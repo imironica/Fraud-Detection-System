@@ -1,0 +1,13 @@
+D:\Proiecte\Innovationlab\InnovationLab_v2\FraudDetection.Web\FraudDetection.ML\bin\Microsoft.PythonTools.WebRole.dll
+D:\Proiecte\Innovationlab\InnovationLab_v2\FraudDetection.Web\FraudDetection.ML\obj\Debug\attach_server.py
+D:\Proiecte\Innovationlab\InnovationLab_v2\FraudDetection.Web\FraudDetection.ML\obj\Debug\visualstudio_py_debugger.py
+D:\Proiecte\Innovationlab\InnovationLab_v2\FraudDetection.Web\FraudDetection.ML\obj\Debug\visualstudio_py_repl.py
+D:\Proiecte\Innovationlab\InnovationLab_v2\FraudDetection.Web\FraudDetection.ML\obj\Debug\visualstudio_py_util.py
+D:\Proiecte\Innovationlab\InnovationLab_v2\FraudDetection.Web\FraudDetection.ML\obj\Debug\__init__.py
+D:\Proiecte\Innovationlab\InnovationLab_v2\FraudDetection.Web\FraudDetection.ML\obj\Debug\__main__.py
+D:\Proiecte\Innovationlab\InnovationLab_v2\FraudDetection.Web\FraudDetection.ML\bin\AzureSetup.cfg
+D:\Proiecte\Innovationlab\InnovationLab_v2\FraudDetection.Web\FraudDetection.ML\bin\Microsoft.PythonTools.AzureSetup.exe
+D:\Proiecte\Innovationlab\InnovationLab_v2\FraudDetection.Web\FraudDetection.ML\bin\Microsoft.PythonTools.AzureSetup.exe.config
+D:\Proiecte\Innovationlab\InnovationLab_v2\FraudDetection.Web\FraudDetection.ML\bin\wfastcgi.py
+D:\Proiecte\Innovationlab\InnovationLab_v2\FraudDetection.Web\FraudDetection.ML\obj\Debug\web.config
+D:\Proiecte\Innovationlab\InnovationLab_v2\FraudDetection.Web\FraudDetection.ML\obj\Debug\web.debug.config

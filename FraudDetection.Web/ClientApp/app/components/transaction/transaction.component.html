@@ -1,0 +1,151 @@
+﻿<div class="box box-warning skin-blue">
+    <div class="box-header with-border">
+        <h1>Test transaction</h1>
+    </div>
+    <div style="padding:10px;">
+        <div class="alert alert-danger alert-dismissible" *ngIf="alertResponse.status == 'ALERT'">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+            This transaction has a high risk value to be a fraud!
+        </div>
+         
+        <div class="alert alert-warning alert-dismissible" *ngIf="alertResponse.status == 'WARNING'">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+            This transaction has a medium risk value to be a fraud!
+        </div>
+        <div class="alert alert-success alert-dismissible" *ngIf="alertResponse.status == 'LOW'">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i> Alert!</h4>
+            This transaction has a low risk value to be a fraud!
+        </div>
+
+    </div>
+
+    <form role="form" (ngSubmit)="onSubmit()">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Transaction details</h3>
+                </div>
+
+                <div class="box-body">
+                    <div class="col-sm-12 col-lg-6">
+                        <label>Transaction Type</label>
+                        <select class="form-control" id="transactionType" name="transactionType" [(ngModel)]="transaction.transactionTypeFeature" >
+                            <option *ngFor="let x of transactionTypes" [value]="x.feature">{{x.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-12 col-lg-6">
+                        <label>Card Type</label>
+                        <select class="form-control" [(ngModel)]="transaction.cardTypeFeature"  id="cardTypeFeature" name="cardTypeFeature" >
+                            <option *ngFor="let x of cardTypes" [value]="x.feature">{{x.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-12 col-lg-6">
+                        <label>Outlet Code</label>
+                        <input type="text" class="form-control" placeholder="Enter ..." [(ngModel)]="transaction.outletCode" id="outletCode" name="outletCode" />
+                    </div>
+
+                    <div class="col-sm-12 col-lg-6">
+                        <label>Transaction amount</label>
+                        <input type="text" class="form-control" placeholder="Enter ..." [(ngModel)]="transaction.amount" id="amount" name="amount" />
+                    </div>
+
+                    <div class="col-sm-12 col-lg-6">
+                        <label>Currency</label>
+                        <select class="form-control" [(ngModel)]="transaction.transactionCurrency" id="transactionCurrency" name="transactionCurrency" >
+                            <option value="1">EUR</option>
+                            <option value="2">USD</option>
+                            <option value="3">RON</option>
+                        </select>
+                    </div>
+
+                    <div class="col-sm-12 col-lg-6">
+                        <label>Transaction amount in EUR</label>
+                        <input type="text" class="form-control" id="amountEUR" name="amountEUR" placeholder="Enter ..." [(ngModel)]="transaction.amountEUR">
+                    </div>
+
+                    <div class="col-sm-12 col-lg-6">
+                        <label>Transaction date</label>
+                        <input type="text" class="form-control pull-right" [(ngModel)]="transaction.transactionDate" id="transactionDate" name="transactionDate" />
+                    </div>
+                    <div class="col-sm-12 col-lg-6">
+                        <label>Login Atempts</label>
+                        <input type="text" class="form-control" placeholder="Enter ..." [(ngModel)]="transaction.loginAtempts" id="loginAtempts" name="loginAtempts" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Client details</h3>
+                </div>
+                <div class="box-body">
+                    <div class="col-sm-12 col-lg-6">
+                        <label>Client country</label>
+                        <select class="form-control" id="clientCountry" name="clientCountry" [(ngModel)]="transaction.clientCountryFeature">
+                            <option *ngFor="let x of countries" [value]="x.feature">{{x.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12 col-lg-6">
+                        <label>Last transaction date</label>
+                        <input type="text" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="col-sm-12 col-lg-6">
+                        <label>Amount of spent money per day</label>
+                        <input type="text" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <label>Amount per last month</label>
+                        <input type="text" class="form-control" placeholder="Enter ...">
+                    </div>
+
+                    <div class="col-sm-12 col-lg-6">
+                        <label>Card number</label>
+                        <input type="text" class="form-control" placeholder="Enter ...">
+                    </div>
+                    <div class="col-sm-12 col-lg-6">
+                        <label>Card expiration date</label>
+                        <input type="text" class="form-control" placeholder="Enter ...">
+                    </div>
+                </div>
+            </div>
+
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Merchant details</h3>
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                    <label>Merchant Code</label>
+                    <input type="text" class="form-control" placeholder="Enter ...">
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                    <label>Merchant country</label>
+                    <select class="form-control" id="country">
+                        <option *ngFor="let x of countries" [value]="x.feature">{{x.name}}</option>
+                    </select>
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                    <label>Longitude</label>
+                    <input type="text" class="form-control" placeholder="Enter ...">
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                    <label>Latitude</label>
+                    <input type="text" class="form-control" placeholder="Enter ...">
+                </div>
+            </div>
+        </div>
+
+        <div class="box-body">
+            <div class="form-group" style="clear:both; padding:10px;">
+                <button type="button" (click)="verify()" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+ 

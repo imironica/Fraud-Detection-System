@@ -1,0 +1,44 @@
+﻿<div style="margin-top:40px;" class="skin-blue">
+    <!-- search form -->
+
+    <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+
+    <ul class="sidebar-menu">
+        <li class="header">MAIN NAVIGATION</li>
+        <li class="active treeview">
+        <li><a [routerLink]="['/home']"><i class="fa fa-circle-o"></i> Dashboard</a></li>
+        <li class="treeview">
+            <a [routerLink]="['/transactions-list']">
+                <i class="fa fa-envelope"></i> <span>View alerts</span>
+            </a>
+            <div style="clear:both"></div>
+            <span class="pull-right-container" style="clear:both">
+                <span>
+                    <small class="label pull-right bg-yellow">{{currentStatistics.numberOfUnprocessedAlerts }}</small>
+                    <small class="label pull-right bg-green">{{currentStatistics.numberProcessedAlerts}}</small>
+                    <small class="label pull-right bg-red">{{currentStatistics.numberOfFraudsDetected}}</small>
+                </span>
+            </span>
+
+            <div style="clear:both"></div>
+        </li>
+        <li>
+            <a [routerLink]="['/transaction']">
+                <i class="fa fa-th"></i> <span>Test transaction</span>
+                <span class="pull-right-container">
+                    <small class="label pull-right bg-green">new</small>
+                </span>
+            </a>
+        </li>
+
+    </ul>
+</div>

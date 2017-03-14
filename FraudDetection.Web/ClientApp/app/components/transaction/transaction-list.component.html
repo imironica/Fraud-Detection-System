@@ -1,0 +1,40 @@
+<div class="skin-blue">
+
+    <p *ngIf="!transactions"><em>Loading...</em></p>
+
+    <div class="box">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Transaction list
+            </h1>
+        </section>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="transactionTable" class="table table-bordered table-hover" *ngIf="transactions">
+                <thead>
+                    <tr>
+                        <th>Merchant Code</th>
+                        <th>Card Type</th>
+                        <th>Country </th>
+                        <th>Transaction Time</th>
+                        <th>Status</th>
+                        <th>Fraud Probability</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let transaction of transactions">
+                        <td>{{ transaction.merchantCode }}</td>
+                        <td>{{ transaction.cardType }}</td>
+                        <td>{{ transaction.country }}</td>
+                        <td>{{ transaction.insertedTime }}</td>
+                        <td>{{ transaction.status }}</td>
+                        <td>{{ transaction.fraudProbability }}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+</div>

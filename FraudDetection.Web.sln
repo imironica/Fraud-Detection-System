@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FraudDetection.Web", "FraudDetection.Web\FraudDetection.Web.xproj", "{98DD7823-B9C7-4FBE-83A2-4CC490476D27}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FraudDetection.Console", "FraudDetection.Console\FraudDetection.Console.xproj", "{7CBCF193-D846-4445-8737-7EDC8C22CD7B}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FraudDetection.Service", "FraudDetection.Service\FraudDetection.Service.xproj", "{093973BE-3F7B-42D9-B351-AB65D8CB5E00}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FraudDetection.Models", "FraudDetection.Models\FraudDetection.Models.xproj", "{E6B12FAF-623A-4982-8896-8C3FF9AA2914}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "FraudDetection.ML", "FraudDetection.ML\FraudDetection.ML.pyproj", "{32631C66-AF4B-4F38-8734-CA0A41DC496E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98DD7823-B9C7-4FBE-83A2-4CC490476D27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98DD7823-B9C7-4FBE-83A2-4CC490476D27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98DD7823-B9C7-4FBE-83A2-4CC490476D27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98DD7823-B9C7-4FBE-83A2-4CC490476D27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CBCF193-D846-4445-8737-7EDC8C22CD7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CBCF193-D846-4445-8737-7EDC8C22CD7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CBCF193-D846-4445-8737-7EDC8C22CD7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CBCF193-D846-4445-8737-7EDC8C22CD7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{093973BE-3F7B-42D9-B351-AB65D8CB5E00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{093973BE-3F7B-42D9-B351-AB65D8CB5E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{093973BE-3F7B-42D9-B351-AB65D8CB5E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{093973BE-3F7B-42D9-B351-AB65D8CB5E00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6B12FAF-623A-4982-8896-8C3FF9AA2914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6B12FAF-623A-4982-8896-8C3FF9AA2914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6B12FAF-623A-4982-8896-8C3FF9AA2914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6B12FAF-623A-4982-8896-8C3FF9AA2914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32631C66-AF4B-4F38-8734-CA0A41DC496E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32631C66-AF4B-4F38-8734-CA0A41DC496E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32631C66-AF4B-4F38-8734-CA0A41DC496E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32631C66-AF4B-4F38-8734-CA0A41DC496E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
