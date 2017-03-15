@@ -115,15 +115,12 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save as non fraud</button>
-                    <button type="button" class="btn btn-primary btn-danger">Save as fraud</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveTransactionStatus(transaction.transactionID,'CLSNONFRAUD');" >Save as non fraud</button>
+                    <button type="button" class="btn btn-primary btn-danger" data-dismiss="modal" (click)="saveTransactionStatus(transaction.transactionID,'CLSFRAUD');">Save as fraud</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -131,7 +128,14 @@
         <!-- /.modal-dialog -->
     </div>
 
+     <div style="padding:10px;">
+        <div class="alert alert-success alert-dismissible" *ngIf="message">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i> Message!</h4>
+            The transaction status have been changed!
+        </div>
 
+    </div>
     <div class="box">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -150,7 +154,7 @@
                         <th>Transaction Time</th>
                         <th>Status</th>
                         <th>Fraud Probability</th>
-                        <th>Set status</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -159,12 +163,14 @@
                         <td>{{ transaction.cardType }}</td>
                         <td>{{ transaction.country }}</td>
                         <td>{{ transaction.insertedTime }}</td>
-                        <td>{{ transaction.status }}</td>
+                        <td>
+                            <span *ngIf="transaction.statusCode=='ALERT'" class="label label-warning">{{transaction.status}}</span>
+                            <span *ngIf="transaction.statusCode=='CLSNONFRAUD'" class="label label-success">{{transaction.status}}</span>
+                            <span *ngIf="transaction.statusCode=='CLSFRAUD'" class="label label-danger">{{transaction.status}}</span>
+                        </td>
                         <td>{{ transaction.fraudProbability }}</td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" (click)="getAlert(transaction._id)">
-                                Edit
-                            </button>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" (click)="getAlert(transaction.transactionID)">Edit</button>
                         </td>
                     </tr>
                 </tbody>

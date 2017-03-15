@@ -75,9 +75,10 @@ namespace FraudDetection.Console
             for (int i = 0; i < 1000; i++)
             {
                 fraudProbability = 0;
-
+                var guid = Guid.NewGuid();
                 var transaction = new TransactionDTO();
-                transaction._id = Guid.NewGuid();
+                transaction._id = guid;
+                transaction.TransactionID = guid.ToString();
 
                 probabilityId = Convert.ToInt32(rng.Next(lstCardTypesProb.Count - 1));
 

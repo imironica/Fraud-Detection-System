@@ -17,14 +17,16 @@ namespace FraudDetection.Service
         public List<TransactionDTO> GetAlerts()
         {
             var repo = new MDRepository<TransactionDTO>();
-            var lst = repo.Find(x => x.StatusCode == "ALERT").ToList();
+            var lst = repo.Find(x => x.StatusCode == "ALERT").OrderByDescending(y=> y.FraudProbability).ToList();
             return lst;
         }
         public TransactionDTO GetAlert(string id)
         {
             var repo = new MDRepository<TransactionDTO>();
-            var lst = repo.GetById(id);
-            return lst;
+            var lst = repo.Find(x => x.TransactionID == id);
+            if (lst != null && lst.Count == 1)
+                return lst[0];
+            return new TransactionDTO();
         }
         public bool InsertTransactionList(List<TransactionDTO> lstTransactions)
         {
@@ -91,6 +93,13 @@ namespace FraudDetection.Service
             currentMonthStatistics.NumberOfSuccessfullyProcessedTransactions = currentMonthStatistics.NumberOfDetectedFraudsPerCurrentMonth
                 + currentMonthStatistics.NumberOfIncorrectlyDetectedFrauds;
             return currentMonthStatistics;
+        }
+
+        public bool SaveTransactionStatus(string transactionID, string statusCode)
+        {
+            //TODO
+
+            return true;
         }
     }
 }

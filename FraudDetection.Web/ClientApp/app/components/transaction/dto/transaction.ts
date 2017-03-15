@@ -3,7 +3,6 @@
 		constructor() {
         
 		}
-		_id:string;
 		transactionType: string;
 		transactionTypeFeature: Number;
 		amount: Number;
@@ -35,6 +34,7 @@
 		amountOfSpentMoneyPerMonth: Number;
 		insertedTime: Date;
 		status: string;
+		statusCode: string;
 		fraudProbability: Number;
 	} 
 

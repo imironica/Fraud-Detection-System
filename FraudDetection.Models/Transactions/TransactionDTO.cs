@@ -12,7 +12,7 @@ namespace FraudDetection.Models
 
         }
         public object _id { get; set; }
-        public int TransactionID { get; set; }
+        public string TransactionID { get; set; }
         public string TransactionType { get; set; }
         public double TransactionTypeFeature { get; set; }
         public decimal Amount { get; set; }

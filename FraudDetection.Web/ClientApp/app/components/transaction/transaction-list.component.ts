@@ -11,7 +11,7 @@ export class TransactionListComponent {
     public transactions: Transaction[];
 	public transaction: Transaction;
 	http: Http;
-    
+    message:string;
 
     constructor(http: Http) {
 	    this.http = http;
@@ -22,12 +22,24 @@ export class TransactionListComponent {
     }
 
 	getAlert(id:string) {
-	     var idSend = JSON.stringify(id);
+	     var transactionRequest = new Transaction();
+		 transactionRequest.transactionID = id;
          this.http.post('/api/Transactions/GetAlert',
-		                id 
-						)
+		                transactionRequest)
 			.subscribe(result => {
               this.transaction = result.json();
         });
 	  }
+
+	saveTransactionStatus(id:string, status:string)
+	{
+		var transactionRequest = new Transaction();
+		 transactionRequest.transactionID = id;
+		 transactionRequest.statusCode = status;
+         this.http.post('/api/Transactions/saveTransactionStatus',
+		                transactionRequest)
+			 .subscribe(result => {
+              this.message = "saved";
+        });
+	}
 } 
