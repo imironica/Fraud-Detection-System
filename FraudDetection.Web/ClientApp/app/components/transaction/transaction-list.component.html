@@ -164,9 +164,9 @@
                         <td>{{ transaction.country }}</td>
                         <td>{{ transaction.insertedTime }}</td>
                         <td>
-                            <span *ngIf="transaction.statusCode=='ALERT'" class="label label-warning">{{transaction.status}}</span>
-                            <span *ngIf="transaction.statusCode=='CLSNONFRAUD'" class="label label-success">{{transaction.status}}</span>
-                            <span *ngIf="transaction.statusCode=='CLSFRAUD'" class="label label-danger">{{transaction.status}}</span>
+                            <span *ngIf="transaction.statusCode=='ALERT'" class="label label-warning">Alert</span>
+                            <span *ngIf="transaction.statusCode=='CLSNONFRAUD'" class="label label-success">Classified as NonFraud</span>
+                            <span *ngIf="transaction.statusCode=='CLSFRAUD'" class="label label-danger">Classified as Fraud</span>
                         </td>
                         <td>{{ transaction.fraudProbability }}</td>
                         <td>

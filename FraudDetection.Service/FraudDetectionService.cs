@@ -17,7 +17,7 @@ namespace FraudDetection.Service
         public List<TransactionDTO> GetAlerts()
         {
             var repo = new MDRepository<TransactionDTO>();
-            var lst = repo.Find(x => x.StatusCode == "ALERT").OrderByDescending(y=> y.FraudProbability).ToList();
+            var lst = repo.Find(x => x.StatusCode == "ALERT" || x.StatusCode == "CLSFRAUD" || x.StatusCode == "CLSNONFRAUD").OrderByDescending(y=> y.FraudProbability).ToList();
             return lst;
         }
         public TransactionDTO GetAlert(string id)
@@ -97,8 +97,10 @@ namespace FraudDetection.Service
 
         public bool SaveTransactionStatus(string transactionID, string statusCode)
         {
-            //TODO
-
+            var repo = new MDRepository<TransactionDTO>();
+            var update = Builders<TransactionDTO>.Update
+                    .Set("StatusCode", statusCode);
+            repo.Update(x=>x.TransactionID == transactionID, update);
             return true;
         }
     }

@@ -94,5 +94,10 @@ namespace FraudDetection.Service
             var result = _collection.Find(filter).ToList();
             return result;
         }
+
+        public void Update(Expression<System.Func<T, bool>> filter, UpdateDefinition<T> updateDefinition)
+        {
+            _collection.UpdateOne<T>(filter, updateDefinition);
+        }
     }
 }
