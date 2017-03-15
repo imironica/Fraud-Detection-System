@@ -20,7 +20,12 @@ namespace FraudDetection.Service
             var lst = repo.Find(x => x.StatusCode == "ALERT").ToList();
             return lst;
         }
-
+        public TransactionDTO GetAlert(string id)
+        {
+            var repo = new MDRepository<TransactionDTO>();
+            var lst = repo.GetById(id);
+            return lst;
+        }
         public bool InsertTransactionList(List<TransactionDTO> lstTransactions)
         {
             var repo = new MDRepository<TransactionDTO>();

@@ -3,7 +3,7 @@
 		constructor() {
         
 		}
-
+		_id:string;
 		transactionType: string;
 		transactionTypeFeature: Number;
 		amount: Number;

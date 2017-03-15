@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using FraudDetection.Models;
 using FraudDetection.Service;
+using System.Linq;
+using System.Web.Http;
 
 namespace FraudDetection.Web.Controllers
 {
@@ -19,6 +21,13 @@ namespace FraudDetection.Web.Controllers
         {
             var lstTransactions = _fraudService.GetAlerts();
             return lstTransactions;
+        }
+
+        [HttpPost("[action]")]
+        public TransactionDTO GetAlert([FromBody] string id)
+        {
+            var transaction = _fraudService.GetAlert(id);
+            return transaction;
         }
 
         [HttpPost("[action]")]

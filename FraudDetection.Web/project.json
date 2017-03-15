@@ -22,7 +22,8 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "FraudDetection.Models": "1.0.0-*",
-    "FraudDetection.Service": "1.0.0-*"
+    "FraudDetection.Service": "1.0.0-*",
+    "Microsoft.AspNetCore.Mvc.WebApiCompatShim": "1.0.1"
   },
 
   "tools": {
