@@ -17,7 +17,9 @@ namespace FraudDetection.Service
         public List<TransactionDTO> GetAlerts()
         {
             var repo = new MDRepository<TransactionDTO>();
-            var lst = repo.Find(x => x.StatusCode == "ALERT" || x.StatusCode == "CLSFRAUD" || x.StatusCode == "CLSNONFRAUD").OrderByDescending(y=> y.FraudProbability).ToList();
+            var lst = repo.Find(x => x.StatusCode == "ALERT" || 
+                                     x.StatusCode == "CLSFRAUD" || x.StatusCode == "CLSNONFRAUD")
+                          .OrderByDescending(y=> y.FraudProbability).ToList();
             return lst;
         }
         public TransactionDTO GetAlert(string id)

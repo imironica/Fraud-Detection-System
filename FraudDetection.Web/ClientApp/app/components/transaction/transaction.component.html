@@ -23,6 +23,7 @@
     </div>
 
     <form role="form" (ngSubmit)="onSubmit()">
+       
         <div class="col-md-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -70,7 +71,8 @@
 
                     <div class="col-sm-12 col-lg-6">
                         <label>Transaction date</label>
-                        <input type="text" class="form-control pull-right" [(ngModel)]="transaction.transactionDate" id="transactionDate" name="transactionDate" />
+                        <p-calendar class="form-control" class="form-control"[(ngModel)]="transaction.transactionDate" id="transactionDate" name="transactionDate"></p-calendar>
+                        
                     </div>
                     <div class="col-sm-12 col-lg-6">
                         <label>Login Atempts</label>
@@ -94,7 +96,8 @@
                     </div>
                     <div class="col-sm-12 col-lg-6">
                         <label>Last transaction date</label>
-                        <input type="text" class="form-control" placeholder="Enter ...">
+                        <p-calendar [(ngModel)]="transaction.lastTransactionDate" id="lastTransactionDate" name="lastTransactionDate"></p-calendar>
+
                     </div>
                     <div class="col-sm-12 col-lg-6">
                         <label>Amount of spent money per day</label>
@@ -111,7 +114,7 @@
                     </div>
                     <div class="col-sm-12 col-lg-6">
                         <label>Card expiration date</label>
-                        <input type="text" class="form-control" placeholder="Enter ...">
+                        <p-calendar class="form-control" [(ngModel)]="transaction.cardExpirationDate" id="cardExpirationDate" name="cardExpirationDate"></p-calendar>
                     </div>
                 </div>
             </div>

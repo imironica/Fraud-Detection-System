@@ -10,7 +10,7 @@ import { TransactionComponent } from './components/transaction/transaction.compo
 import { CounterComponent } from './components/counter/counter.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarMenuComponent } from './components/sidebarmenu/sidebarmenu.component';
-import { ChartModule }  from 'angular2-highcharts'; 
+import { ButtonModule, GrowlModule, CalendarModule } from 'primeng/primeng';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -34,7 +34,7 @@ import { ChartModule }  from 'angular2-highcharts';
             { path: 'transaction', component: TransactionComponent },
             { path: '**', redirectTo: 'home' }
         ]),
-		ChartModule.forRoot(require('highcharts')),
+		ButtonModule, GrowlModule, CalendarModule
     ]
 })
 export class AppModule {

@@ -9,6 +9,7 @@ import { TransactionType } from './dto/TransactionType';
 import { CardType } from './dto/CardType';
 import { Country } from './dto/Country';
 import { TransactionAlertResponse } from './dto/transactionAlertResponse';
+import { ButtonModule, GrowlModule,Message, CalendarModule } from 'primeng/primeng';
 
 @Component({
     selector: 'transaction',
@@ -23,12 +24,19 @@ export class TransactionComponent {
 	public transaction: Transaction;
 	public countries: Country;
 	public alertResponse: TransactionAlertResponse;
+	public msgs: Message[] = [];
 	http: Http;
 
 	constructor(http: Http) {
 		this.transaction = new Transaction();
 		this.alertResponse = new TransactionAlertResponse();
 		this.alertResponse.status = "";
+		this.msgs.push(
+             {
+                 severity: 'info',
+                 summary: 'Info Message',
+                 detail: "aaaaaaa AAAA"
+             });
 
 		this.http = http;
 		http.get('/api/MasterData/GetCardTypes').subscribe(result => {
