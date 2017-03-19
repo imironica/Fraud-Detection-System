@@ -27,9 +27,8 @@ namespace FraudDetection.Service
 
         private void OpenConnection()
         {
-            //TODO - add this to configuration file
-            var db = "local";
-            string connectionString = "mongodb://localhost:27017";
+            var db = AppSettings.Get<string>("Database");
+            var connectionString = AppSettings.Get<string>("ConnectionString");
             var client = new MongoClient(connectionString);
 
             _database = client.GetDatabase(db);

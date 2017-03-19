@@ -90,7 +90,10 @@
                                     <p class="text-center">
                                         <strong>Number of frauds per country</strong>
                                     </p>
-                                    
+
+                                    <p-chart type="bar" [data]="data"></p-chart>  <!--*ngIf="isDataAvailable"--> 
+                                    <!--<button type="button" pButton (click)="update($event)"></button>-->
+
                                 </div>
 
 

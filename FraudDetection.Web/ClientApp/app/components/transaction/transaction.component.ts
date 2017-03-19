@@ -1,6 +1,6 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UniversalModule } from 'angular2-universal';
 import { Http } from '@angular/http';
 import { Transaction } from './dto/Transaction';
@@ -9,7 +9,7 @@ import { TransactionType } from './dto/TransactionType';
 import { CardType } from './dto/CardType';
 import { Country } from './dto/Country';
 import { TransactionAlertResponse } from './dto/transactionAlertResponse';
-import { ButtonModule, GrowlModule,Message, CalendarModule } from 'primeng/primeng';
+import { ButtonModule, GrowlModule, Message, CalendarModule, Calendar, SelectItem, Button, Dropdown } from 'primeng/primeng';
 
 @Component({
     selector: 'transaction',
@@ -17,17 +17,25 @@ import { ButtonModule, GrowlModule,Message, CalendarModule } from 'primeng/prime
     styles: [require('../css/AdminLTE.css'), require('../css/skins/skin-blue.css')]
 })
 
-export class TransactionComponent {
+export class TransactionComponent implements OnInit {
     public transactionStatuses: TransactionStatus[];
-	public transactionTypes: TransactionType[];
+    public transactionTypes: TransactionType[];
 	public cardTypes: CardType[];
 	public transaction: Transaction;
 	public countries: Country;
 	public alertResponse: TransactionAlertResponse;
-	public msgs: Message[] = [];
-	http: Http;
+    public msgs: Message[] = [];
+    public submitted: boolean;
+    public transactionform: FormGroup;
+    public hasTransactionTypeError = false;
+    public hasCardTypeError = false;
+    public hasTransactionCurrencyError = false;
+    public currencies = ['EUR', 'RON', 'USD'];
+    public hasClientCountryError = false;
+    public hasMerchantCountryError = false;
+    http: Http;
 
-	constructor(http: Http) {
+    constructor(http: Http, private fb: FormBuilder) {
 		this.transaction = new Transaction();
 		this.alertResponse = new TransactionAlertResponse();
 		this.alertResponse.status = "";
@@ -54,12 +62,70 @@ export class TransactionComponent {
         });
     }
 
+    ngOnInit() {
+        this.transactionform = this.fb.group({
+            'transactionType': new FormControl('', Validators.required),
+            'cardType': new FormControl('', Validators.required),
+            'outletCode': new FormControl('', Validators.required),
+            'amount': new FormControl('', Validators.required),
+            'transactionCurrency': new FormControl('', Validators.required),
+            'amountEUR': new FormControl('', Validators.required),
+            'transactionDate': new FormControl('', Validators.required),
+            'loginAtempts': new FormControl('', Validators.required),
+            'clientCountry': new FormControl('', Validators.required),
+            'lastTransactionDate': new FormControl('', Validators.required),
+            'spentMoneyPerDay': new FormControl('', Validators.required),
+            'amountPerLastMonth': new FormControl('', Validators.required),
+            'cardNumber': new FormControl('', Validators.required),
+            'cardExpirationDate': new FormControl('', Validators.required),
+            'merchantCode': new FormControl('', Validators.required),
+            'merchantCountry': new FormControl('', Validators.required),
+            'longitude': new FormControl('', Validators.required),
+            'latitude': new FormControl('', Validators.required)
+        });
+    }
+
 	verify() {
          this.http.post('/api/Transactions/VerifyAlert', this.transaction)
 			.subscribe(result => {
               this.alertResponse = result.json();
         });
-	  }
+    }
+
+    validateTransactionType(value) {
+        if (value === '')
+            this.hasTransactionTypeError = true;
+        else
+            this.hasTransactionTypeError = false;
+    }
+
+    validateCardType(value) {
+        if (value === '')
+            this.hasCardTypeError = true;
+        else
+            this.hasCardTypeError = false;
+    }
+
+    validateTransactionCurrencyError(value) {
+        if (value === '')
+            this.hasTransactionCurrencyError = true;
+        else
+            this.hasTransactionCurrencyError = false;
+    }
+
+    validateClientCountry(value) {
+        if (value === '')
+            this.hasClientCountryError = true;
+        else
+            this.hasClientCountryError = false;
+    }
+
+    validateMerchantCountry(value) {
+        if (value === '')
+            this.hasMerchantCountryError = true;
+        else
+            this.hasMerchantCountryError = false;
+    }
 }
 
 

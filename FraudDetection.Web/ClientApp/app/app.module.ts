@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
 import { AppComponent } from './components/app/app.component'
@@ -10,7 +10,7 @@ import { TransactionComponent } from './components/transaction/transaction.compo
 import { CounterComponent } from './components/counter/counter.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarMenuComponent } from './components/sidebarmenu/sidebarmenu.component';
-import { ButtonModule, GrowlModule, CalendarModule } from 'primeng/primeng';
+import { AccordionModule, ButtonModule, Message, GrowlModule, CalendarModule, MenuItem, ChartModule, Calendar, SelectItem, Button, Dropdown } from 'primeng/primeng';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -26,6 +26,11 @@ import { ButtonModule, GrowlModule, CalendarModule } from 'primeng/primeng';
     imports: [
         UniversalModule, 
         FormsModule,
+        ButtonModule,
+        GrowlModule,
+        CalendarModule,
+        ChartModule,
+        ReactiveFormsModule,
 		RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
@@ -33,8 +38,7 @@ import { ButtonModule, GrowlModule, CalendarModule } from 'primeng/primeng';
             { path: 'transactions-list', component: TransactionListComponent },
             { path: 'transaction', component: TransactionComponent },
             { path: '**', redirectTo: 'home' }
-        ]),
-		ButtonModule, GrowlModule, CalendarModule
+        ])
     ]
 })
 export class AppModule {

@@ -6,11 +6,12 @@ var extractCSS = new ExtractTextPlugin('vendor.css');
 
 module.exports = {
     resolve: {
-        extensions: [ '', '.js' ]
+        extensions: ['', '.js', '.ts'  ]
     },
     module: {
         loaders: [
-            { test: /\.(png|woff|woff2|eot|ttf|svg|gif)(\?|$)/, loader: 'url-loader?limit=100000' },
+            { test: /\.(png|jpg|jpeg|jpe?g|gif|svg|woff|woff2|eot|ttf|ico|cur)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=100000' },
+            //{ test: /\.(png|jpg|woff|woff2|eot|ttf|svg|gif)(\?|$)/, loader: 'url-loader?limit=100000' },
             { test: /\.css(\?|$)/, loader: extractCSS.extract(['css']) }
         ]
     },
@@ -35,7 +36,9 @@ module.exports = {
             'font-awesome/css/font-awesome.css',
             'primeng/primeng',
             'primeng/resources/themes/omega/theme.css',
-            'primeng/resources/primeng.min.css'
+            'primeng/resources/primeng.min.css',
+            'admin-lte/dist/css/AdminLTE.min.css',
+            'admin-lte/dist/css/skins/skin-red-light.min.css'
         ]
     },
     output: {
