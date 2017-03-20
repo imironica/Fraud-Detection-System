@@ -35,6 +35,9 @@ Obj/
 !/wwwroot/dist/_placeholder.txt
 !/ClientApp/dist/_placeholder.txt
 
+# ignore *js and *js.map files
+/ClientApp/app/components/app/*.js
+/ClientApp/app/components/app/*.map
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -77,6 +80,7 @@ artifacts/
 *.pidb
 *.svclog
 *.scc
+*.dll
 
 # Chutzpah Test files
 _Chutzpah*
@@ -191,6 +195,7 @@ ClientBin/
 *.pfx
 *.publishsettings
 orleans.codegen.cs
+*deps.json
 
 # Workaround for https://github.com/aspnet/JavaScriptServices/issues/235
 /node_modules/**
