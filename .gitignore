@@ -1,0 +1,13 @@
+*.log
+*.dll
+*.pdb
+*.user
+bin/
+obj/
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
+Backup/
+*deps.json
+/ClientApp/app/components/app/*js
+/ClientApp/app/components/app/*map

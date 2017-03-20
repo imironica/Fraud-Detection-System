@@ -11,7 +11,6 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.(png|jpg|jpeg|jpe?g|gif|svg|woff|woff2|eot|ttf|ico|cur)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?limit=100000' },
-            //{ test: /\.(png|jpg|woff|woff2|eot|ttf|svg|gif)(\?|$)/, loader: 'url-loader?limit=100000' },
             { test: /\.css(\?|$)/, loader: extractCSS.extract(['css']) }
         ]
     },

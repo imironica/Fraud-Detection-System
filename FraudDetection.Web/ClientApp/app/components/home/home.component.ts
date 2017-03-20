@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     isDataAvailable: boolean = false;
 
     constructor(http: Http) {
-		this.statisticPerMonth = new MonthStatistics(0,0,0);
+        this.statisticPerMonth = new MonthStatistics(300, 50, 100);
 		this.dashboardStatistics = new DashboardStatistics();
 		this.dashboardStatistics.currentMonthStatistics = this.statisticPerMonth;
         http.get('/api/Transactions/GetDashboardStatisticsPerCurrentMonth').subscribe(result => {
@@ -28,61 +28,21 @@ export class HomeComponent implements OnInit {
         });
 
         this.data = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels: ['Romania', 'Germany', 'France'],
             datasets: [
                 {
-                    label: 'Anger',
-                    backgroundColor: '#42A5F5',
-                    borderColor: '#1E88E5',
-                    data: [65, 59, 80, 81, 56, 55, 40]
-                },
-                {
-                    label: 'Contempt',
-                    backgroundColor: '#9CCC65',
-                    borderColor: '#7CB342',
-                    data: [28, 48, 40, 19, 86, 27, 90]
-                }
-                ,
-                {
-                    label: 'Disgust',
-                    backgroundColor: '#FF99E6',
-                    borderColor: '#7CB342',
-                    data: [28, 11, 40, 12, 33, 13, 90]
-                }
-                ,
-                {
-                    label: 'Fear',
-                    backgroundColor: '#66C2FF',
-                    borderColor: '#7CB342',
-                    data: [28, 2, 40, 19, 12, 27, 9]
-                }
-                ,
-                {
-                    label: 'Happiness',
-                    backgroundColor: '#FF5050',
-                    borderColor: '#7CB342',
-                    data: [28, 48, 140, 119, 86, 127, 90]
-                }
-                ,
-                {
-                    label: 'Neutral',
-                    backgroundColor: '#DDDDDD',
-                    borderColor: '#7CB342',
-                    data: [28, 48, 40, 19, 86, 27, 90]
-                },
-                {
-                    label: 'Sadness',
-                    backgroundColor: ' #8585AD',
-                    borderColor: '#7CB342',
-                    data: [23, 48, 34, 54, 86, 27, 65]
-                },
-                {
-                    label: 'Surprise',
-                    backgroundColor: '#FF9966',
-                    borderColor: '#7CB342',
-                    data: [28, 48, 40, 19, 86, 27, 90]
-                }
-            ]
+                    data: [300, 50, 100],
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56"
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56"
+                    ]
+                }]    
         };
     }
     ngOnInit() {
