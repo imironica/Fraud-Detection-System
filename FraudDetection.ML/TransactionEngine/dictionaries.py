@@ -67,7 +67,7 @@ countries = [
         "id":1,
         "name":"USA",
         "probability":0.28,
-        "longitute": {
+        "longitude": {
             "min": 33,
             "max": 45
         },
@@ -132,7 +132,7 @@ countries = [
         "id": 2,
         "name": "China",
         "probability": 0.22,
-        "longitute": {
+        "longitude": {
             "min": 99,
             "max": 119
         },
@@ -197,7 +197,7 @@ countries = [
         "id": 3,
         "name": "United Kingdom",
         "probability": 0.1,
-        "longitute": {
+        "longitude": {
             "min": -3.5,
             "max": 0.75
         },
@@ -262,7 +262,7 @@ countries = [
         "id": 4,
         "name": "France",
         "probability": 0.1,
-        "longitute": {
+        "longitude": {
             "min": -1.35,
             "max": 5.75
         },
@@ -327,7 +327,7 @@ countries = [
         "id": 5,
         "name": "Germany",
         "probability": 0.1,
-        "longitute": {
+        "longitude": {
             "min": 7.5,
             "max": 14
         },
@@ -392,7 +392,7 @@ countries = [
         "id": 6,
         "name": "Brazil",
         "probability": 0.15,
-        "longitute": {
+        "longitude": {
             "min": -59,
             "max": -37
         },
@@ -458,7 +458,7 @@ countries = [
         "id": 7,
         "name": "Romania",
         "probability": 0.05,
-        "longitute": {
+        "longitude": {
             "min": 44,
             "max": 47
         },

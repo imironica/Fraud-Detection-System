@@ -23,11 +23,14 @@ def generate_initial_transactions():
     test_df = pd.DataFrame()
     dates = pd.date_range('2017-03-01' ,datetime.date.today())
     for date in dates:
-        temp_df = generator.generate_transactions(date,size=3000)
+        temp_df = generator.generate_transactions(date,size=10)
         test_df = test_df.append(temp_df,ignore_index=True)
     prediction = main.return_prediction(test_df)
-    trans_list = prediction.reset_index().to_dict('records')
-    trans_list.rename(columns={'index':'TransactionId'},inplace=True)
+    prediction = prediction.reset_index().rename(columns={'index':'TransactionId'})
+    prediction['Verified'] = True
+    prediction[prediction['TransactionDate']==datetime.date.today().strftime('%d/%m/%Y')]['Verified']=False
+    print(prediction[prediction['TransactionDate']==datetime.date.today().strftime('%d/%m/%Y')])
+    trans_list = prediction.to_dict('records')
     db.transactions.insert_many(trans_list)
 
 def wipe_collections():
