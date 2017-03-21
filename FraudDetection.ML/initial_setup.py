@@ -27,6 +27,7 @@ def generate_initial_transactions():
         test_df = test_df.append(temp_df,ignore_index=True)
     prediction = main.return_prediction(test_df)
     trans_list = prediction.reset_index().to_dict('records')
+    trans_list.rename(columns={'index':'TransactionId'},inplace=True)
     db.transactions.insert_many(trans_list)
 
 def wipe_collections():
@@ -48,7 +49,7 @@ def start_up():
 if __name__ == '__main__':
 
     client = MongoClient()
-    db = client.local
+    db = client.FraudDetection
     wipe_collections()
-    print(start_up())
+    print("Done adding colections: {} to db".format(start_up()))
 
