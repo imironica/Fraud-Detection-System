@@ -8,6 +8,7 @@ import { TransactionStatus } from './dto/TransactionStatus';
 import { TransactionType } from './dto/TransactionType';
 import { CardType } from './dto/CardType';
 import { Country } from './dto/Country';
+import { Merchant } from './dto/Merchant';
 import { TransactionAlertResponse } from './dto/transactionAlertResponse';
 import { ButtonModule, GrowlModule, Message, CalendarModule, Calendar, SelectItem, Button, Dropdown } from 'primeng/primeng';
 
@@ -22,7 +23,8 @@ export class TransactionComponent implements OnInit {
     public transactionTypes: TransactionType[];
 	public cardTypes: CardType[];
 	public transaction: Transaction;
-	public countries: Country;
+    public countries: Country;
+    public merchants: Merchant;
 	public alertResponse: TransactionAlertResponse;
     public msgs: Message[] = [];
     public submitted: boolean;
@@ -30,9 +32,9 @@ export class TransactionComponent implements OnInit {
     public hasTransactionTypeError = false;
     public hasCardTypeError = false;
     public hasTransactionCurrencyError = false;
-    public currencies = ['EUR', 'RON', 'USD'];
     public hasClientCountryError = false;
     public hasMerchantCountryError = false;
+    public hasMerchantError = false;
     http: Http;
 
     constructor(http: Http, private fb: FormBuilder) {
@@ -67,13 +69,16 @@ export class TransactionComponent implements OnInit {
             'transactionType': new FormControl('', Validators.required),
             'cardType': new FormControl('', Validators.required),
             'amount': new FormControl('', Validators.required),
+            'transactionTime': new FormControl('', Validators.required),
             'transactionDate': new FormControl('', Validators.required),
             'loginAtempts': new FormControl('', Validators.required),
             'clientCountry': new FormControl('', Validators.required),
             'lastTransactionDate': new FormControl('', Validators.required),
             'spentMoneyPerDay': new FormControl('', Validators.required),
-            'amountPerLastMonth': new FormControl('', Validators.required),
+            'spentMoneyPerMonth': new FormControl('', Validators.required),
             'cardNumber': new FormControl('', Validators.required),
+            //'cardCvv': new FormControl('', Validators.required),
+            'cardVendor': new FormControl('', Validators.required),
             'cardExpiryDate': new FormControl('', Validators.required),
             'merchantCountry': new FormControl('', Validators.required),
             'merchant': new FormControl('', Validators.required),
@@ -122,6 +127,13 @@ export class TransactionComponent implements OnInit {
             this.hasMerchantCountryError = true;
         else
             this.hasMerchantCountryError = false;
+    }
+
+    validateMerchant(value) {
+        if (value === '')
+            this.hasMerchantError = true;
+        else
+            this.hasMerchantError = false;
     }
 }
 

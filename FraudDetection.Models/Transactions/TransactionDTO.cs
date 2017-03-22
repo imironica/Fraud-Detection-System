@@ -22,9 +22,9 @@ namespace FraudDetection.Models
         public int CardStartFeature { get; set; }
         public int CardEndFeature { get; set; }
         public string CardType { get; set; }
+        public int CardTypeFeature { get; set; }
         public string CardVendor { get; set; }
         public int CardVendorFeature { get; set; }
-        public int CardTypeFeature { get; set; }
         public string TransactionDate { get; set; }
         public string TransactionTime { get; set; }
         public DateTime TransactionDateTimeFeature { get; set; }
@@ -37,7 +37,6 @@ namespace FraudDetection.Models
         public double MerchantFeature { get; set; }
 
         #region ClientRelated
-        //public ClientCountryDTO ClientCountry { get; set; }
         public string ClientCountry { get; set; }
         public int ClientCountryFeature { get; set; }
         public string LastTransactionDate { get; set; }

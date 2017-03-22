@@ -19,8 +19,8 @@ export class Transaction {
         cardTypeFeature: Number;
         cardVendor: string;
         cardVendorFeature: Number;
-        transactionDate: string;
         transactionTime: string;
+        transactionDate: string;
         transactionDateTimeFeature: Number;
         longitude: Number;
         latitude: Number;
