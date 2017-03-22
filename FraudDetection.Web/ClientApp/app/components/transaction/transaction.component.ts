@@ -11,7 +11,6 @@ import { Country } from './dto/Country';
 import { Merchant } from './dto/Merchant';
 import { TransactionAlertResponse } from './dto/transactionAlertResponse';
 import { ButtonModule, GrowlModule, Message, CalendarModule, Calendar, SelectItem, Button, Dropdown } from 'primeng/primeng';
-import $ = require("jquery");
 
 @Component({
     selector: 'transaction',
@@ -102,10 +101,6 @@ export class TransactionComponent implements OnInit {
         });
     }
 
-    //$(function() {
-    //    alert('Hello');
-    //});
-
     validateTransactionType(value) {
         if (value === '')
             this.hasTransactionTypeError = true;
@@ -149,13 +144,3 @@ export class TransactionComponent implements OnInit {
         this.onSelect();
     }
 }
-
-
-
-
-
-
-
- 
-
- 
