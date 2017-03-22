@@ -74,9 +74,9 @@ export class TransactionComponent implements OnInit {
             'spentMoneyPerDay': new FormControl('', Validators.required),
             'amountPerLastMonth': new FormControl('', Validators.required),
             'cardNumber': new FormControl('', Validators.required),
-            'cardExpirationDate': new FormControl('', Validators.required),
-            'merchant': new FormControl('', Validators.required),
+            'cardExpiryDate': new FormControl('', Validators.required),
             'merchantCountry': new FormControl('', Validators.required),
+            'merchant': new FormControl('', Validators.required),
             'longitude': new FormControl('', Validators.required),
             'latitude': new FormControl('', Validators.required)
         });

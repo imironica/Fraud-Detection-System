@@ -155,14 +155,14 @@
                         </div>
                     </div>
 
-                    <div class="form-group" [class.has-error]="transactionform.controls['cardExpirationDate'].invalid && transactionform.controls['cardExpirationDate'].touched">
+                    <div class="form-group" [class.has-error]="transactionform.controls['cardExpiryDate'].invalid && transactionform.controls['cardExpiryDate'].touched">
                         <div class="col-md-12">
                             <div style="clear:both">
-                                <label>Card expiration date *</label>
+                                <label>Card expiry date *</label>
                             </div>
-                            <p-calendar class="form-control" formControlName="cardExpirationDate" #cardExpirationDate name="cardExpirationDate" id="cardExpirationDate"
+                            <p-calendar class="form-control" formControlName="cardExpiryDate" #cardExpiryDate name="cardExpiryDate" id="cardExpiryDate"
                                         [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
-                                        [(ngModel)]="transaction.cardExpirationDate">
+                                        [(ngModel)]="transaction.cardExpiryDate">
                             </p-calendar>
                         </div>
                     </div>
@@ -184,18 +184,18 @@
                             <select class="form-control" formControlName="merchantCountry" #merchantCountryFeature name="merchantCountryFeature" id="merchantCountryFeature"
                                     (blur)="validateMerchantCountry(merchantCountryFeature.value)"
                                     (change)="validateMerchantCountry(merchantCountryFeature.value)">
-                                <option *ngFor="let x of countries" [value]="x.feature">{{x.name}}</option>
+                                <option *ngFor="let x of countries" [value]="x.name">{{x.name}}</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="form-group" [class.has-error]="transactionform.controls['merchantCode'].invalid && transactionform.controls['merchantCode'].touched">
+                    <div class="form-group" [class.has-error]="transactionform.controls['merchant'].invalid && transactionform.controls['merchant'].touched">
                         <div class="col-md-12">
                             <div style="clear:both">
-                                <label class="control-label">Merchant Code *</label>
+                                <label class="control-label">Merchant *</label>
                             </div>
-                            <input type="text" class="form-control" formControlName="merchantCode" #merchantCode name="merchantCode" id="merchantCode"
-                                   placeholder="Enter merchant code...">
+                            <input type="text" class="form-control" formControlName="merchant" #merchant name="merchant" id="merchant"
+                                   placeholder="Enter merchant...">
                         </div>
                     </div>
 

@@ -58,9 +58,9 @@ var TransactionComponent = (function () {
             'spentMoneyPerDay': new forms_1.FormControl('', forms_1.Validators.required),
             'amountPerLastMonth': new forms_1.FormControl('', forms_1.Validators.required),
             'cardNumber': new forms_1.FormControl('', forms_1.Validators.required),
-            'cardExpirationDate': new forms_1.FormControl('', forms_1.Validators.required),
-            'merchant': new forms_1.FormControl('', forms_1.Validators.required),
+            'cardExpiryDate': new forms_1.FormControl('', forms_1.Validators.required),
             'merchantCountry': new forms_1.FormControl('', forms_1.Validators.required),
+            'merchant': new forms_1.FormControl('', forms_1.Validators.required),
             'longitude': new forms_1.FormControl('', forms_1.Validators.required),
             'latitude': new forms_1.FormControl('', forms_1.Validators.required)
         });

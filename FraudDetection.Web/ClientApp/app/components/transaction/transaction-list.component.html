@@ -15,88 +15,88 @@
                 </div>
                 <div class="modal-body">
                    
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Transaction details</h3>
                             </div>
 
                             <div class="box-body">
-                                <div class="col-sm-12">
+                                <div>
                                     <label>Transaction Type</label><br />
                                     {{transaction.transactionType}}
                                 </div>
 
-                                <div class="col-sm-12">
+                                <div>
                                     <label>Card Type</label><br />
                                     {{transaction.cardType}}
                                 </div>
-                                <div class="col-sm-12">
+                                <div>
                                     <label>Transaction amount</label><br />
                                     {{transaction.amount}}
                                 </div>
-                                <div class="col-sm-12">
+                                <div>
                                     <label>Transaction date</label>
                                     {{transaction.transactionDate}}
                                 </div>
-                                <div class="col-sm-12">
+                                <div>
                                     <label>Login Atempts</label>
                                     {{transaction.loginAtempts}}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="box box-warning">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Client details</h3>
                             </div>
                             <div class="box-body">
-                                <div class="col-sm-12">
+                                <div>
                                     <label>Client country</label>
                                     {{transaction.clientCountry}}
                                 </div>
-                                <div class="col-sm-12">
+                                <div>
                                     <label>Last transaction date</label>
                                     {{transaction.lastTransactionDate}}
                                 </div>
-                                <div class="col-sm-12">
+                                <div>
                                     <label>Amount of spent money per day</label>
                                     {{transaction.amountOfSpentMoneyPerDay}}
                                 </div>
-                                <div class="col-sm-12 col-lg-4">
+                                <div>
                                     <label>Amount per last month</label>
                                     {{transaction.amountOfSpentMoneyPerMonth}}
                                 </div>
 
-                                <div class="col-sm-12">
+                                <div>
                                     <label>Card number</label>
                                     {{transaction.cardNumber}}
                                 </div>
-                                <div class="col-sm-12">
-                                    <label>Card expiration date</label>
-                                    {{transaction.cardExpirationDate}}
+                                <div>
+                                    <label>Card expiry date</label>
+                                    {{transaction.cardExpiryDate}}
                                 </div>
                             </div>
                         </div>
 
-                        <div class="box box-success">
+                        <div class="box box-success col-md-12">
                             <div class="box-header with-border">
                                 <h3 class="box-title">Merchant details</h3>
                             </div>
-                            <div class="col-sm-12">
+                            <div>
                                 <label>Merchant Code</label>
                                 
                             </div>
-                            <div class="col-sm-12">
+                            <div>
                                 <label>Merchant country</label>
                                 
                             </div>
-                            <div class="col-sm-12">
+                            <div>
                                 <label>Longitude</label>
                                 
                             </div>
-                            <div class="col-sm-12">
+                            <div>
                                 <label>Latitude</label>
                                 
                             </div>
@@ -161,9 +161,9 @@
                         </td>
                         <td>{{ transaction.fraudProbability }}</td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" 
-                                    [disabled]="transaction.verified==true"
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"                                     
                                     (click)="getAlert(transaction.transactionID)">Edit</button>
+                                    <!--[disabled]="transaction.verified==true"-->
                         </td>
                     </tr>
                 </tbody>
