@@ -31,22 +31,9 @@
                                     <label>Card Type</label><br />
                                     {{transaction.cardType}}
                                 </div>
-
-                                <div class="col-sm-12">
-                                    <label>Outlet Code</label><br />
-                                    {{transaction.outletCode}}
-                                </div>
                                 <div class="col-sm-12">
                                     <label>Transaction amount</label><br />
                                     {{transaction.amount}}
-                                </div>
-                                <div class="col-sm-12">
-                                    <label>Currency</label><br />
-                                    {{transaction.transactionCurrency}}
-                                </div>
-                                <div class="col-sm-12">
-                                    <label>Transaction amount in EUR</label>
-                                    {{transaction.amountEUR}}
                                 </div>
                                 <div class="col-sm-12">
                                     <label>Transaction date</label>
@@ -75,11 +62,11 @@
                                 </div>
                                 <div class="col-sm-12">
                                     <label>Amount of spent money per day</label>
-                                    {{transaction.amount}}
+                                    {{transaction.amountOfSpentMoneyPerDay}}
                                 </div>
                                 <div class="col-sm-12 col-lg-4">
                                     <label>Amount per last month</label>
-                                    {{transaction.amount}}
+                                    {{transaction.amountOfSpentMoneyPerMonth}}
                                 </div>
 
                                 <div class="col-sm-12">
@@ -119,8 +106,8 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveTransactionStatus(transaction.transactionID,'CLSNONFRAUD');" >Save as non fraud</button>
-                    <button type="button" class="btn btn-primary btn-danger" data-dismiss="modal" (click)="saveTransactionStatus(transaction.transactionID,'CLSFRAUD');">Save as fraud</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveTransactionStatus(transaction.transactionID, 1);" >Save as non fraud</button>
+                    <button type="button" class="btn btn-primary btn-danger" data-dismiss="modal" (click)="saveTransactionStatus(transaction.transactionID, 0);">Save as fraud</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -148,10 +135,12 @@
             <table id="transactionTable" class="table table-bordered table-hover" *ngIf="transactions">
                 <thead>
                     <tr>
-                        <th>Merchant Code</th>
+                        <th>Merchant</th>
                         <th>Card Type</th>
-                        <th>Country </th>
+                        <th>Card Number</th>
+                        <th>Country</th>
                         <th>Transaction Time</th>
+                        <th>Transaction Date</th>
                         <th>Status</th>
                         <th>Fraud Probability</th>
                         <th>Edit</th>
@@ -159,18 +148,22 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let transaction of transactions">
-                        <td>{{ transaction.merchantCode }}</td>
+                        <td>{{ transaction.merchant }}</td>
                         <td>{{ transaction.cardType }}</td>
+                        <td>{{ transaction.cardNumber }}</td>
                         <td>{{ transaction.country }}</td>
-                        <td>{{ transaction.insertedTime }}</td>
+                        <td>{{ transaction.transactionTime }}</td>
+                        <td>{{ transaction.transactionDate }}</td>
                         <td>
-                            <span *ngIf="transaction.statusCode=='ALERT'" class="label label-warning">Alert</span>
-                            <span *ngIf="transaction.statusCode=='CLSNONFRAUD'" class="label label-success">Classified as NonFraud</span>
-                            <span *ngIf="transaction.statusCode=='CLSFRAUD'" class="label label-danger">Classified as Fraud</span>
+                            <span *ngIf="transaction.prediction==0" class="label label-warning">Alert</span>
+                            <span *ngIf="transaction.class==1" class="label label-success">Classified as NonFraud</span>
+                            <span *ngIf="transaction.class==0" class="label label-danger">Classified as Fraud</span>
                         </td>
                         <td>{{ transaction.fraudProbability }}</td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" (click)="getAlert(transaction.transactionID)">Edit</button>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" 
+                                    [disabled]="transaction.verified==true"
+                                    (click)="getAlert(transaction.transactionID)">Edit</button>
                         </td>
                     </tr>
                 </tbody>

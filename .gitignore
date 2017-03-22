@@ -249,3 +249,19 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+bin
+Python
+__pycache__
+__pycache__
+
+*.pkl
+*.pkl
+model.pkl
+.vs
+bin
+obj
+__pycache__
+__pycache__
+bin
+bin
+.vs

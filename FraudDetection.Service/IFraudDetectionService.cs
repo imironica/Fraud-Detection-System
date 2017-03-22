@@ -9,10 +9,11 @@ namespace FraudDetection.Service
     public interface IFraudDetectionService
     {
         List<TransactionDTO> GetAlerts();
-        TransactionDTO GetAlert(string id);
-        bool SaveTransactionStatus(string transactionID, string statusCode);
+        TransactionDTO GetAlert(int id);
+        bool SaveTransactionStatus(int transactionID, int statusCode);
         TransactionAlertReponse VerifyAlert(TransactionDTO transaction);
         bool InsertTransactionList(List<TransactionDTO> lstTransactions);
+        bool InsertTransation(TransactionDTO transaction);
         DailyStatisticsDTO GetDailyStatistics();
         MonthStatisticDTO GetDashboardStatisticsPerCurrentMonth();
     }

@@ -50,10 +50,7 @@ var TransactionComponent = (function () {
         this.transactionform = this.fb.group({
             'transactionType': new forms_1.FormControl('', forms_1.Validators.required),
             'cardType': new forms_1.FormControl('', forms_1.Validators.required),
-            'outletCode': new forms_1.FormControl('', forms_1.Validators.required),
             'amount': new forms_1.FormControl('', forms_1.Validators.required),
-            'transactionCurrency': new forms_1.FormControl('', forms_1.Validators.required),
-            'amountEUR': new forms_1.FormControl('', forms_1.Validators.required),
             'transactionDate': new forms_1.FormControl('', forms_1.Validators.required),
             'loginAtempts': new forms_1.FormControl('', forms_1.Validators.required),
             'clientCountry': new forms_1.FormControl('', forms_1.Validators.required),
@@ -62,7 +59,7 @@ var TransactionComponent = (function () {
             'amountPerLastMonth': new forms_1.FormControl('', forms_1.Validators.required),
             'cardNumber': new forms_1.FormControl('', forms_1.Validators.required),
             'cardExpirationDate': new forms_1.FormControl('', forms_1.Validators.required),
-            'merchantCode': new forms_1.FormControl('', forms_1.Validators.required),
+            'merchant': new forms_1.FormControl('', forms_1.Validators.required),
             'merchantCountry': new forms_1.FormControl('', forms_1.Validators.required),
             'longitude': new forms_1.FormControl('', forms_1.Validators.required),
             'latitude': new forms_1.FormControl('', forms_1.Validators.required)

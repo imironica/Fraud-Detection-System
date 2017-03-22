@@ -12,18 +12,12 @@ namespace FraudDetection.Service
             CardTypeDTO cardDebit = new CardTypeDTO()
             {
                 Name = "Debit",
-                Feature = 0,
-                FraudProbability = 0.2,
-                AprearenceProbability = 0.4,
                 CreatedAt = DateTime.Now,
                 Id = 1
             };
             CardTypeDTO cardCredit = new CardTypeDTO()
             {
                 Name = "Credit",
-                Feature = 0.3,
-                FraudProbability = 0.1,
-                AprearenceProbability = 0.5,
                 CreatedAt = DateTime.Now,
                 Id = 2
             };
@@ -31,9 +25,6 @@ namespace FraudDetection.Service
             CardTypeDTO cardOther = new CardTypeDTO()
             {
                 Name = "Other",
-                Feature = 0.6,
-                FraudProbability = 0.1,
-                AprearenceProbability = 0.1,
                 CreatedAt = DateTime.Now,
                 Id = 3
             };
@@ -146,9 +137,6 @@ namespace FraudDetection.Service
             CountryDTO c1 = new CountryDTO()
             {
                 Name = "USA",
-                Feature = featureValue,
-                FraudProbability = 0.1,
-                AprearenceProbability = 0.1,
                 CreatedAt = DateTime.Now,
                 Id = 1
             };
@@ -156,9 +144,6 @@ namespace FraudDetection.Service
             CountryDTO c2 = new CountryDTO()
             {
                 Name = "United Kingdom",
-                Feature = featureValue,
-                FraudProbability = 0.1,
-                AprearenceProbability = 0.1,
                 CreatedAt = DateTime.Now,
                 Id = 2
             };
@@ -166,9 +151,6 @@ namespace FraudDetection.Service
             CountryDTO c3 = new CountryDTO()
             {
                 Name = "France",
-                Feature = featureValue,
-                FraudProbability = 0.1,
-                AprearenceProbability = 0.1,
                 CreatedAt = DateTime.Now,
                 Id = 3
             };
@@ -176,9 +158,6 @@ namespace FraudDetection.Service
             CountryDTO c4 = new CountryDTO()
             {
                 Name = "Germany",
-                Feature = featureValue,
-                FraudProbability = 0.1,
-                AprearenceProbability = 0.1,
                 CreatedAt = DateTime.Now,
                 Id = 4
             };
@@ -186,9 +165,6 @@ namespace FraudDetection.Service
             CountryDTO c5 = new CountryDTO()
             {
                 Name = "Romania",
-                Feature = featureValue,
-                FraudProbability = 0.1,
-                AprearenceProbability = 0.1,
                 CreatedAt = DateTime.Now,
                 Id = 5
             };
@@ -196,9 +172,6 @@ namespace FraudDetection.Service
             CountryDTO c6 = new CountryDTO()
             {
                 Name = "China",
-                Feature = featureValue,
-                FraudProbability = 0.5,
-                AprearenceProbability = 0.1,
                 CreatedAt = DateTime.Now,
                 Id = 6
             };
@@ -206,9 +179,6 @@ namespace FraudDetection.Service
             CountryDTO c7 = new CountryDTO()
             {
                 Name = "Australia",
-                Feature = featureValue,
-                FraudProbability = 0.1,
-                AprearenceProbability = 0.1,
                 CreatedAt = DateTime.Now,
                 Id = 7
             };
@@ -216,9 +186,6 @@ namespace FraudDetection.Service
             CountryDTO c8 = new CountryDTO()
             {
                 Name = "Japan",
-                Feature = featureValue,
-                FraudProbability = 0.1,
-                AprearenceProbability = 0.1,
                 CreatedAt = DateTime.Now,
                 Id = 8
             };
@@ -226,9 +193,6 @@ namespace FraudDetection.Service
             CountryDTO c9 = new CountryDTO()
             {
                 Name = "Brazil",
-                Feature = featureValue,
-                FraudProbability = 0.1,
-                AprearenceProbability = 0.1,
                 CreatedAt = DateTime.Now,
                 Id = 9
             };
@@ -236,9 +200,6 @@ namespace FraudDetection.Service
             CountryDTO c10 = new CountryDTO()
             {
                 Name = "Spain",
-                Feature = featureValue,
-                FraudProbability = 0.1,
-                AprearenceProbability = 0.1,
                 CreatedAt = DateTime.Now,
                 Id = 10
             };

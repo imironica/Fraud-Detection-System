@@ -33,7 +33,7 @@ namespace FraudDetection.Web.Controllers
         [HttpPost("[action]")]
         public bool SaveTransactionStatus([FromBody] TransactionDTO transactionRequest)
         {
-            var transactionChange = _fraudService.SaveTransactionStatus(transactionRequest.TransactionID, transactionRequest.StatusCode);
+            var transactionChange = _fraudService.SaveTransactionStatus(transactionRequest.TransactionID, transactionRequest.Class);
             return transactionChange;
         }
         

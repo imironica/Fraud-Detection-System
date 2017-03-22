@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
 namespace FraudDetection.Models
 {
-    public class TransactionStatusDTO:Entity
+    [BsonIgnoreExtraElements]
+    public class TransactionStatusDTO : Entity
     {
         public int Id { get; set; }
         public string Code { get; set; }

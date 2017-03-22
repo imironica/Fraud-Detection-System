@@ -1,64 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using FraudDetection.Models.Transactions;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 
 namespace FraudDetection.Models
 {
+    [BsonIgnoreExtraElements]
     public class TransactionDTO : Entity
     {
         public TransactionDTO()
         {
-
         }
         public object _id { get; set; }
-        public string TransactionID { get; set; }
+        public int TransactionID { get; set; }
         public string TransactionType { get; set; }
-        public double TransactionTypeFeature { get; set; }
-        public decimal Amount { get; set; }
-        public double AmountFeature { get; set; }
-        public string MerchantCode { get; set; }
-        public double MerchantCodeFeature { get; set; }
-        public string OutletCode { get; set; }
-        public double OutletCodeFeature { get; set; }
+        public int TransactionTypeFeature { get; set; }
+        public double Amount { get; set; }
         public string CardNumber { get; set; }
+        public double CardNumberFeature { get; set; }
         public string CardExpiryDate { get; set; }
-        public double CardExpiryDateFeature { get; set; }
+        public DateTime CardExpiryDateFeature { get; set; }
+        public int CardStartFeature { get; set; }
+        public int CardEndFeature { get; set; }
         public string CardType { get; set; }
-        public double CardTypeFeature { get; set; }
+        public string CardVendor { get; set; }
+        public int CardVendorFeature { get; set; }
+        public int CardTypeFeature { get; set; }
         public string TransactionDate { get; set; }
-        public double TransactionDateFeature { get; set; }
         public string TransactionTime { get; set; }
-        public double TransactionTimeFeature { get; set; }
+        public DateTime TransactionDateTimeFeature { get; set; }
         public double Longitude { get; set; }
-        public double LongitudeFeature { get; set; }
         public double Latitude { get; set; }
-        public double LatitudeFeature { get; set; }
-        public string TransactionCurency { get; set; }
-        public double TransactionCurencyFeature { get; set; }
         public int LoginAtempts { get; set; }
-        public double LoginAtemptsFeature { get; set; }
         public string Country { get; set; }
         public double CountryFeature { get; set; }
-        public decimal AmountEUR { get; set; }
-        public double AmountEURFeature;
-        public decimal ExchangeRate { get; set; }
-        public double ExchangeRateFeature { get; set; }
+        public string Merchant { get; set; }
+        public double MerchantFeature { get; set; }
 
         #region ClientRelated
+        //public ClientCountryDTO ClientCountry { get; set; }
         public string ClientCountry { get; set; }
-        public double ClientCountryFeature { get; set; }
+        public int ClientCountryFeature { get; set; }
         public string LastTransactionDate { get; set; }
-        public double LastTransactionDateFeature { get; set; }
-        public decimal AmountOfSpentMoneyPerDay { get; set; }
-        public double AmountOfSpentMoneyPerDayFeature { get; set; }
-        public decimal AmountOfSpentMoneyPerMonth { get; set; }
-        public double AmountOfSpentMoneyPerMonthFeature { get; set; }
+        public DateTime LastTransactionDateFeature { get; set; }
+        public double AmountOfSpentMoneyPerDay { get; set; }
+        public double AmountOfSpentMoneyPerMonth { get; set; }
         #endregion
 
-        public DateTime InsertedTime { get; set; }
-        public string Status { get; set; }
-        public string StatusCode { get; set; }
-        public double FraudProbability { get; set; }
+        public int Prediction { get; set; } // 1-nonfraud; 0-fraud (predicted)
+        public int Class { get; set; } // 1-nonfraud; 0-fraud
+        public double FraudProbability { get; set; } // [0.1]
+        public bool Verified { get; set; }
     }
 }

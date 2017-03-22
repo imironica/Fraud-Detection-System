@@ -13,13 +13,16 @@ var http_1 = require("@angular/http");
 var Transaction_1 = require("./dto/Transaction");
 var TransactionListComponent = (function () {
     function TransactionListComponent(http) {
-        var _this = this;
         this.http = http;
         this.transaction = new Transaction_1.Transaction();
-        http.get('/api/Transactions/GetAlerts').subscribe(function (result) {
+        this.reloadData();
+    }
+    TransactionListComponent.prototype.reloadData = function () {
+        var _this = this;
+        this.http.get('/api/Transactions/GetAlerts').subscribe(function (result) {
             _this.transactions = result.json();
         });
-    }
+    };
     TransactionListComponent.prototype.getAlert = function (id) {
         var _this = this;
         var transactionRequest = new Transaction_1.Transaction();
@@ -33,11 +36,12 @@ var TransactionListComponent = (function () {
         var _this = this;
         var transactionRequest = new Transaction_1.Transaction();
         transactionRequest.transactionID = id;
-        transactionRequest.statusCode = status;
+        transactionRequest.class = status;
         this.http.post('/api/Transactions/saveTransactionStatus', transactionRequest)
             .subscribe(function (result) {
             _this.message = "saved";
         });
+        window.location.reload();
     };
     return TransactionListComponent;
 }());

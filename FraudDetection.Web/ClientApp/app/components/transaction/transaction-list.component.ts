@@ -16,12 +16,16 @@ export class TransactionListComponent {
     constructor(http: Http) {
 	    this.http = http;
         this.transaction = new Transaction();
-        http.get('/api/Transactions/GetAlerts').subscribe(result => {
+        this.reloadData();
+    }
+
+    reloadData() {
+        this.http.get('/api/Transactions/GetAlerts').subscribe(result => {
             this.transactions = result.json();
         });
     }
 
-	getAlert(id:string) {
+	getAlert(id: Number) {
 	     var transactionRequest = new Transaction();
 		 transactionRequest.transactionID = id;
          this.http.post('/api/Transactions/GetAlert',
@@ -29,17 +33,18 @@ export class TransactionListComponent {
 			.subscribe(result => {
               this.transaction = result.json();
         });
-	  }
+	}
 
-	saveTransactionStatus(id:string, status:string)
+    saveTransactionStatus(id: Number, status: Number)
 	{
 		var transactionRequest = new Transaction();
-		 transactionRequest.transactionID = id;
-		 transactionRequest.statusCode = status;
+        transactionRequest.transactionID = id;
+        transactionRequest.class = status;
          this.http.post('/api/Transactions/saveTransactionStatus',
 		                transactionRequest)
 			 .subscribe(result => {
               this.message = "saved";
-        });
+            });
+         window.location.reload();
 	}
-} 
+}

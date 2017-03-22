@@ -17,12 +17,12 @@ namespace FraudDetection.Service
         public List<TransactionDTO> GetAlerts()
         {
             var repo = new MDRepository<TransactionDTO>();
-            var lst = repo.Find(x => x.StatusCode == "ALERT" || 
-                                     x.StatusCode == "CLSFRAUD" || x.StatusCode == "CLSNONFRAUD")
-                          .OrderByDescending(y=> y.FraudProbability).ToList();
+            var lst = repo.Find((x => x.TransactionDate.Equals(DateTime.Today.ToString("dd/MM/yyyy"))))
+                                                .OrderByDescending(y => y.FraudProbability).ToList();
+            //var lst = repo.Find((x => x.Verified == false)).OrderByDescending(y=> y.FraudProbability).ToList();
             return lst;
         }
-        public TransactionDTO GetAlert(string id)
+        public TransactionDTO GetAlert(int id)
         {
             var repo = new MDRepository<TransactionDTO>();
             var lst = repo.Find(x => x.TransactionID == id);
@@ -37,9 +37,17 @@ namespace FraudDetection.Service
             return true;
         }
 
+        public bool InsertTransation(TransactionDTO transaction)
+        {
+            var repo = new MDRepository<TransactionDTO>();
+            repo.InsertOne(transaction);
+            return true;
+        }
+
         public TransactionAlertReponse VerifyAlert(TransactionDTO transaction)
         {
             //TODO: query the ML service
+
             Random rnd = new Random();
             var response = new TransactionAlertReponse()
             {
@@ -97,11 +105,10 @@ namespace FraudDetection.Service
             return currentMonthStatistics;
         }
 
-        public bool SaveTransactionStatus(string transactionID, string statusCode)
+        public bool SaveTransactionStatus(int transactionID, int statusCode)
         {
             var repo = new MDRepository<TransactionDTO>();
-            var update = Builders<TransactionDTO>.Update
-                    .Set("StatusCode", statusCode);
+            var update = Builders<TransactionDTO>.Update.Set("Class", statusCode);
             repo.Update(x=>x.TransactionID == transactionID, update);
             return true;
         }

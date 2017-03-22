@@ -1,4 +1,5 @@
 ﻿using FraudDetection.Models;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
@@ -72,9 +73,10 @@ namespace FraudDetection.Service
             return _collection.InsertManyAsync(insertedObjects);
         }
 
-        public T GetById(string id)
+        public T GetById(int id)
         {
-            //TODO
+            //var filter = Builders<T>.Filter.Eq("_id", id);
+            //return _collection.Find(filter);
             return new T();
         }
 

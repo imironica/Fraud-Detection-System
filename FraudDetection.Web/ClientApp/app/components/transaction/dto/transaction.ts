@@ -1,40 +1,44 @@
-﻿	export class Transaction {
+﻿import { ClientCountry } from './ClientCountry';
+
+export class Transaction {
 
 		constructor() {
         
-		}
+        }
+        transactionID: Number;
 		transactionType: string;
 		transactionTypeFeature: Number;
-		amount: Number;
-		merchantCode: string;
-		outletCode: string;
-		cardNumber: string;
-		cardType: string;
-		cardTypeFeature: Number;
-		transactionID: string;
-		cardExpiryDate: Date;
-	
-		transactionDate: Date;
-		transactionTime: Date;
+        amount: Number;
+        cardNumber: string;
+        cardNumberFeature: Number;
+        cardExpiryDate: string;
+        cardExpiryDateFeature: Date;
+        cardStartFeature: Number;
+        cardEndFeature: Number;
+        cardType: string;
+        cardTypeFeature: Number;
+        cardVendor: string;
+        cardVendorFeature: Number;
+        transactionDate: string;
+        transactionTime: string;
+        transactionDateTimeFeature: Number;
+        longitude: Number;
+        latitude: Number;
+        loginAtempts: Number;
+        country: string;
+        countryFeature: Number;
+        merchant: string;
+        merchantFeature: Number;
 
-		longitude: Number;
-		latitude: Number;
-
-		transactionCurency: string;
-		loginAtemptsFeature: Number;
-		country : string;
-		countryFeature: Number;
-
-		amountEUR: Number;
-		exchangeRate: Number;
-		clientCountry : string;
+        clientCountry: string;
 		ClientCountryFeature: Number;
-		lastTransactionDate: Date;
+        lastTransactionDate: Date;
+        lastTransactionDateFeature: Number;
 		amountOfSpentMoneyPerDay: Number;
 		amountOfSpentMoneyPerMonth: Number;
-		insertedTime: Date;
-		status: string;
-		statusCode: string;
-		fraudProbability: Number;
+        prediction: Number;
+        class: Number;
+        fraudProbability: Number;
+        verified: boolean;
 	} 
 

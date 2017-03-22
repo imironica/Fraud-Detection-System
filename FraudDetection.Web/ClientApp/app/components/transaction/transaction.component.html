@@ -56,17 +56,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group" [class.has-error]="transactionform.controls['outletCode'].invalid && transactionform.controls['outletCode'].touched">
-                        <div class="col-md-12">
-                            <div style="clear:both">
-                                <label class="control-label">Outlet Code *</label>
-                            </div>
-                            <input type="text" class="form-control" #outletCode name="outletCode" formControlName="outletCode" id="outletCode"
-                                    placeholder="Enter outlet code..."
-                                    [(ngModel)]="transaction.outletCode">
-                        </div>
-                    </div>
-
                     <div class="form-group" [class.has-error]="transactionform.controls['amount'].invalid && transactionform.controls['amount'].touched">
                         <div class="col-md-12">
                             <div style="clear:both">
@@ -75,31 +64,6 @@
                             <input type="text" class="form-control" formControlName="amount" #amount name="amount" id="amount"
                                     placeholder="Enter transaction amount..." 
                                     [(ngModel)]="transaction.amount">
-                        </div>
-                    </div>
-
-                    <div class="form-group" [class.has-error]="hasTransactionCurrencyError">
-                        <div class="col-md-12">
-                            <div style="clear:both">
-                                <label class="control-label">Currency *</label>
-                            </div>
-                            <select class="form-control" formControlName="transactionCurrency" #transactionCurrency name="transactionCurrency" id="transactionCurrency"
-                                    (blur)="validateTransactionCurrencyError(transactionCurrency.value)"
-                                    (change)="validateTransactionCurrencyError(transactionCurrency.value)"
-                                    [(ngModel)]="transaction.transactionCurrency">
-                                <option *ngFor="let currency of currencies" value="transactionCurrency">{{currency}}</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group" [class.has-error]="transactionform.controls['amountEUR'].invalid && transactionform.controls['amountEUR'].touched">
-                        <div class="col-md-12">
-                            <div style="clear:both">
-                                <label class="control-label">Transaction amount in EUR *</label>
-                            </div>
-                            <input type="text" class="form-control" formControlName="amountEUR" #amountEUR name="amountEUR" id="amountEUR"
-                                    placeholder="Enter transaction amount in EUR..." 
-                                    [(ngModel)]="transaction.amountEUR">
                         </div>
                     </div>
 
@@ -212,16 +176,6 @@
                 </div>
 
                 <div class="box-body">
-                    <div class="form-group" [class.has-error]="transactionform.controls['merchantCode'].invalid && transactionform.controls['merchantCode'].touched">
-                        <div class="col-md-12">
-                            <div style="clear:both">
-                                <label class="control-label">Merchant Code *</label>
-                            </div>
-                            <input type="text" class="form-control" formControlName="merchantCode" #merchantCode name="merchantCode" id="merchantCode"
-                                   placeholder="Enter merchant code...">
-                        </div>
-                    </div>
-
                     <div class="form-group" [class.has-error]="hasMerchantCountryError">
                         <div class="col-md-12">
                             <div style="clear:both">
@@ -232,6 +186,16 @@
                                     (change)="validateMerchantCountry(merchantCountryFeature.value)">
                                 <option *ngFor="let x of countries" [value]="x.feature">{{x.name}}</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" [class.has-error]="transactionform.controls['merchantCode'].invalid && transactionform.controls['merchantCode'].touched">
+                        <div class="col-md-12">
+                            <div style="clear:both">
+                                <label class="control-label">Merchant Code *</label>
+                            </div>
+                            <input type="text" class="form-control" formControlName="merchantCode" #merchantCode name="merchantCode" id="merchantCode"
+                                   placeholder="Enter merchant code...">
                         </div>
                     </div>
 

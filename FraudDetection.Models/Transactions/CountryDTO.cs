@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using FraudDetection.Models.Transactions;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace FraudDetection.Models
 {
-    public class CountryDTO:Entity
+    [BsonIgnoreExtraElements]
+    public class CountryDTO : Entity
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public double Feature { get; set; }
-        public double AprearenceProbability { get; set; }
-        public double FraudProbability { get; set; }
+        public double Probability { get; set; }
+        public LatitudeDTO Latitude { get; set; }
+        public LongitudeDTO Longitude { get; set; }
     }
 }

@@ -66,10 +66,7 @@ export class TransactionComponent implements OnInit {
         this.transactionform = this.fb.group({
             'transactionType': new FormControl('', Validators.required),
             'cardType': new FormControl('', Validators.required),
-            'outletCode': new FormControl('', Validators.required),
             'amount': new FormControl('', Validators.required),
-            'transactionCurrency': new FormControl('', Validators.required),
-            'amountEUR': new FormControl('', Validators.required),
             'transactionDate': new FormControl('', Validators.required),
             'loginAtempts': new FormControl('', Validators.required),
             'clientCountry': new FormControl('', Validators.required),
@@ -78,7 +75,7 @@ export class TransactionComponent implements OnInit {
             'amountPerLastMonth': new FormControl('', Validators.required),
             'cardNumber': new FormControl('', Validators.required),
             'cardExpirationDate': new FormControl('', Validators.required),
-            'merchantCode': new FormControl('', Validators.required),
+            'merchant': new FormControl('', Validators.required),
             'merchantCountry': new FormControl('', Validators.required),
             'longitude': new FormControl('', Validators.required),
             'latitude': new FormControl('', Validators.required)
