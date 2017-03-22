@@ -1,6 +1,6 @@
 ﻿export class CardType
 {
-	id:Number;
+	cardTypeId:Number;
     name: string;
     probability: Number;
 }

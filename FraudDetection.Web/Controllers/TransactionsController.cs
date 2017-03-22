@@ -26,14 +26,14 @@ namespace FraudDetection.Web.Controllers
         [HttpPost("[action]")]
         public TransactionDTO GetAlert([FromBody] TransactionDTO transactionRequest)
         {
-            var transaction = _fraudService.GetAlert(transactionRequest.TransactionID);
+            var transaction = _fraudService.GetAlert(transactionRequest.TransactionId);
             return transaction;
         }
 
         [HttpPost("[action]")]
         public bool SaveTransactionStatus([FromBody] TransactionDTO transactionRequest)
         {
-            var transactionChange = _fraudService.SaveTransactionStatus(transactionRequest.TransactionID, transactionRequest.Class);
+            var transactionChange = _fraudService.SaveTransactionStatus(transactionRequest.TransactionId, transactionRequest.Class);
             return transactionChange;
         }
         

@@ -6,7 +6,7 @@ namespace FraudDetection.Models.Transactions
 {
     public class ClientCountryDTO
     {
-        public int Id { get; set; }
+        public int ClientCountryId { get; set; }
         public string Name { get; set; }
         public double Probability { get; set; }
     }

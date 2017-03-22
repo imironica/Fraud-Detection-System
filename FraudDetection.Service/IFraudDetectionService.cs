@@ -10,7 +10,7 @@ namespace FraudDetection.Service
     {
         List<TransactionDTO> GetAlerts();
         TransactionDTO GetAlert(int id);
-        bool SaveTransactionStatus(int transactionID, int statusCode);
+        bool SaveTransactionStatus(int transactionId, int statusCode);
         TransactionAlertReponse VerifyAlert(TransactionDTO transaction);
         bool InsertTransactionList(List<TransactionDTO> lstTransactions);
         bool InsertTransation(TransactionDTO transaction);

@@ -89,7 +89,7 @@ export class TransactionComponent implements OnInit {
     }
 
     onSelect() {
-        this.http.get('/api/MasterData/GetMerchants?id=' + this.selectedMerchantCountry.id).subscribe(result => {
+        this.http.get('/api/MasterData/GetMerchants?id=' + this.selectedMerchantCountry.countryId).subscribe(result => {
             this.merchants = result.json();
         });
     }

@@ -1,6 +1,6 @@
 ﻿export class TransactionType
 {
-	id:Number;
+	transactionTypeId:Number;
     name: string;
     probability: Number;
 }

@@ -1,5 +1,5 @@
 ﻿export class CardVendor {
-    id: Number;
+    cardVendorId: Number;
     name: string;
     cardStart: Number;
 }

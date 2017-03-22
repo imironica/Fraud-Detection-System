@@ -25,8 +25,8 @@ def generate_transactions(date, size=10000):
         login_atempts.append(np.random.choice(np.arange(1,4), p =[0.8,0.1,0.1]))
         client_country.append(np.random.choice(np.arange(1,len(client_country_proba) + 1),p=client_country_proba))
         merchant_code_list.append(np.random.randint(1,11))
-        longitute_min_max = next((x['longitude'] for x in dictionaries.countries if x['id'] == country_list[-1]))
-        latitude_min_max = next((x['latitude'] for x in dictionaries.countries if x['id'] == country_list[-1]))
+        longitute_min_max = next((x['longitude'] for x in dictionaries.countries if x['countryId'] == country_list[-1]))
+        latitude_min_max = next((x['latitude'] for x in dictionaries.countries if x['countryId'] == country_list[-1]))
         longitute.append(np.random.uniform(low=longitute_min_max['min'],high=longitute_min_max['max']))
         latitude.append(np.random.uniform(low=latitude_min_max['min'],high=latitude_min_max['max']))
         amount.append(np.random.triangular(0,200,1500))
@@ -34,7 +34,7 @@ def generate_transactions(date, size=10000):
         transaction_time.append(datetime.time(np.random.randint(0,24),np.random.randint(0,60),np.random.randint(0,60)))
         last_trans_date.append(date - datetime.timedelta(days=np.random.randint(0,30)))
         card_expiry_date.append(date + datetime.timedelta(days=np.random.randint(30,800)))
-        card_vendors.append(next((x['id'] for x in dictionaries.card_vendors if x['cardstart'] ==int(str(card_start[-1])[:1]))))
+        card_vendors.append(next((x['cardVendorId'] for x in dictionaries.card_vendors if x['cardstart'] ==int(str(card_start[-1])[:1]))))
 
     df['Amount'] = amount
     df['CardVendorFeature'] = card_vendors

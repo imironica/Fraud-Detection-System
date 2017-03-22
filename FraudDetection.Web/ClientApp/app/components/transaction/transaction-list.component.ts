@@ -27,7 +27,7 @@ export class TransactionListComponent {
 
 	getAlert(id: Number) {
 	     var transactionRequest = new Transaction();
-		 transactionRequest.transactionID = id;
+		 transactionRequest.transactionId = id;
          this.http.post('/api/Transactions/GetAlert',
 		                transactionRequest)
 			.subscribe(result => {
@@ -38,7 +38,7 @@ export class TransactionListComponent {
     saveTransactionStatus(id: Number, status: Number)
 	{
 		var transactionRequest = new Transaction();
-        transactionRequest.transactionID = id;
+        transactionRequest.transactionId = id;
         transactionRequest.class = status;
          this.http.post('/api/Transactions/saveTransactionStatus',
 		                transactionRequest)

@@ -3,7 +3,7 @@ import { Latitude } from './Latitude';
 import { Longitude } from './Longitude';
 export class Country
 {
-	id:Number;
+	countryId:Number;
     name: string;
     probability: Number;
     merchants: Array<Merchant>;

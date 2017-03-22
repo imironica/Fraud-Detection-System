@@ -1,5 +1,5 @@
 ﻿export class ClientCountry {
-    id: Number;
+    clientCountryId: Number;
     name: string;
     probability: Number;
 }

@@ -86,19 +86,19 @@
                             </div>
                             <div>
                                 <label>Merchant Code</label>
-                                
+                                {{transaction.merchant}}
                             </div>
                             <div>
                                 <label>Merchant country</label>
-                                
+                                {{transaction.merchantCountry}}
                             </div>
                             <div>
                                 <label>Longitude</label>
-                                
+                                {{transaction.longitude}}
                             </div>
                             <div>
                                 <label>Latitude</label>
-                                
+                                {{transaction.latitude}}
                             </div>
                         </div>
                     </div>
@@ -106,8 +106,8 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveTransactionStatus(transaction.transactionID, 1);" >Save as non fraud</button>
-                    <button type="button" class="btn btn-primary btn-danger" data-dismiss="modal" (click)="saveTransactionStatus(transaction.transactionID, 0);">Save as fraud</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveTransactionStatus(transaction.transactionId, 1);" >Save as non fraud</button>
+                    <button type="button" class="btn btn-primary btn-danger" data-dismiss="modal" (click)="saveTransactionStatus(transaction.transactionId, 0);">Save as fraud</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -162,7 +162,7 @@
                         <td>{{ transaction.fraudProbability }}</td>
                         <td>
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"                                     
-                                    (click)="getAlert(transaction.transactionID)">Edit</button>
+                                    (click)="getAlert(transaction.transactionId)">Edit</button>
                                     <!--[disabled]="transaction.verified==true"-->
                         </td>
                     </tr>

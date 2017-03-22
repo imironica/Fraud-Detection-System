@@ -7,7 +7,7 @@ namespace FraudDetection.Models
     [BsonIgnoreExtraElements]
     public class CountryDTO : Entity
     {
-        public int Id { get; set; }
+        public int CountryId { get; set; }
         public string Name { get; set; }
         public double Probability { get; set; }
         public Latitude Latitude { get; set; }

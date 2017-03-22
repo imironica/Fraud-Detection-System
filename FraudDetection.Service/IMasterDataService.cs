@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FraudDetection.Models;
+using FraudDetection.Models.Transactions;
 
 namespace FraudDetection.Service
 {
@@ -9,5 +10,6 @@ namespace FraudDetection.Service
         List<TransactionStatus> GetTransactionStatus();
         List<TransactionTypeDTO> GetTransactionType();
         List<CountryDTO> GetCountries();
+        List<Merchant> GetMerchants(int countryId);
     }
 }

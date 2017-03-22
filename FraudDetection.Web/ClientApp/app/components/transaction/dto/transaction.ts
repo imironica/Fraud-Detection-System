@@ -5,7 +5,7 @@ export class Transaction {
 		constructor() {
         
         }
-        transactionID: Number;
+        transactionId: Number;
 		transactionType: string;
 		transactionTypeFeature: Number;
         amount: Number;

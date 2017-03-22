@@ -6,7 +6,7 @@ namespace FraudDetection.Models.Transactions
 {
     public class CardVendorDTO : Entity
     {
-        public int Id { get; set; }
+        public int CardVendorId { get; set; }
         public string Name { get; set; }
         public int CardStart { get; set; }
     }

@@ -1,4 +1,5 @@
 ﻿using FraudDetection.Models;
+using FraudDetection.Models.Transactions;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace FraudDetection.Service
     {
         public List<CardTypeDTO> GetCardTypes()
         {
-            var repo = new MDRepository<CardTypeDTO>("cardType");
+            var repo = new MDRepository<CardTypeDTO>("card_types");
             var lst = repo.GetAllList();
             return lst;
         }
@@ -25,17 +26,23 @@ namespace FraudDetection.Service
 
         public List<TransactionTypeDTO> GetTransactionType()
         {
-            var repo = new MDRepository<TransactionTypeDTO>("transactionType");
+            var repo = new MDRepository<TransactionTypeDTO>("transaction_types");
             var lst = repo.GetAllList();
             return lst;
         }
 
         public List<CountryDTO> GetCountries()
         {
-            var repo = new MDRepository<CountryDTO>("country");
+            var repo = new MDRepository<CountryDTO>("countries");
             var lst = repo.GetAllList();
             return lst;
         }
 
+        public List<Merchant> GetMerchants(int countryId)
+        {
+            var repo = new MDRepository<CountryDTO>("countries");
+            var merchantsList =  repo.Find(c => c.CountryId == countryId).FirstOrDefault().Merchants;
+            return merchantsList;
+        }
     }
 }

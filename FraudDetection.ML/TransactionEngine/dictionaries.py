@@ -1,43 +1,43 @@
 client_contries = [
-    {"id" :1, "name": "USA", "probability": 0.18},
-    {"id": 2, "name": "France", "probability": 0.06},
-    {"id": 3, "name": "Germany", "probability": 0.06},
-    {"id": 4, "name": "United Kingdom", "probability": 0.06},
-    {"id": 5, "name": "Romania", "probability": 0.02},
-    {"id": 6, "name": "Spain", "probability": 0.04},
-    {"id": 7, "name": "Italy", "probability": 0.05},
-    {"id": 8, "name": "Norway", "probability": 0.03},
-    {"id": 9, "name": "India", "probability": 0.06},
-    {"id": 10, "name": "China", "probability": 0.12},
-    {"id": 11, "name": "South Korea", "probability": 0.06},
-    {"id": 12, "name": "Canada", "probability": 0.05},
-    {"id": 13, "name": "Brazil", "probability": 0.08},
-    {"id": 14, "name": "Poland", "probability": 0.02},
-    {"id": 15, "name": "Australia", "probability": 0.03},
-    {"id": 16, "name": "Russia", "probability": 0.05},
-    {"id": 17, "name": "Nigeria", "probability": 0.03},
+    {"clientCountryId" :1, "name": "USA", "probability": 0.18},
+    {"clientCountryId": 2, "name": "France", "probability": 0.06},
+    {"clientCountryId": 3, "name": "Germany", "probability": 0.06},
+    {"clientCountryId": 4, "name": "United Kingdom", "probability": 0.06},
+    {"clientCountryId": 5, "name": "Romania", "probability": 0.02},
+    {"clientCountryId": 6, "name": "Spain", "probability": 0.04},
+    {"clientCountryId": 7, "name": "Italy", "probability": 0.05},
+    {"clientCountryId": 8, "name": "Norway", "probability": 0.03},
+    {"clientCountryId": 9, "name": "India", "probability": 0.06},
+    {"clientCountryId": 10, "name": "China", "probability": 0.12},
+    {"clientCountryId": 11, "name": "South Korea", "probability": 0.06},
+    {"clientCountryId": 12, "name": "Canada", "probability": 0.05},
+    {"clientCountryId": 13, "name": "Brazil", "probability": 0.08},
+    {"clientCountryId": 14, "name": "Poland", "probability": 0.02},
+    {"clientCountryId": 15, "name": "Australia", "probability": 0.03},
+    {"clientCountryId": 16, "name": "Russia", "probability": 0.05},
+    {"clientCountryId": 17, "name": "Nigeria", "probability": 0.03},
 ]
 card_vendors = [
-    { "id": 1, "name": "American Express" , "cardstart":3 },
-    { "id": 2, "name": "Visa" , "cardstart":4 },
-    { "id": 3, "name": "MasterCard" , "cardstart":5 }
+    { "cardVendorId": 1, "name": "American Express" , "cardstart":3 },
+    { "cardVendorId": 2, "name": "Visa" , "cardstart":4 },
+    { "cardVendorId": 3, "name": "MasterCard" , "cardstart":5 }
 ]
 
 transaction_types = [
     {
-        "id" : 1,
+        "transactionTypeId" : 1,
         "name" : "E-Commenrce",
         "probability" : 0.4
 
     },
     {
-        "id": 2,
+        "transactionTypeId": 2,
         "name": "ATM",
         "probability" : 0.5
 
     },
     {
-        "id": 3,
+        "transactionTypeId": 3,
         "name": "POS",
         "probability" : 0.1
 
@@ -46,17 +46,17 @@ transaction_types = [
 
 card_types = [
     {
-        "id" : 1,
+        "cardTypeId" : 1,
         "name": "Credit",
         "probability": 0.5
     },
     {
-        "id" : 2,
+        "cardTypeId" : 2,
         "name": "Debit",
         "probability": 0.4
     },
     {
-        "id" : 3,
+        "cardTypeId" : 3,
         "name": "Other",
         "probability": 0.1
     },
@@ -64,7 +64,7 @@ card_types = [
 
 countries = [
     {
-        "id":1,
+        "countryId":1,
         "name":"USA",
         "probability":0.28,
         "longitude": {
@@ -129,7 +129,7 @@ countries = [
         ]
     },
     {
-        "id": 2,
+        "countryId": 2,
         "name": "China",
         "probability": 0.22,
         "longitude": {
@@ -194,7 +194,7 @@ countries = [
         ]
     },
     {
-        "id": 3,
+        "countryId": 3,
         "name": "United Kingdom",
         "probability": 0.1,
         "longitude": {
@@ -259,7 +259,7 @@ countries = [
         ]
     },
     {
-        "id": 4,
+        "countryId": 4,
         "name": "France",
         "probability": 0.1,
         "longitude": {
@@ -274,57 +274,57 @@ countries = [
             {
                 "id": 1,
                 "name":'Écomarché',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 2,
                 "name":'Vêti',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 3,
                 "name":'Vival',
-"probability":0.1
+                "probability":0.1
             },
 {
                 "id": 4,
                 "name":'Utile',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id":5,
                 "name":'Marché Plus',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 6,
                 "name":'Monoprix',
-"probability":0.1
+                "probability":0.1
             },
 {
                 "id": 7,
                 "name": 'Géant',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 8,
                 "name":'Auchan',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 9,
                 "name":'Bricomarché',
-"probability":0.1
+                "probability":0.1
             },
 {
                 "id": 10,
                 "name":'Carrefour',
-"probability":0.1
+                "probability":0.1
             }
         ]
     },
     {
-        "id": 5,
+        "countryId": 5,
         "name": "Germany",
         "probability": 0.1,
         "longitude": {
@@ -339,57 +339,57 @@ countries = [
             {
                 "id": 1,
                 "name":'Aldi',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 2,
                 "name":'DM-Drogeriemarkt',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 3,
                 "name":'IKEA',
-"probability":0.1
+                "probability":0.1
             },
 {
                 "id": 4,
                 "name":'REWE',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id":5,
                 "name": 'Karstadt',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 6,
                 "name":'Rossmann',
-"probability":0.1
+                "probability":0.1
             },
 {
                 "id": 7,
                 "name":'Kaufland',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 8,
                 "name":'Fielmann',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 9,
                 "name":'Weltbild',
-"probability":0.1
+                "probability":0.1
             },
 {
                 "id": 10,
                 "name":'Lidl',
-"probability":0.1
+                "probability":0.1
             }
         ]
     },
     {
-        "id": 6,
+        "countryId": 6,
         "name": "Brazil",
         "probability": 0.15,
         "longitude": {
@@ -404,58 +404,58 @@ countries = [
             {
                 "id": 1,
                 "name":'Companhia Brasileira de Distribuição',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 2,
                 "name":'Carrefour Comércio e Indústria Ltda.',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 3,
                 "name":'Wal-Mart Brasil Ltda.',
-"probability":0.1
+                "probability":0.1
             },
 {
                 "id": 4,
                 "name":'Cencosud Brasil Comercial Ltda.',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id":5,
                 "name":'Companhia Zaffari Comércio e Indústria',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 6,
                 "name":'Irmãos Muffato e Cia Ltda.',
-"probability":0.1
+                "probability":0.1
             },
 {
                 "id": 7,
                 "name":'Condor Super Center Ltda.',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 8,
                 "name":'Supermercados BH Comércio de Alimentos Ltda.',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 9,
                 "name":'Sonda Supermercados Exportação e Importação ',
-"probability":0.1
+                "probability":0.1
             },
 {
                 "id": 10,
                 "name":'SDB Comércio de Alimentos Ltda.',
-"probability":0.1
+                "probability":0.1
             }
         ]
     },
 
     {
-        "id": 7,
+        "countryId": 7,
         "name": "Romania",
         "probability": 0.05,
         "longitude": {
@@ -470,52 +470,52 @@ countries = [
             {
                 "id": 1,
                 "name":'Auchan',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 2,
                 "name":'eMag',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 3,
                 "name":'Mega Image',
-"probability":0.1
+                "probability":0.1
             },
 {
                 "id": 4,
                 "name":'Selgros',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id":5,
                 "name":'Cora',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 6,
                 "name":'Kaufland',
-"probability":0.1
+                "probability":0.1
             },
 {
                 "id": 7,
                 "name":'Flanco',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 8,
                 "name":'Hornbach',
-"probability":0.1
+                "probability":0.1
             },
             {
                 "id": 9,
                 "name":'bauMax',
-"probability":0.1
+                "probability":0.1
             },
 {
                 "id": 10,
                 "name":'KIKA',
-"probability":0.1
+                "probability":0.1
             }
         ]
     },

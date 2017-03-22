@@ -13,20 +13,20 @@ namespace FraudDetection.Service
             {
                 Name = "Debit",
                 CreatedAt = DateTime.Now,
-                Id = 1
+                CardTypeId = 1
             };
             CardTypeDTO cardCredit = new CardTypeDTO()
             {
                 Name = "Credit",
                 CreatedAt = DateTime.Now,
-                Id = 2
+                CardTypeId = 2
             };
 
             CardTypeDTO cardOther = new CardTypeDTO()
             {
                 Name = "Other",
                 CreatedAt = DateTime.Now,
-                Id = 3
+                CardTypeId = 3
             };
 
             var lst = new List<CardTypeDTO>();
@@ -46,20 +46,20 @@ namespace FraudDetection.Service
             {
                 Name = "E-Commerce",
                 CreatedAt = DateTime.Now,
-                Id = 1
+                TransactionTypeId = 1
             };
             TransactionTypeDTO tranATM = new TransactionTypeDTO()
             {
                 Name = "ATM",
                 CreatedAt = DateTime.Now,
-                Id = 2
+                TransactionTypeId = 2
             };
 
             TransactionTypeDTO tranPOS = new TransactionTypeDTO()
             {
                 Name = "POS",
                 CreatedAt = DateTime.Now,
-                Id = 3
+                TransactionTypeId = 3
             };
 
             var lst = new List<TransactionTypeDTO>();
@@ -129,70 +129,70 @@ namespace FraudDetection.Service
             {
                 Name = "USA",
                 CreatedAt = DateTime.Now,
-                Id = 1
+                CountryId = 1
             };
             featureValue += step;
             CountryDTO c2 = new CountryDTO()
             {
                 Name = "United Kingdom",
                 CreatedAt = DateTime.Now,
-                Id = 2
+                CountryId = 2
             };
             featureValue += step;
             CountryDTO c3 = new CountryDTO()
             {
                 Name = "France",
                 CreatedAt = DateTime.Now,
-                Id = 3
+                CountryId = 3
             };
             featureValue += step;
             CountryDTO c4 = new CountryDTO()
             {
                 Name = "Germany",
                 CreatedAt = DateTime.Now,
-                Id = 4
+                CountryId = 4
             };
             featureValue += step;
             CountryDTO c5 = new CountryDTO()
             {
                 Name = "Romania",
                 CreatedAt = DateTime.Now,
-                Id = 5
+                CountryId = 5
             };
             featureValue += step;
             CountryDTO c6 = new CountryDTO()
             {
                 Name = "China",
                 CreatedAt = DateTime.Now,
-                Id = 6
+                CountryId = 6
             };
             featureValue += step;
             CountryDTO c7 = new CountryDTO()
             {
                 Name = "Australia",
                 CreatedAt = DateTime.Now,
-                Id = 7
+                CountryId = 7
             };
             featureValue += step;
             CountryDTO c8 = new CountryDTO()
             {
                 Name = "Japan",
                 CreatedAt = DateTime.Now,
-                Id = 8
+                CountryId = 8
             };
             featureValue += step;
             CountryDTO c9 = new CountryDTO()
             {
                 Name = "Brazil",
                 CreatedAt = DateTime.Now,
-                Id = 9
+                CountryId = 9
             };
             featureValue += step;
             CountryDTO c10 = new CountryDTO()
             {
                 Name = "Spain",
                 CreatedAt = DateTime.Now,
-                Id = 10
+                CountryId = 10
             };
 
 
