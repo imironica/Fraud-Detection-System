@@ -27,7 +27,7 @@ namespace FraudDetection.Web.Controllers
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<TransactionStatusDTO> GetTransactionStatus()
+        public IEnumerable<TransactionStatus> GetTransactionStatus()
         {
             var response = _masterDataService.GetTransactionStatus();
             return response;

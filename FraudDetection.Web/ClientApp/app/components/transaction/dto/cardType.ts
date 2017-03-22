@@ -1,6 +1,6 @@
 ﻿export class CardType
 {
 	id:Number;
-	feature:Number;
-	name:string;
+    name: string;
+    probability: Number;
 }

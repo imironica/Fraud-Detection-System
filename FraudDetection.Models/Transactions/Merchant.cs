@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FraudDetection.Models.Transactions
 {
-    public class MerchantDTO
+    public class Merchant
     {
         public int Id { get; set; }
         public string Name { get; set; }

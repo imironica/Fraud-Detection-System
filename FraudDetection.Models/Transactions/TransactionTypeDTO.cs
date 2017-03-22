@@ -7,8 +7,6 @@ namespace FraudDetection.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public double Feature { get; set; }
-        public double AprearenceProbability { get; set; }
-        public double FraudProbability { get; set; }
+        public double Probability { get; set; }
     }
 }

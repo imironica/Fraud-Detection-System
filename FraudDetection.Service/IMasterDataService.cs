@@ -6,7 +6,7 @@ namespace FraudDetection.Service
     public interface IMasterDataService
     {
         List<CardTypeDTO> GetCardTypes();
-        List<TransactionStatusDTO> GetTransactionStatus();
+        List<TransactionStatus> GetTransactionStatus();
         List<TransactionTypeDTO> GetTransactionType();
         List<CountryDTO> GetCountries();
     }

@@ -10,8 +10,8 @@ namespace FraudDetection.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public double Probability { get; set; }
-        public LatitudeDTO Latitude { get; set; }
-        public LongitudeDTO Longitude { get; set; }
-        public List<MerchantDTO> Merchants { get; set; }
+        public Latitude Latitude { get; set; }
+        public Longitude Longitude { get; set; }
+        public List<Merchant> Merchants { get; set; }
     }
 }

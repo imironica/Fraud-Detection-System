@@ -3,7 +3,7 @@
 namespace FraudDetection.Models
 {
     [BsonIgnoreExtraElements]
-    public class TransactionStatusDTO : Entity
+    public class TransactionStatus : Entity
     {
         public int Id { get; set; }
         public string Code { get; set; }

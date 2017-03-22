@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FraudDetection.Models.Transactions
 {
-    public class LatitudeDTO
+    public class Latitude
     {
         public int Min { get; set; }
         public int Max { get; set; }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FraudDetection.Models.Transactions
 {
-    public class LongitudeDTO
+    public class Longitude
     {
         public int Min { get; set; }
         public int Max { get; set; }

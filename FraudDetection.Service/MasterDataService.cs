@@ -16,9 +16,9 @@ namespace FraudDetection.Service
             return lst;
         }
 
-        public List<TransactionStatusDTO> GetTransactionStatus()
+        public List<TransactionStatus> GetTransactionStatus()
         {
-            var repo = new MDRepository<TransactionStatusDTO>("transactionStatus");
+            var repo = new MDRepository<TransactionStatus>("transactionStatus");
             var lst = repo.GetAllList();
             return lst;
         }

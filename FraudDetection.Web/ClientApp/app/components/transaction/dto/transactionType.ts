@@ -1,6 +1,6 @@
 ﻿export class TransactionType
 {
 	id:Number;
-	feature:Number;
-	name:string;
+    name: string;
+    probability: Number;
 }

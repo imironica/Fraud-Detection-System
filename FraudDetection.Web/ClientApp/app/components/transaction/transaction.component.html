@@ -37,7 +37,7 @@
                                     (blur)="validateTransactionType(transactionTypeFeature.value)"
                                     (change)="validateTransactionType(transactionTypeFeature.value)"
                                     [(ngModel)]="transaction.transactionTypeFeature">
-                                <option *ngFor="let x of transactionTypes" [value]="x.feature">{{x.name}}</option>
+                                <option *ngFor="let x of transactionTypes" [value]="x.id">{{x.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                     (blur)="validateCardType(cardTypeFeature.value)"
                                     (change)="validateCardType(cardTypeFeature.value)"
                                     [(ngModel)]="transaction.cardTypeFeature">
-                                <option *ngFor="let x of cardTypes" [value]="x.feature">{{x.name}}</option>
+                                <option *ngFor="let x of cardTypes" [value]="x.id">{{x.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                                     (blur)="validateClientCountry(clientCountryFeature.value)"
                                     (change)="validateClientCountry(clientCountryFeature.value)"
                                     [(ngModel)]="transaction.clientCountryFeature">
-                                <option *ngFor="let x of countries" [value]="x.feature">{{x.name}}</option>
+                                <option *ngFor="let x of countries" [value]="x.id">{{x.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -142,7 +142,8 @@
                             <div style="clear:both">
                                 <label class="control-label">Amount of spent money per day *</label>
                             </div>
-                            <input type="text" class="form-control" formControlName="spentMoneyPerDay" #amountEUR name="spentMoneyPerDay" id="spentMoneyPerDay"
+                            <input type="text" class="form-control" formControlName="spentMoneyPerDay" 
+                                    #amountOfSpentMoneyPerDay name="amountOfSpentMoneyPerDay" id="amountOfSpentMoneyPerDay"
                                     placeholder="Enter amount of spent money per day..."
                                     [(ngModel)]="transaction.amountOfSpentMoneyPerDay">
                         </div>
@@ -224,7 +225,7 @@
                                     (blur)="validateMerchantCountry(merchantCountryFeature.value)"
                                     (change)="validateMerchantCountry(merchantCountryFeature.value)"
                                     [(ngModel)]="transaction.merchantCountryFeature">
-                                <option *ngFor="let x of countries" [value]="x.feature">{{x.name}}</option>
+                                <option *ngFor="let x of countries" [value]="x.id">{{x.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -238,7 +239,7 @@
                                     (blur)="validateMerchant(merchantFeature.value)"
                                     (change)="validateMerchant(merchantFeature.value)"
                                     [(ngModel)]="transaction.merchantFeature">
-                                <option *ngFor="let x of merchants" [value]="x.feature">{{x.name}}</option>
+                                <option *ngFor="let x of merchants" [value]="x.id">{{x.name}}</option>
                             </select>
                         </div>
                     </div>

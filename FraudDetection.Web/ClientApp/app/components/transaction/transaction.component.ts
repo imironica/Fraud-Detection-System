@@ -23,8 +23,8 @@ export class TransactionComponent implements OnInit {
     public transactionTypes: TransactionType[];
 	public cardTypes: CardType[];
 	public transaction: Transaction;
-    public countries: Country;
-    public merchants: Merchant;
+    public countries: Country[];
+    public merchants: Merchant[];
 	public alertResponse: TransactionAlertResponse;
     public msgs: Message[] = [];
     public submitted: boolean;
@@ -35,6 +35,7 @@ export class TransactionComponent implements OnInit {
     public hasClientCountryError = false;
     public hasMerchantCountryError = false;
     public hasMerchantError = false;
+    public selectedMerchantCountry: Country;
     http: Http;
 
     constructor(http: Http, private fb: FormBuilder) {
@@ -87,6 +88,12 @@ export class TransactionComponent implements OnInit {
         });
     }
 
+    onSelect() {
+        this.http.get('/api/MasterData/GetMerchants?id=' + this.selectedMerchantCountry.id).subscribe(result => {
+            this.merchants = result.json();
+        });
+    }
+
 	verify() {
          this.http.post('/api/Transactions/VerifyAlert', this.transaction)
 			.subscribe(result => {
@@ -134,6 +141,7 @@ export class TransactionComponent implements OnInit {
             this.hasMerchantError = true;
         else
             this.hasMerchantError = false;
+        this.onSelect();
     }
 }
 

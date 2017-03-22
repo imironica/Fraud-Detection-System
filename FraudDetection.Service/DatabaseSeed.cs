@@ -45,18 +45,12 @@ namespace FraudDetection.Service
             TransactionTypeDTO tranEcom = new TransactionTypeDTO()
             {
                 Name = "E-Commerce",
-                Feature = 0,
-                FraudProbability = 0.2,
-                AprearenceProbability = 0.4,
                 CreatedAt = DateTime.Now,
                 Id = 1
             };
             TransactionTypeDTO tranATM = new TransactionTypeDTO()
             {
                 Name = "ATM",
-                Feature = 0.3,
-                FraudProbability = 0.1,
-                AprearenceProbability = 0.5,
                 CreatedAt = DateTime.Now,
                 Id = 2
             };
@@ -64,9 +58,6 @@ namespace FraudDetection.Service
             TransactionTypeDTO tranPOS = new TransactionTypeDTO()
             {
                 Name = "POS",
-                Feature = 0.6,
-                FraudProbability = 0.1,
-                AprearenceProbability = 0.1,
                 CreatedAt = DateTime.Now,
                 Id = 3
             };
@@ -83,9 +74,9 @@ namespace FraudDetection.Service
             return lst;
         }
 
-        public List<TransactionStatusDTO> SeedTransactionStatus(bool insertDictionariesDb)
+        public List<TransactionStatus> SeedTransactionStatus(bool insertDictionariesDb)
         {
-            TransactionStatusDTO tranFraudAlert = new TransactionStatusDTO()
+            TransactionStatus tranFraudAlert = new TransactionStatus()
             {
                 Name = "Fraud Alert",
                 Code = "ALERT",
@@ -93,7 +84,7 @@ namespace FraudDetection.Service
                 Id = 1
             };
 
-            TransactionStatusDTO tranNonFraud = new TransactionStatusDTO()
+            TransactionStatus tranNonFraud = new TransactionStatus()
             {
                 Name = "Non Fraud",
                 Code = "NONFRAUD",
@@ -101,14 +92,14 @@ namespace FraudDetection.Service
                 Id = 2
             };
 
-            TransactionStatusDTO tranClassifiedAsNonFraud = new TransactionStatusDTO()
+            TransactionStatus tranClassifiedAsNonFraud = new TransactionStatus()
             {
                 Name = "Classified as NonFraud",
                 Code = "CLSNONFRAUD",
                 CreatedAt = DateTime.Now,
                 Id = 3
             };
-            TransactionStatusDTO tranClassifiedAsFraud = new TransactionStatusDTO()
+            TransactionStatus tranClassifiedAsFraud = new TransactionStatus()
             {
                 Name = "Classified as Fraud",
                 Code = "CLSFRAUD",
@@ -117,14 +108,14 @@ namespace FraudDetection.Service
             };
 
 
-            var lst = new List<TransactionStatusDTO>();
+            var lst = new List<TransactionStatus>();
             lst.Add(tranFraudAlert);
             lst.Add(tranNonFraud);
             lst.Add(tranClassifiedAsFraud);
             lst.Add(tranClassifiedAsNonFraud);
             if (insertDictionariesDb)
             {
-                var repo = new MDRepository<TransactionStatusDTO>("transactionStatus");
+                var repo = new MDRepository<TransactionStatus>("transactionStatus");
                 repo.InsertMany(lst);
             }
             return lst;
