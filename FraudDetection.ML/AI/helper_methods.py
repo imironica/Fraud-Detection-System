@@ -29,7 +29,7 @@ def format_df_for_db(df):
     def combine_card_numbers(start , end):
         return "{}********{}".format(start,end)
     def extract_merchant(country, merchant):
-        return  next(y['name'] for y in next(x['merchants'] for x in dictionaries.countries if x['countryId'] == country) if y['id']==merchant)
+        return  next(y['Name'] for y in next(x['Merchants'] for x in dictionaries.Countries if x['CountryId'] == country) if y['MerchantId']==merchant)
 
     df['TransactionDateTimeFeature'] = df[['TransactionDateFeature','TransactionTimeFeature']].apply(lambda x: combine_date_time(*x), axis=1)
     df.drop(['TransactionDateFeature','TransactionTimeFeature'],axis=1,inplace=True)
@@ -38,11 +38,11 @@ def format_df_for_db(df):
     df['CardExpiryDate'] = df['CardExpiryDateFeature'].map(lambda x: x.strftime('%m/%Y'))
     df['LastTransactionDate'] = df['LastTransactionDateFeature'].map(lambda x : x.strftime('%d/%m/%Y'))
     df['CardNumber'] = df[['CardStartFeature','CardEndFeature']].apply(lambda x:combine_card_numbers(*x),axis=1)
-    df['Country'] = df['CountryFeature'].map(lambda x: next(c['name'] for c in dictionaries.countries if c['countryId']==x))
-    df['ClientCountry'] = df['ClientCountryFeature'].map(lambda x: next(c['name'] for c in dictionaries.client_contries if c['clientCountryId']==x))
-    df['CardType'] = df['CardTypeFeature'].map(lambda x: next(c['name'] for c in dictionaries.card_types if c['cardTypeId']==x))
-    df['CardVendor'] = df['CardVendorFeature'].map(lambda x: next(c['name'] for c in dictionaries.card_vendors if c['cardVendorId']==x))
-    df['TransactionType'] = df['TransactionTypeFeature'].map(lambda x: next(c['name'] for c in dictionaries.transaction_types if c['transactionTypeId']==x))
+    df['Country'] = df['CountryFeature'].map(lambda x: next(c['Name'] for c in dictionaries.Countries if c['CountryId']==x))
+    df['ClientCountry'] = df['ClientCountryFeature'].map(lambda x: next(c['Name'] for c in dictionaries.ClientCountries if c['ClientCountryId']==x))
+    df['CardType'] = df['CardTypeFeature'].map(lambda x: next(c['Name'] for c in dictionaries.CardTypes if c['CardTypeId']==x))
+    df['CardVendor'] = df['CardVendorFeature'].map(lambda x: next(c['Name'] for c in dictionaries.CardVendors if c['CardVendorId']==x))
+    df['TransactionType'] = df['TransactionTypeFeature'].map(lambda x: next(c['Name'] for c in dictionaries.TransactionTypes if c['TransactionTypeId']==x))
     df['Merchant'] = df[['CountryFeature','MerchantFeature']].apply(lambda x: extract_merchant(*x), axis=1)
     df['InsertedTime'] = datetime.datetime.now()
     return df

@@ -2,10 +2,8 @@
 
 namespace FraudDetection.Models
 {
-    [BsonIgnoreExtraElements]
-    public class TransactionStatus : Entity
+    public class TransactionStatus
     {
-        public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
     }

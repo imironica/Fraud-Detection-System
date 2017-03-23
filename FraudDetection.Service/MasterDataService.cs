@@ -8,41 +8,58 @@ using System.Threading.Tasks;
 
 namespace FraudDetection.Service
 {
-    public class MasterDataService:IMasterDataService
+    public class MasterDataService : IMasterDataService
     {
+        private MDRepository<TransactionDTO> _transactionRepo;
+        private MDRepository<CountryDTO> _countryRepo;
+        private MDRepository<ClientCountryDTO> _clientCountryRepo;
+        private MDRepository<CardVendorDTO> _cardVendorRepo;
+        private MDRepository<CardTypeDTO> _cardTypeRepo;
+        private MDRepository<TransactionTypeDTO> _transactionTypeRepo;
+
+        public MasterDataService()
+        {
+            _transactionRepo = new MDRepository<TransactionDTO>("Transactions");
+            _countryRepo = new MDRepository<CountryDTO>("Countries");
+            _clientCountryRepo = new MDRepository<ClientCountryDTO>("ClientCountries");
+            _cardVendorRepo = new MDRepository<CardVendorDTO>("CardVendors");
+            _cardTypeRepo = new MDRepository<CardTypeDTO>("CardTypes");
+            _transactionTypeRepo = new MDRepository<TransactionTypeDTO>("TransactionTypes");
+        }
+
+        public List<CardVendorDTO> GetCardVendors()
+        {
+            return _cardVendorRepo.GetAllList();
+        }
         public List<CardTypeDTO> GetCardTypes()
         {
-            var repo = new MDRepository<CardTypeDTO>("card_types");
-            var lst = repo.GetAllList();
-            return lst;
+            return _cardTypeRepo.GetAllList();
         }
 
-        public List<TransactionStatus> GetTransactionStatus()
+        public List<TransactionTypeDTO> GetTransactionTypes()
         {
-            var repo = new MDRepository<TransactionStatus>("transactionStatus");
-            var lst = repo.GetAllList();
-            return lst;
-        }
-
-        public List<TransactionTypeDTO> GetTransactionType()
-        {
-            var repo = new MDRepository<TransactionTypeDTO>("transaction_types");
-            var lst = repo.GetAllList();
-            return lst;
+            return _transactionTypeRepo.GetAllList();
         }
 
         public List<CountryDTO> GetCountries()
         {
-            var repo = new MDRepository<CountryDTO>("countries");
-            var lst = repo.GetAllList();
-            return lst;
+            return _countryRepo.GetAllList();
+        }
+
+        public List<ClientCountryDTO> GetClientCountries()
+        {
+            return _clientCountryRepo.GetAllList();
         }
 
         public List<Merchant> GetMerchants(int countryId)
         {
-            var repo = new MDRepository<CountryDTO>("countries");
-            var merchantsList =  repo.Find(c => c.CountryId == countryId).FirstOrDefault().Merchants;
+            var merchantsList = _countryRepo.Find(c => c.CountryId == countryId).FirstOrDefault().Merchants;
             return merchantsList;
+        }
+
+        public List<TransactionStatus> GetTransactionStatus()
+        {            
+            return null;
         }
     }
 }

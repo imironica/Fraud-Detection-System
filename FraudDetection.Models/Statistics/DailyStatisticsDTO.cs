@@ -10,5 +10,6 @@ namespace FraudDetection.Models
         public int NumberOfUnprocessedAlerts { get; set; }
         public int NumberProcessedAlerts { get; set; }
         public int NumberOfFraudsDetected { get; set; }
+        public int NumberGoodTransactions { get; set; }
     }
 }

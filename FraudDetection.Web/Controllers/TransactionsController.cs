@@ -56,7 +56,5 @@ namespace FraudDetection.Web.Controllers
             var response = _fraudService.GetDashboardStatisticsPerCurrentMonth();
             return response;
         }
-
-        
     }
 }

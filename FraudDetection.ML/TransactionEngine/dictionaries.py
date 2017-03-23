@@ -1,521 +1,521 @@
-client_contries = [
-    {"clientCountryId" :1, "name": "USA", "probability": 0.18},
-    {"clientCountryId": 2, "name": "France", "probability": 0.06},
-    {"clientCountryId": 3, "name": "Germany", "probability": 0.06},
-    {"clientCountryId": 4, "name": "United Kingdom", "probability": 0.06},
-    {"clientCountryId": 5, "name": "Romania", "probability": 0.02},
-    {"clientCountryId": 6, "name": "Spain", "probability": 0.04},
-    {"clientCountryId": 7, "name": "Italy", "probability": 0.05},
-    {"clientCountryId": 8, "name": "Norway", "probability": 0.03},
-    {"clientCountryId": 9, "name": "India", "probability": 0.06},
-    {"clientCountryId": 10, "name": "China", "probability": 0.12},
-    {"clientCountryId": 11, "name": "South Korea", "probability": 0.06},
-    {"clientCountryId": 12, "name": "Canada", "probability": 0.05},
-    {"clientCountryId": 13, "name": "Brazil", "probability": 0.08},
-    {"clientCountryId": 14, "name": "Poland", "probability": 0.02},
-    {"clientCountryId": 15, "name": "Australia", "probability": 0.03},
-    {"clientCountryId": 16, "name": "Russia", "probability": 0.05},
-    {"clientCountryId": 17, "name": "Nigeria", "probability": 0.03},
+ClientCountries = [
+    {"ClientCountryId" :1, "Name": "USA", "Probability": 0.18},
+    {"ClientCountryId": 2, "Name": "France", "Probability": 0.06},
+    {"ClientCountryId": 3, "Name": "Germany", "Probability": 0.06},
+    {"ClientCountryId": 4, "Name": "United Kingdom", "Probability": 0.06},
+    {"ClientCountryId": 5, "Name": "Romania", "Probability": 0.02},
+    {"ClientCountryId": 6, "Name": "Spain", "Probability": 0.04},
+    {"ClientCountryId": 7, "Name": "Italy", "Probability": 0.05},
+    {"ClientCountryId": 8, "Name": "Norway", "Probability": 0.03},
+    {"ClientCountryId": 9, "Name": "India", "Probability": 0.06},
+    {"ClientCountryId": 10, "Name": "China", "Probability": 0.12},
+    {"ClientCountryId": 11, "Name": "South Korea", "Probability": 0.06},
+    {"ClientCountryId": 12, "Name": "Canada", "Probability": 0.05},
+    {"ClientCountryId": 13, "Name": "Brazil", "Probability": 0.08},
+    {"ClientCountryId": 14, "Name": "Poland", "Probability": 0.02},
+    {"ClientCountryId": 15, "Name": "Australia", "Probability": 0.03},
+    {"ClientCountryId": 16, "Name": "Russia", "Probability": 0.05},
+    {"ClientCountryId": 17, "Name": "Nigeria", "Probability": 0.03},
 ]
-card_vendors = [
-    { "cardVendorId": 1, "name": "American Express" , "cardstart":3 },
-    { "cardVendorId": 2, "name": "Visa" , "cardstart":4 },
-    { "cardVendorId": 3, "name": "MasterCard" , "cardstart":5 }
-]
-
-transaction_types = [
-    {
-        "transactionTypeId" : 1,
-        "name" : "E-Commenrce",
-        "probability" : 0.4
-
-    },
-    {
-        "transactionTypeId": 2,
-        "name": "ATM",
-        "probability" : 0.5
-
-    },
-    {
-        "transactionTypeId": 3,
-        "name": "POS",
-        "probability" : 0.1
-
-    },
+CardVendors = [
+    { "CardVendorId": 1, "Name": "American Express" , "CardStart":3 },
+    { "CardVendorId": 2, "Name": "Visa" , "CardStart":4 },
+    { "CardVendorId": 3, "Name": "MasterCard" , "CardStart":5 }
 ]
 
-card_types = [
+TransactionTypes = [
     {
-        "cardTypeId" : 1,
-        "name": "Credit",
-        "probability": 0.5
+        "TransactionTypeId" : 1,
+        "Name" : "E-Commenrce",
+        "Probability" : 0.4
+
     },
     {
-        "cardTypeId" : 2,
-        "name": "Debit",
-        "probability": 0.4
+        "TransactionTypeId": 2,
+        "Name": "ATM",
+        "Probability" : 0.5
+
     },
     {
-        "cardTypeId" : 3,
-        "name": "Other",
-        "probability": 0.1
+        "TransactionTypeId": 3,
+        "Name": "POS",
+        "Probability" : 0.1
+
     },
 ]
 
-countries = [
+CardTypes = [
     {
-        "countryId":1,
-        "name":"USA",
-        "probability":0.28,
-        "longitude": {
-            "min": 33,
-            "max": 45
+        "CardTypeId" : 1,
+        "Name": "Credit",
+        "Probability": 0.5
+    },
+    {
+        "CardTypeId" : 2,
+        "Name": "Debit",
+        "Probability": 0.4
+    },
+    {
+        "CardTypeId" : 3,
+        "Name": "Other",
+        "Probability": 0.1
+    },
+]
+
+Countries = [
+    {
+        "CountryId":1,
+        "Name":"USA",
+        "Probability":0.28,
+        "Longitude": {
+            "Min": 33,
+            "Max": 45
         },
-        "latitude": {
-            "min": -121,
-            "max": -77
+        "Latitude": {
+            "Min": -121,
+            "Max": -77
         },
-        "merchants":[
+        "Merchants":[
             {
-                "id": 1,
-                "name":'Wal-Mart Stores',
-                "probability":0.1
+                "MerchantId": 1,
+                "Name":'Wal-Mart Stores',
+                "Probability":0.1
             },
             {
-                "id": 2,
-                "name":'The Kroger Co.',
-                "probability":0.1
+                "MerchantId": 2,
+                "Name":'The Kroger Co.',
+                "Probability":0.1
             },
             {
-                "id": 3,
-                "name":'Costco',
-                "probability":0.1
+                "MerchantId": 3,
+                "Name":'Costco',
+                "Probability":0.1
             },
 {
-                "id": 4,
-                "name":'The Home Depot',
-                "probability":0.1
+                "MerchantId": 4,
+                "Name":'The Home Depot',
+                "Probability":0.1
             },
             {
-                "id":5,
-                "name":'Walgreens Boots Alliance',
-                "probability":0.1
+                "MerchantId":5,
+                "Name":'Walgreens Boots Alliance',
+                "Probability":0.1
             },
             {
-                "id": 6,
-                "name":'Lowe’s Companies',
-                "probability":0.1
+                "MerchantId": 6,
+                "Name":'Lowe’s Companies',
+                "Probability":0.1
             },
 {
-                "id": 7,
-                "name":'Best Buy',
-                "probability":0.1
+                "MerchantId": 7,
+                "Name":'Best Buy',
+                "Probability":0.1
             },
             {
-                "id": 8,
-                "name":'Apple Stores / iTunes',
-                "probability":0.1
+                "MerchantId": 8,
+                "Name":'Apple Stores / iTunes',
+                "Probability":0.1
             },
             {
-                "id": 9,
-                "name":'Publix Super Markets',
-                "probability":0.1
+                "MerchantId": 9,
+                "Name":'Publix Super Markets',
+                "Probability":0.1
             },
 {
-                "id": 10,
-                "name":'Macy’s',
-                "probability":0.1
+                "MerchantId": 10,
+                "Name":'Macy’s',
+                "Probability":0.1
             }
         ]
     },
     {
-        "countryId": 2,
-        "name": "China",
-        "probability": 0.22,
-        "longitude": {
-            "min": 99,
-            "max": 119
+        "CountryId": 2,
+        "Name": "China",
+        "Probability": 0.22,
+        "Longitude": {
+            "Min": 99,
+            "Max": 119
         },
-        "latitude": {
-            "min": 23,
-            "max": 39
+        "Latitude": {
+            "Min": 23,
+            "Max": 39
         },
-        "merchants":[
+        "Merchants":[
             {
-                "id": 1,
-                "name":'Gome Home Appliance Group',
-                "probability":0.1
+                "MerchantId": 1,
+                "Name":'Gome Home Appliance Group',
+                "Probability":0.1
             },
             {
-                "id": 2,
-                "name":'Suning Appliance Company Ltd.',
-                "probability":0.1
+                "MerchantId": 2,
+                "Name":'Suning Appliance Company Ltd.',
+                "Probability":0.1
             },
             {
-                "id": 3,
-                "name":'Dalian Dashang Group',
-                "probability":0.1
+                "MerchantId": 3,
+                "Name":'Dalian Dashang Group',
+                "Probability":0.1
             },
             {
-                "id": 4,
-                "name":'Nonggongshang Supermarket Group Company Ltd.',
-                "probability":0.1
+                "MerchantId": 4,
+                "Name":'Nonggongshang Supermarket Group Company Ltd.',
+                "Probability":0.1
             },
             {
-                "id":5,
-                "name":'Shandong Jianyuan Bioengineering co. Ltd',
-                "probability":0.1
+                "MerchantId":5,
+                "Name":'Shandong Jianyuan Bioengineering co. Ltd',
+                "Probability":0.1
             },
             {
-                "id": 6,
-                "name":'Carrefour China',
-                "probability":0.1
+                "MerchantId": 6,
+                "Name":'Carrefour China',
+                "Probability":0.1
             },
 {
-                "id": 7,
-                "name":'Wal-Mart (China) Investment co. Ltd.',
-                "probability":0.1
+                "MerchantId": 7,
+                "Name":'Wal-Mart (China) Investment co. Ltd.',
+                "Probability":0.1
             },
             {
-                "id": 8,
-                "name":'Yonghui Superstores Co. Ltd.',
-                "probability":0.1
+                "MerchantId": 8,
+                "Name":'Yonghui Superstores Co. Ltd.',
+                "Probability":0.1
             },
             {
-                "id": 9,
-                "name":'Tesco China',
-                "probability":0.1
+                "MerchantId": 9,
+                "Name":'Tesco China',
+                "Probability":0.1
             },
             {
-                "id": 10,
-                "name":'Lianhua Holdings co. ,Ltd',
-                "probability":0.1
+                "MerchantId": 10,
+                "Name":'Lianhua Holdings co. ,Ltd',
+                "Probability":0.1
             }
         ]
     },
     {
-        "countryId": 3,
-        "name": "United Kingdom",
-        "probability": 0.1,
-        "longitude": {
-            "min": -3.5,
-            "max": 0.75
+        "CountryId": 3,
+        "Name": "United Kingdom",
+        "Probability": 0.1,
+        "Longitude": {
+            "Min": -3.5,
+            "Max": 0.75
         },
-        "latitude": {
-            "min": 51,
-            "max": 53
+        "Latitude": {
+            "Min": 51,
+            "Max": 53
         },
-        "merchants":[
+        "Merchants":[
             {
-                "id": 1,
-                "name": 'Alliance Boots',
-                "probability":0.1
+                "MerchantId": 1,
+                "Name": 'Alliance Boots',
+                "Probability":0.1
             },
             {
-                "id": 2,
-                "name":'Asda',
-                "probability":0.1
+                "MerchantId": 2,
+                "Name":'Asda',
+                "Probability":0.1
             },
             {
-                "id": 3,
-                "name":'Co-operative Group',
-                "probability":0.1
+                "MerchantId": 3,
+                "Name":'Co-operative Group',
+                "Probability":0.1
             },
 {
-                "id": 4,
-                "name":'Home Retail Group',
-                "probability":0.1
+                "MerchantId": 4,
+                "Name":'Home Retail Group',
+                "Probability":0.1
             },
             {
-                "id":5,
-                "name":'J Sainsbury',
-                "probability":0.1
+                "MerchantId":5,
+                "Name":'J Sainsbury',
+                "Probability":0.1
             },
             {
-                "id": 6,
-                "name":'John Lewis Partnership',
-                "probability":0.1
+                "MerchantId": 6,
+                "Name":'John Lewis Partnership',
+                "Probability":0.1
             },
             {
-                "id": 7,
-                "name":'Kingfisher Group',
-                "probability":0.1
+                "MerchantId": 7,
+                "Name":'Kingfisher Group',
+                "Probability":0.1
             },
             {
-                "id": 8,
-                "name":'Marks & Spencer',
-                "probability":0.1
+                "MerchantId": 8,
+                "Name":'Marks & Spencer',
+                "Probability":0.1
             },
             {
-                "id": 9,
-                "name":'Morrisons',
-                "probability":0.1
+                "MerchantId": 9,
+                "Name":'Morrisons',
+                "Probability":0.1
             },
             {
-                "id": 10,
-                "name":'Tesco',
-                "probability":0.1
+                "MerchantId": 10,
+                "Name":'Tesco',
+                "Probability":0.1
             }
         ]
     },
     {
-        "countryId": 4,
-        "name": "France",
-        "probability": 0.1,
-        "longitude": {
-            "min": -1.35,
-            "max": 5.75
+        "CountryId": 4,
+        "Name": "France",
+        "Probability": 0.1,
+        "Longitude": {
+            "Min": -1.35,
+            "Max": 5.75
         },
-        "latitude": {
-            "min": 44,
-            "max": 50
+        "Latitude": {
+            "Min": 44,
+            "Max": 50
         },
-        "merchants":[
+        "Merchants":[
             {
-                "id": 1,
-                "name":'Écomarché',
-                "probability":0.1
+                "MerchantId": 1,
+                "Name":'Écomarché',
+                "Probability":0.1
             },
             {
-                "id": 2,
-                "name":'Vêti',
-                "probability":0.1
+                "MerchantId": 2,
+                "Name":'Vêti',
+                "Probability":0.1
             },
             {
-                "id": 3,
-                "name":'Vival',
-                "probability":0.1
+                "MerchantId": 3,
+                "Name":'Vival',
+                "Probability":0.1
             },
 {
-                "id": 4,
-                "name":'Utile',
-                "probability":0.1
+                "MerchantId": 4,
+                "Name":'Utile',
+                "Probability":0.1
             },
             {
-                "id":5,
-                "name":'Marché Plus',
-                "probability":0.1
+                "MerchantId":5,
+                "Name":'Marché Plus',
+                "Probability":0.1
             },
             {
-                "id": 6,
-                "name":'Monoprix',
-                "probability":0.1
+                "MerchantId": 6,
+                "Name":'Monoprix',
+                "Probability":0.1
             },
 {
-                "id": 7,
-                "name": 'Géant',
-                "probability":0.1
+                "MerchantId": 7,
+                "Name": 'Géant',
+                "Probability":0.1
             },
             {
-                "id": 8,
-                "name":'Auchan',
-                "probability":0.1
+                "MerchantId": 8,
+                "Name":'Auchan',
+                "Probability":0.1
             },
             {
-                "id": 9,
-                "name":'Bricomarché',
-                "probability":0.1
+                "MerchantId": 9,
+                "Name":'Bricomarché',
+                "Probability":0.1
             },
 {
-                "id": 10,
-                "name":'Carrefour',
-                "probability":0.1
+                "MerchantId": 10,
+                "Name":'Carrefour',
+                "Probability":0.1
             }
         ]
     },
     {
-        "countryId": 5,
-        "name": "Germany",
-        "probability": 0.1,
-        "longitude": {
-            "min": 7.5,
-            "max": 14
+        "CountryId": 5,
+        "Name": "Germany",
+        "Probability": 0.1,
+        "Longitude": {
+            "Min": 7.5,
+            "Max": 14
         },
-        "latitude": {
-            "min": 48.5,
-            "max": 53.5
+        "Latitude": {
+            "Min": 48.5,
+            "Max": 53.5
         },
-        "merchants":[
+        "Merchants":[
             {
-                "id": 1,
-                "name":'Aldi',
-                "probability":0.1
+                "MerchantId": 1,
+                "Name":'Aldi',
+                "Probability":0.1
             },
             {
-                "id": 2,
-                "name":'DM-Drogeriemarkt',
-                "probability":0.1
+                "MerchantId": 2,
+                "Name":'DM-Drogeriemarkt',
+                "Probability":0.1
             },
             {
-                "id": 3,
-                "name":'IKEA',
-                "probability":0.1
+                "MerchantId": 3,
+                "Name":'IKEA',
+                "Probability":0.1
             },
 {
-                "id": 4,
-                "name":'REWE',
-                "probability":0.1
+                "MerchantId": 4,
+                "Name":'REWE',
+                "Probability":0.1
             },
             {
-                "id":5,
-                "name": 'Karstadt',
-                "probability":0.1
+                "MerchantId":5,
+                "Name": 'Karstadt',
+                "Probability":0.1
             },
             {
-                "id": 6,
-                "name":'Rossmann',
-                "probability":0.1
+                "MerchantId": 6,
+                "Name":'Rossmann',
+                "Probability":0.1
             },
 {
-                "id": 7,
-                "name":'Kaufland',
-                "probability":0.1
+                "MerchantId": 7,
+                "Name":'Kaufland',
+                "Probability":0.1
             },
             {
-                "id": 8,
-                "name":'Fielmann',
-                "probability":0.1
+                "MerchantId": 8,
+                "Name":'Fielmann',
+                "Probability":0.1
             },
             {
-                "id": 9,
-                "name":'Weltbild',
-                "probability":0.1
+                "MerchantId": 9,
+                "Name":'Weltbild',
+                "Probability":0.1
             },
 {
-                "id": 10,
-                "name":'Lidl',
-                "probability":0.1
+                "MerchantId": 10,
+                "Name":'Lidl',
+                "Probability":0.1
             }
         ]
     },
     {
-        "countryId": 6,
-        "name": "Brazil",
-        "probability": 0.15,
-        "longitude": {
-            "min": -59,
-            "max": -37
+        "CountryId": 6,
+        "Name": "Brazil",
+        "Probability": 0.15,
+        "Longitude": {
+            "Min": -59,
+            "Max": -37
         },
-        "latitude": {
-            "min": -21.5,
-            "max": -1.5
+        "Latitude": {
+            "Min": -21.5,
+            "Max": -1.5
         },
-        "merchants":[
+        "Merchants":[
             {
-                "id": 1,
-                "name":'Companhia Brasileira de Distribuição',
-                "probability":0.1
+                "MerchantId": 1,
+                "Name":'Companhia Brasileira de Distribuição',
+                "Probability":0.1
             },
             {
-                "id": 2,
-                "name":'Carrefour Comércio e Indústria Ltda.',
-                "probability":0.1
+                "MerchantId": 2,
+                "Name":'Carrefour Comércio e Indústria Ltda.',
+                "Probability":0.1
             },
             {
-                "id": 3,
-                "name":'Wal-Mart Brasil Ltda.',
-                "probability":0.1
+                "MerchantId": 3,
+                "Name":'Wal-Mart Brasil Ltda.',
+                "Probability":0.1
             },
 {
-                "id": 4,
-                "name":'Cencosud Brasil Comercial Ltda.',
-                "probability":0.1
+                "MerchantId": 4,
+                "Name":'Cencosud Brasil Comercial Ltda.',
+                "Probability":0.1
             },
             {
-                "id":5,
-                "name":'Companhia Zaffari Comércio e Indústria',
-                "probability":0.1
+                "MerchantId":5,
+                "Name":'Companhia Zaffari Comércio e Indústria',
+                "Probability":0.1
             },
             {
-                "id": 6,
-                "name":'Irmãos Muffato e Cia Ltda.',
-                "probability":0.1
+                "MerchantId": 6,
+                "Name":'Irmãos Muffato e Cia Ltda.',
+                "Probability":0.1
             },
 {
-                "id": 7,
-                "name":'Condor Super Center Ltda.',
-                "probability":0.1
+                "MerchantId": 7,
+                "Name":'Condor Super Center Ltda.',
+                "Probability":0.1
             },
             {
-                "id": 8,
-                "name":'Supermercados BH Comércio de Alimentos Ltda.',
-                "probability":0.1
+                "MerchantId": 8,
+                "Name":'Supermercados BH Comércio de Alimentos Ltda.',
+                "Probability":0.1
             },
             {
-                "id": 9,
-                "name":'Sonda Supermercados Exportação e Importação ',
-                "probability":0.1
+                "MerchantId": 9,
+                "Name":'Sonda Supermercados Exportação e Importação ',
+                "Probability":0.1
             },
 {
-                "id": 10,
-                "name":'SDB Comércio de Alimentos Ltda.',
-                "probability":0.1
+                "MerchantId": 10,
+                "Name":'SDB Comércio de Alimentos Ltda.',
+                "Probability":0.1
             }
         ]
     },
 
     {
-        "countryId": 7,
-        "name": "Romania",
-        "probability": 0.05,
-        "longitude": {
-            "min": 44,
-            "max": 47
+        "CountryId": 7,
+        "Name": "Romania",
+        "Probability": 0.05,
+        "Longitude": {
+            "Min": 44,
+            "Max": 47
         },
-        "latitude": {
-            "min": 23,
-            "max": 27
+        "Latitude": {
+            "Min": 23,
+            "Max": 27
         },
-        "merchants":[
+        "Merchants":[
             {
-                "id": 1,
-                "name":'Auchan',
-                "probability":0.1
+                "MerchantId": 1,
+                "Name":'Auchan',
+                "Probability":0.1
             },
             {
-                "id": 2,
-                "name":'eMag',
-                "probability":0.1
+                "MerchantId": 2,
+                "Name":'eMag',
+                "Probability":0.1
             },
             {
-                "id": 3,
-                "name":'Mega Image',
-                "probability":0.1
+                "MerchantId": 3,
+                "Name":'Mega Image',
+                "Probability":0.1
             },
 {
-                "id": 4,
-                "name":'Selgros',
-                "probability":0.1
+                "MerchantId": 4,
+                "Name":'Selgros',
+                "Probability":0.1
             },
             {
-                "id":5,
-                "name":'Cora',
-                "probability":0.1
+                "MerchantId":5,
+                "Name":'Cora',
+                "Probability":0.1
             },
             {
-                "id": 6,
-                "name":'Kaufland',
-                "probability":0.1
+                "MerchantId": 6,
+                "Name":'Kaufland',
+                "Probability":0.1
             },
 {
-                "id": 7,
-                "name":'Flanco',
-                "probability":0.1
+                "MerchantId": 7,
+                "Name":'Flanco',
+                "Probability":0.1
             },
             {
-                "id": 8,
-                "name":'Hornbach',
-                "probability":0.1
+                "MerchantId": 8,
+                "Name":'Hornbach',
+                "Probability":0.1
             },
             {
-                "id": 9,
-                "name":'bauMax',
-                "probability":0.1
+                "MerchantId": 9,
+                "Name":'bauMax',
+                "Probability":0.1
             },
 {
-                "id": 10,
-                "name":'KIKA',
-                "probability":0.1
+                "MerchantId": 10,
+                "Name":'KIKA',
+                "Probability":0.1
             }
         ]
     },

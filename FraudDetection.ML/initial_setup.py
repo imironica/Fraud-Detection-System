@@ -9,11 +9,11 @@ import datetime
 
 def insert_dictionaries():
     global db
-    db.countries.insert(dictionaries.countries)
-    db.transaction_types.insert(dictionaries.transaction_types)
-    db.card_types.insert(dictionaries.card_types)
-    db.client_countries.insert(dictionaries.client_contries)
-    db.card_vendors.insert(dictionaries.card_vendors)
+    db.Countries.insert(dictionaries.Countries)
+    db.TransactionTypes.insert(dictionaries.TransactionTypes)
+    db.CardTypes.insert(dictionaries.CardTypes)
+    db.ClientCountries.insert(dictionaries.ClientCountries)
+    db.CardVendors.insert(dictionaries.CardVendors)
 
 def save_model():
     main.save_model_to_disk()
@@ -21,9 +21,9 @@ def save_model():
 def generate_initial_transactions():
     global db
     test_df = pd.DataFrame()
-    dates = pd.date_range('2017-03-01' ,datetime.date.today())
+    dates = pd.date_range('2017-01-01' ,datetime.date.today())
     for date in dates:
-        temp_df = generator.generate_transactions(date,size=10)
+        temp_df = generator.generate_transactions(date,size=1000)
         test_df = test_df.append(temp_df,ignore_index=True)
     prediction = main.return_prediction(test_df)
     prediction = prediction.reset_index().rename(columns={'index':'TransactionId'})
@@ -31,16 +31,16 @@ def generate_initial_transactions():
     prediction[prediction['TransactionDate']==datetime.date.today().strftime('%d/%m/%Y')]['Verified']=False
     print(prediction[prediction['TransactionDate']==datetime.date.today().strftime('%d/%m/%Y')])
     trans_list = prediction.to_dict('records')
-    db.transactions.insert_many(trans_list)
+    db.Transactions.insert_many(trans_list)
 
 def wipe_collections():
     global db
-    db.drop_collection('card_types')
-    db.drop_collection('transactions')
-    db.drop_collection('countries')
-    db.drop_collection('transaction_types')
-    db.drop_collection('card_vendors')
-    db.drop_collection('client_countries')
+    db.drop_collection('CardTypes')
+    db.drop_collection('Transactions')
+    db.drop_collection('Countries')
+    db.drop_collection('TransactionTypes')
+    db.drop_collection('CardVendors')
+    db.drop_collection('ClientCountries')
 
 def start_up():
     global db

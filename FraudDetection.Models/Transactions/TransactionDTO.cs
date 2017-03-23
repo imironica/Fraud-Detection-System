@@ -10,7 +10,6 @@ namespace FraudDetection.Models
         public TransactionDTO()
         {
         }
-        public object _id { get; set; }
         public int TransactionId { get; set; }
         public string TransactionType { get; set; }
         public int TransactionTypeFeature { get; set; }
@@ -25,6 +24,7 @@ namespace FraudDetection.Models
         public int CardTypeFeature { get; set; }
         public string CardVendor { get; set; }
         public int CardVendorFeature { get; set; }
+        public DateTime InsertedTime { get; set; }
         public string TransactionDate { get; set; }
         public string TransactionTime { get; set; }
         public DateTime TransactionDateTimeFeature { get; set; }

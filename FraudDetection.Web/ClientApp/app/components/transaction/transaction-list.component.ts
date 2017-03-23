@@ -40,11 +40,12 @@ export class TransactionListComponent {
 		var transactionRequest = new Transaction();
         transactionRequest.transactionId = id;
         transactionRequest.class = status;
-         this.http.post('/api/Transactions/saveTransactionStatus',
+        this.http.post('/api/Transactions/saveTransactionStatus',
 		                transactionRequest)
 			 .subscribe(result => {
               this.message = "saved";
             });
-         window.location.reload();
+        this.transaction.verified = true;
+        window.location.reload();
 	}
 }

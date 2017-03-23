@@ -1,5 +1,5 @@
 ﻿export class Merchant {
-    id: Number;
+    merchantId: Number;
     name: string;
     probability: Number;
 }

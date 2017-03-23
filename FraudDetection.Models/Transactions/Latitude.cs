@@ -6,7 +6,7 @@ namespace FraudDetection.Models.Transactions
 {
     public class Latitude
     {
-        public int Min { get; set; }
-        public int Max { get; set; }
+        public double Min { get; set; }
+        public double Max { get; set; }
     }
 }

@@ -79,46 +79,27 @@ namespace FraudDetection.Service
             TransactionStatus tranFraudAlert = new TransactionStatus()
             {
                 Name = "Fraud Alert",
-                Code = "ALERT",
-                CreatedAt = DateTime.Now,
-                Id = 1
+                Code = "ALERT"
             };
 
             TransactionStatus tranNonFraud = new TransactionStatus()
             {
                 Name = "Non Fraud",
-                Code = "NONFRAUD",
-                CreatedAt = DateTime.Now,
-                Id = 2
+                Code = "NONFRAUD"
             };
 
             TransactionStatus tranClassifiedAsNonFraud = new TransactionStatus()
             {
                 Name = "Classified as NonFraud",
-                Code = "CLSNONFRAUD",
-                CreatedAt = DateTime.Now,
-                Id = 3
+                Code = "CLSNONFRAUD"
             };
             TransactionStatus tranClassifiedAsFraud = new TransactionStatus()
             {
                 Name = "Classified as Fraud",
-                Code = "CLSFRAUD",
-                CreatedAt = DateTime.Now,
-                Id = 4
+                Code = "CLSFRAUD"
             };
 
-
-            var lst = new List<TransactionStatus>();
-            lst.Add(tranFraudAlert);
-            lst.Add(tranNonFraud);
-            lst.Add(tranClassifiedAsFraud);
-            lst.Add(tranClassifiedAsNonFraud);
-            if (insertDictionariesDb)
-            {
-                var repo = new MDRepository<TransactionStatus>("transactionStatus");
-                repo.InsertMany(lst);
-            }
-            return lst;
+            return null;
         }
 
         public List<CountryDTO> SeedTransactionCountries(bool insertDictionariesDb)

@@ -16,5 +16,11 @@ namespace FraudDetection.Service
         bool InsertTransation(TransactionDTO transaction);
         DailyStatisticsDTO GetDailyStatistics();
         MonthStatisticDTO GetDashboardStatisticsPerCurrentMonth();
+        DashboardStatisticsDTO GetDashboardStatistics();
+        List<StatisticsPerCountryDTO> GetDashboardStatisticsPerCountryPerCurrentMonth();
+        List<StatisticsPerClientCountryDTO> GetDashboardStatisticsPerClientCountryPerCurrentMonth();
+        List<StatisticsPerCardVendorDTO> GetDashboardStatisticsPerCardVendorPerCurrentMonth();
+        List<StatisticsPerCardTypeDTO> GetDashboardStatisticsPerCardTypePerCurrentMonth();
+        List<StatisticsPerTransactionTypeDTO> GetDashboardStatisticsPerTransactionTypePerCurrentMonth();
     }
 }

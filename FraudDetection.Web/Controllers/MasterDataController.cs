@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FraudDetection.Service;
 using FraudDetection.Models;
+using FraudDetection.Models.Transactions;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,21 +23,21 @@ namespace FraudDetection.Web.Controllers
         [HttpGet("[action]")]
         public IEnumerable<CardTypeDTO> GetCardTypes()
         {
-            var lstTransactions = _masterDataService.GetCardTypes();
-            return lstTransactions;
-        }
-
-        [HttpGet("[action]")]
-        public IEnumerable<TransactionStatus> GetTransactionStatus()
-        {
-            var response = _masterDataService.GetTransactionStatus();
+            var response = _masterDataService.GetCardTypes();
             return response;
         }
 
         [HttpGet("[action]")]
-        public IEnumerable<TransactionTypeDTO> GetTransactionType()
+        public IEnumerable<CardVendorDTO> GetCardVendors()
         {
-            var response = _masterDataService.GetTransactionType();
+            var response = _masterDataService.GetCardVendors();
+            return response;
+        }
+
+        [HttpGet("[action]")]
+        public IEnumerable<TransactionTypeDTO> GetTransactionTypes()
+        {
+            var response = _masterDataService.GetTransactionTypes();
             return response;
         }
 
@@ -44,6 +45,27 @@ namespace FraudDetection.Web.Controllers
         public IEnumerable<CountryDTO> GetCountries()
         {
             var response = _masterDataService.GetCountries();
+            return response;
+        }
+
+        [HttpGet("[action]")]
+        public IEnumerable<ClientCountryDTO> GetClientCountries()
+        {
+            var response = _masterDataService.GetClientCountries();
+            return response;
+        }
+
+        [HttpGet("[action]/id")]
+        public IEnumerable<Merchant> GetMerchants([FromBody] int id)
+        {
+            var response = _masterDataService.GetMerchants(id);
+            return response;
+        }
+
+        [HttpGet("[action]")]
+        public IEnumerable<TransactionStatus> GetTransactionStatus()
+        {
+            var response = _masterDataService.GetTransactionStatus();
             return response;
         }
     }

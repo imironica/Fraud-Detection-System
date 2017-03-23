@@ -7,9 +7,11 @@ namespace FraudDetection.Service
     public interface IMasterDataService
     {
         List<CardTypeDTO> GetCardTypes();
-        List<TransactionStatus> GetTransactionStatus();
-        List<TransactionTypeDTO> GetTransactionType();
+        List<CardVendorDTO> GetCardVendors();
+        List<TransactionTypeDTO> GetTransactionTypes();
         List<CountryDTO> GetCountries();
+        List<ClientCountryDTO> GetClientCountries();
         List<Merchant> GetMerchants(int countryId);
+        List<TransactionStatus> GetTransactionStatus();
     }
 }

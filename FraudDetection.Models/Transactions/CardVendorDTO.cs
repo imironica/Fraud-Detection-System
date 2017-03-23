@@ -1,9 +1,11 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace FraudDetection.Models.Transactions
 {
+    [BsonIgnoreExtraElements]
     public class CardVendorDTO : Entity
     {
         public int CardVendorId { get; set; }

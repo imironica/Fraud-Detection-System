@@ -119,7 +119,7 @@
                                     (blur)="validateClientCountry(clientCountryFeature.value)"
                                     (change)="validateClientCountry(clientCountryFeature.value)"
                                     [(ngModel)]="transaction.clientCountryFeature">
-                                <option *ngFor="let x of countries" [value]="x.countryId">{{x.name}}</option>
+                                <option *ngFor="let x of clientCountries" [value]="x.clientCountryId">{{x.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -239,7 +239,7 @@
                                     (blur)="validateMerchant(merchantFeature.value)"
                                     (change)="validateMerchant(merchantFeature.value)"
                                     [(ngModel)]="transaction.merchantFeature">
-                                <option *ngFor="let x of merchants" [value]="x.id">{{x.name}}</option>
+                                <option *ngFor="let x of merchants" [value]="x.merchantId">{{x.name}}</option>
                             </select>
                         </div>
                     </div>
