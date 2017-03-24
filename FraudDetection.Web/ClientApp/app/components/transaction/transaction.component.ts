@@ -27,7 +27,7 @@ export class TransactionComponent implements OnInit {
     public cardVendors: CardVendor[];
 	public transaction: Transaction;
     public countries: Country[];
-    public merchants: Merchant[];
+    public merchants: Merchant[] = [];
     public clientCountries: ClientCountry[];
 	public alertResponse: TransactionAlertResponse;
     public msgs: Message[] = [];
@@ -70,6 +70,7 @@ export class TransactionComponent implements OnInit {
         http.get('/api/MasterData/GetClientCountries').subscribe(result => {
             this.clientCountries = result.json();
         });
+        this.selectedMerchantCountry = new Country();
     }
 
     ngOnInit() {
@@ -92,12 +93,6 @@ export class TransactionComponent implements OnInit {
             'merchant': new FormControl('', Validators.required),
             'longitude': new FormControl('', Validators.required),
             'latitude': new FormControl('', Validators.required)
-        });
-    }
-
-    onSelect() {
-        this.http.get('/api/MasterData/GetMerchants?id=' + this.selectedMerchantCountry.countryId).subscribe(result => {
-            this.merchants = result.json();
         });
     }
 
@@ -144,6 +139,12 @@ export class TransactionComponent implements OnInit {
 
         this.selectedMerchantCountry.countryId = value;
         this.onSelect();
+    }
+
+    onSelect() {
+        this.http.get('/api/MasterData/GetMerchants?id=' + this.selectedMerchantCountry.countryId).subscribe(result => {
+            this.merchants = result.json();
+        });
     }
 
     validateMerchant(value) {

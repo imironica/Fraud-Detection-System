@@ -45,7 +45,7 @@ export class TransactionListComponent {
 			 .subscribe(result => {
               this.message = "saved";
             });
-        this.transaction.verified = true;
+        //this.transaction.verified = true;
         window.location.reload();
 	}
 }
