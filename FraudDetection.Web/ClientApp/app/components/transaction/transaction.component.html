@@ -72,7 +72,7 @@
                             <div style="clear:both">
                                 <label>Transaction time *</label>
                             </div>
-                            <p-calendar class="form-control" formControlName="transactionTime" #transactionTime name="transactionTime" id="transactionTime"
+                            <p-calendar formControlName="transactionTime" #transactionTime name="transactionTime" id="transactionTime"
                                         [(ngModel)]="transaction.transactionDateTimeFeature">
                             </p-calendar>
                         </div>
@@ -83,7 +83,7 @@
                             <div style="clear:both">
                                 <label>Transaction date *</label>
                             </div>
-                            <p-calendar class="form-control" formControlName="transactionDate" #transactionDate name="transactionDate" id="transactionDate"
+                            <p-calendar formControlName="transactionDate" #transactionDate name="transactionDate" id="transactionDate"
                                         [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
                                         [(ngModel)]="transaction.transactionDateTimeFeature">
                             </p-calendar>
@@ -129,7 +129,7 @@
                             <div style="clear:both">
                                 <label>Last transaction date *</label>
                             </div>
-                            <p-calendar class="form-control" formControlName="lastTransactionDate" #lastTransactionDateFeature 
+                            <p-calendar formControlName="lastTransactionDate" #lastTransactionDateFeature 
                                         name="lastTransactionDateFeature" id="lastTransactionDateFeature"
                                         [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
                                         [(ngModel)]="transaction.lastTransactionDateFeature">
@@ -199,7 +199,7 @@
                             <div style="clear:both">
                                 <label>Card expiry date *</label>
                             </div>
-                            <p-calendar class="form-control" formControlName="cardExpiryDate" #CardExpiryDateFeature name="CardExpiryDateFeature" id="CardExpiryDateFeature"
+                            <p-calendar  formControlName="cardExpiryDate" #CardExpiryDateFeature name="CardExpiryDateFeature" id="CardExpiryDateFeature"
                                         [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
                                         [(ngModel)]="transaction.CardExpiryDateFeature">
                             </p-calendar>
