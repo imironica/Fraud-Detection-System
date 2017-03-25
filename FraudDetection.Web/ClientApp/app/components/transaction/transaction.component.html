@@ -115,6 +115,19 @@
                                     [(ngModel)]="transaction.amountOfSpentMoneyPerDay">
                         </div>
                     </div>
+                    <div class="form-group" [class.has-error]="transactionform.controls['lastTransactionDate'].invalid && transactionform.controls['lastTransactionDate'].touched">
+                        <div class="col-md-12">
+                            <div style="clear:both">
+                                <label>Last transaction date *</label>
+                            </div>
+                            <p-calendar formControlName="lastTransactionDate" #lastTransactionDateFeature name="lastTransactionDateFeature" id="lastTransactionDateFeature"
+                                        [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
+                                        dateFormat="dd.mm.yy"
+                                        [(ngModel)]="transaction.lastTransactionDate">
+
+                            </p-calendar>
+                        </div>
+                    </div>
 
                     <div class="form-group" [class.has-error]="transactionform.controls['spentMoneyPerMonth'].invalid && transactionform.controls['spentMoneyPerMonth'].touched">
                         <div class="col-md-12">

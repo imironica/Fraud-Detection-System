@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using FraudDetection.Models;
 using FraudDetection.Service;
 using System;
- 
+using System.Threading.Tasks;
 
 namespace FraudDetection.Web.Controllers
 {
@@ -39,7 +39,7 @@ namespace FraudDetection.Web.Controllers
 
 
         [HttpPost("[action]")]
-        public TransactionAlertReponse VerifyAlert([FromBody]TransactionDTO transaction)
+        public Task<TransactionAlertReponse> VerifyAlert([FromBody]TransactionDTO transaction)
         {
             var response =   _fraudService.VerifyAlert(transaction);
             return response;
