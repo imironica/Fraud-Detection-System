@@ -7,6 +7,12 @@ import { DxVectorMapModule } from 'devextreme-angular';
 import $ = require("jquery");
 import * as jquery from 'jquery';
 import { Country } from '../transaction/dto/Country';
+import { TransactionType } from '../transaction/dto/TransactionType';
+import { CardType } from '../transaction/dto/CardType';
+import { CardVendor } from '../transaction/dto/CardVendor';
+import { ClientCountry } from '../transaction/dto/ClientCountry';
+import { Merchant } from '../transaction/dto/Merchant';
+import { Transaction } from '../transaction/dto/Transaction';
 //import { FeatureCollection, Service } from './home.service';
 //import * as mapsData from 'devextreme/dist/js/vectormap-data/world.js';
 
@@ -25,80 +31,257 @@ export class HomeComponent implements OnInit {
      
     public dashboardStatistics: DashboardStatistics;
     public statisticPerMonth: MonthStatistics;
+    public dailyStatisticsPerLastMonth: Array<DailyStatisticsPerLastMonth>;
+    public statisticsPerCountry: Array<StatisticsPerCountry>;
+    public statisticsPerClientCountry: Array<StatisticsPerClientCountry>;
+    public statisticsPerCardVendor: Array<StatisticsPerCardVendor>;
+    public statisticsPerCardType: Array<StatisticsPerCardType>;
+    public statisticsPerTransactionType: Array<StatisticsPerTransactionType>;
+
     options: any;
-    doughnutdata: any;
-    linedata: any;
-    polardata: any;
     msgs: Message[] = [];
     transactionstatistics: any;
     isDataAvailable: boolean = false;
+    public transactionTypes: TransactionType[];
+    public cardTypes: CardType[];
+    public cardVendors: CardVendor[];
+    public transaction: Transaction;
     public countries: Country[];
-    //mapdatasource: mapsData.world;
-    //worldMap: any;
-    //markers: FeatureCollection;
+    public merchants: Merchant[] = [];
+    public transactions: Transaction[] = [];
+    public clientCountries: ClientCountry[];
+
+    public labelsCountries: Array<string> = [];
+    public numberOfDetectedFraudsPerCountries: Array<Number> = [];
+    public numberOfIncorrectlyDetectedFraudsPerCountries: Array<Number> = [];
+    public numberOfSuccessfullyProcessedTransactionsPerCountries: Array<Number> = [];
+
+    public labelsClientCountries: Array<string> = [];
+    public numberOfDetectedFraudsPerClientCountries: Array<Number> = [];
+    public numberOfIncorrectlyDetectedFraudsPerClientCountries: Array<Number> = [];
+    public numberOfSuccessfullyProcessedTransactionsPerClientCountries: Array<Number> = [];
+
+    public labelsCardVendors: Array<string> = [];
+    public numberOfDetectedFraudsPerCardVendors: Array<Number> = [];
+    public numberOfIncorrectlyDetectedFraudsPerCardVendors: Array<Number> = [];
+    public numberOfSuccessfullyProcessedTransactionsPerCardVendors: Array<Number> = [];
+
+    public labelsCardTypes: Array<string> = [];
+    public numberOfDetectedFraudsPerCardTypes: Array<Number> = [];
+    public numberOfIncorrectlyDetectedFraudsPerCardTypes: Array<Number> = [];
+    public numberOfSuccessfullyProcessedTransactionsPerCardTypes: Array<Number> = [];
+
+    public labelsTransactionTypes: Array<string> = [];
+    public numberOfDetectedFraudsPerTransactionTypes: Array<Number> = [];
+    public numberOfIncorrectlyDetectedFraudsPerTransactionTypes: Array<Number> = [];
+    public numberOfSuccessfullyProcessedTransactionsPerTransactionTypes: Array<Number> = [];
+
+    public labelsDailyStatisticsPerLastMonth: Array<string> = [];
+    public numberOfDetectedFraudsDailyPerLastMonth: Array<Number> = [];
+
+    chartDataCountries: any;
+    chartDataClientCountries: any;
+    chartDataMonthlyStatistics: any;
+    chartDataCardVendors: any;
+    chartDataCardTypes: any;
+    chartDataTransactionTypes: any;
+
     names: string[];
 
-    constructor(http: Http) {//, service: Service
+    constructor(http: Http) {
         this.statisticPerMonth = new MonthStatistics(300, 50, 100);
 		this.dashboardStatistics = new DashboardStatistics();
-		this.dashboardStatistics.currentMonthStatistics = this.statisticPerMonth;
+        this.dashboardStatistics.currentMonthStatistics = this.statisticPerMonth;
+
+        http.get('/api/MasterData/GetTransactionTypes').subscribe(result => {
+            this.transactionTypes = result.json();
+        });
+        http.get('/api/MasterData/GetCardTypes').subscribe(result => {
+            this.cardTypes = result.json();
+        });
+        http.get('/api/MasterData/GetCardVendors').subscribe(result => {
+            this.cardVendors = result.json();
+        });
+        http.get('/api/MasterData/GetCountries').subscribe(result => {
+            this.countries = result.json();
+        });
+        http.get('/api/MasterData/GetClientCountries').subscribe(result => {
+            this.clientCountries = result.json();
+        });
+
         http.get('/api/Transactions/GetDashboardStatisticsPerCurrentMonth').subscribe(result => {
             this.statisticPerMonth = result.json();
         });
 
-        // =====doughnut====
-        //TODO: get transactions 
-        this.doughnutdata = {
-            labels: ['Romania', 'Germany', 'France'],
+        //http.get('/api/Transactions/GetDashboardDailyStatisticsPerLastMonth').subscribe(result => {
+        //    this.dailyStatisticsPerLastMonth = result.json();
+        //    for (var item of this.dailyStatisticsPerLastMonth) {
+        //        this.labelsDailyStatisticsPerLastMonth.push(item.day);
+        //        this.numberOfDetectedFraudsDailyPerLastMonth.push(item.numberOfDetectedFraudsMonthly);
+        //    }
+        //});
+
+        http.get('/api/Transactions/GetDashboardStatisticsPerCountryPerCurrentMonth').subscribe(result => {
+            this.statisticsPerCountry = result.json();
+            for (var item of this.statisticsPerCountry) {
+                this.labelsCountries.push(item.country);
+                this.numberOfDetectedFraudsPerCountries.push(item.numberOfDetectedFraudsPerMonth);
+                this.numberOfIncorrectlyDetectedFraudsPerCountries.push(item.numberOfIncorrectlyDetectedFrauds);
+                this.numberOfSuccessfullyProcessedTransactionsPerCountries.push(item.numberOfSuccessfullyProcessedTransactions);
+            }
+        });
+
+        http.get('/api/Transactions/GetDashboardStatisticsPerClientCountryPerCurrentMonth').subscribe(result => {
+            this.statisticsPerClientCountry = result.json();
+            for (var item of this.statisticsPerClientCountry) {
+                this.labelsClientCountries.push(item.clientCountry);
+                this.numberOfDetectedFraudsPerClientCountries.push(item.numberOfDetectedFraudsPerMonth);
+                this.numberOfIncorrectlyDetectedFraudsPerClientCountries.push(item.numberOfIncorrectlyDetectedFrauds);
+                this.numberOfSuccessfullyProcessedTransactionsPerClientCountries.push(item.numberOfSuccessfullyProcessedTransactions);
+            }
+        });
+
+        http.get('/api/Transactions/GetDashboardStatisticsPerCardVendorPerCurrentMonth').subscribe(result => {
+            this.statisticsPerCardVendor = result.json();
+            for (var item of this.statisticsPerCardVendor) {
+                this.labelsCardVendors.push(item.cardVendor);
+                this.numberOfDetectedFraudsPerCardVendors.push(item.numberOfDetectedFraudsPerMonth);
+                this.numberOfIncorrectlyDetectedFraudsPerCardVendors.push(item.numberOfIncorrectlyDetectedFrauds);
+                this.numberOfSuccessfullyProcessedTransactionsPerCardVendors.push(item.numberOfSuccessfullyProcessedTransactions);
+            }
+        });
+
+        http.get('/api/Transactions/GetDashboardStatisticsPerCardTypePerCurrentMonth').subscribe(result => {
+            this.statisticsPerCardType = result.json();
+            for (var item of this.statisticsPerCardType) {
+                this.labelsCardTypes.push(item.cardType);
+                this.numberOfDetectedFraudsPerCardTypes.push(item.numberOfDetectedFraudsPerMonth);
+                this.numberOfIncorrectlyDetectedFraudsPerCardTypes.push(item.numberOfIncorrectlyDetectedFrauds);
+                this.numberOfSuccessfullyProcessedTransactionsPerCardTypes.push(item.numberOfSuccessfullyProcessedTransactions);
+            }
+        });
+
+        http.get('/api/Transactions/GetDashboardStatisticsPerTransactionTypePerCurrentMonth').subscribe(result => {
+            this.statisticsPerTransactionType = result.json();
+            for (var item of this.statisticsPerTransactionType) {
+                this.labelsTransactionTypes.push(item.transactionType);
+                this.numberOfDetectedFraudsPerTransactionTypes.push(item.numberOfDetectedFraudsPerMonth);
+                this.numberOfIncorrectlyDetectedFraudsPerTransactionTypes.push(item.numberOfIncorrectlyDetectedFrauds);
+                this.numberOfSuccessfullyProcessedTransactionsPerTransactionTypes.push(item.numberOfSuccessfullyProcessedTransactions);
+            }
+        });
+
+        // =====doughnut per countries ====
+
+        this.chartDataCountries = {
+            labels: this.labelsCountries,
             datasets: [
                 {
-                    data: [300, 50, 100],
+                    data: this.numberOfDetectedFraudsPerCountries,
                     backgroundColor: [
                         "#FF6384",
                         "#36A2EB",
-                        "#FFCE56"
+                        "#FFCE56",
+                        "#008b8b",
+                        "#006400",
+                        "#ee7600",
+                        "#9a32cd",
+                        "#528b8b",
+                        "#8b0a50",
+                        "#b22222",
+                        "#cd5555",
+                        "#cd5555",
+                        "#66cdaa",
+                        "#ff4500",
+                        "#3a5fcd"
                     ],
                     hoverBackgroundColor: [
                         "#FF6384",
                         "#36A2EB",
-                        "#FFCE56"
+                        "#FFCE56",
+                        "#008b8b",
+                        "#006400",
+                        "#ee7600",
+                        "#9a32cd",
+                        "#528b8b",
+                        "#8b0a50",
+                        "#b22222",
+                        "#cd5555",
+                        "#cd5555",
+                        "#66cdaa",
+                        "#ff4500",
+                        "#3a5fcd"
                     ]
-                }]    
+                }
+            ]
+        };
+
+        // ===== doughnut per client countries ====
+
+        this.chartDataClientCountries = {
+            labels: this.labelsClientCountries,
+            datasets: [
+                {
+                    data: this.numberOfDetectedFraudsPerClientCountries,
+                    backgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#008b8b",
+                        "#006400",
+                        "#ee7600",
+                        "#9a32cd",
+                        "#528b8b",
+                        "#8b0a50",
+                        "#b22222",
+                        "#cd5555",
+                        "#cd5555",
+                        "#66cdaa",
+                        "#ff4500",
+                        "#3a5fcd",
+                        "#00ee00",
+                        "#ffd700"
+                    ],
+                    hoverBackgroundColor: [
+                        "#FF6384",
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#008b8b",
+                        "#006400",
+                        "#ee7600",
+                        "#9a32cd",
+                        "#528b8b",
+                        "#8b0a50",
+                        "#b22222",
+                        "#cd5555",
+                        "#cd5555",
+                        "#66cdaa",
+                        "#ff4500",
+                        "#3a5fcd",
+                        "#00ee00",
+                        "#ffd700"
+                    ]
+                }
+            ]
         };
 
         //====line chart=====
-        this.linedata = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        this.chartDataMonthlyStatistics = {
+            labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26],
             datasets: [
                 {
-                    label: 'First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40],
+                    label: 'Fraud Detections',
+                    data: [5, 10, 8, 3, 15, 6, 11, 18, 7, 10, 3, 15, 6, 11, 5, 10, 8, 7, 10, 3, 13, 8, 6, 19 ],
                     fill: false,
-                    borderColor: '#4bc0c0'
-                },
-                {
-                    label: 'Second Dataset',
-                    data: [28, 48, 40, 19, 86, 27, 90],
-                    fill: false,
-                    borderColor: '#565656'
+                    borderColor: '#cd0000'
                 }
             ]
         }
 
-        http.get('/api/MasterData/GetCountries').subscribe(result => {
-            this.countries = result.json();
-        });
-
         //====== polar chart =======
-        this.polardata = {
+        this.chartDataCardVendors = {
             datasets: [{
-                data: [
-                    11,
-                    16,
-                    7,
-                    3,
-                    14
-                ],
+                data: this.numberOfDetectedFraudsPerCardVendors,
                 backgroundColor: [
                     "#FF6384",
                     "#4BC0C0",
@@ -106,42 +289,19 @@ export class HomeComponent implements OnInit {
                     "#E7E9ED",
                     "#36A2EB"
                 ],
-                label: 'My dataset'
+                label: 'Card Vendors'
             }],
-            labels: [
-                "Red",
-                "Green",
-                "Yellow",
-                "Grey",
-                "Blue"
-            ]
+            labels: this.labelsCardVendors
         }
 
-        //this.markers = service.getMarkers();
-        //this.names = service.getNames();
-        //this.customizeText = this.customizeText.bind(this);
-
-
     }
-
-    //customizeText(arg) {
-    //    return this.names[arg.index];
-    //}
-
-    //customizeTooltip(arg) {
-    //    if (arg.layer.type === "marker") {
-    //        return {
-    //            text: arg.attribute("tooltip")
-    //        };
-    //    }
-    //}
 
     selectData(event) {
         this.msgs = [];
         this.msgs.push({
             severity: 'info',
             summary: 'Data Selected',
-                     'detail': this.linedata.datasets[event.element._datasetIndex].data[event.element._index]
+            'detail': this.chartDataMonthlyStatistics.datasets[event.element._datasetIndex].data[event.element._index]
         });
     }
 
@@ -163,6 +323,11 @@ export class MonthStatistics {
     }
 }
 
+export class DailyStatisticsPerLastMonth {
+    day: string;
+    numberOfDetectedFraudsMonthly: Number;
+}
+
 export class StatisticsPerCountry {
     numberOfDetectedFraudsPerMonth: Number;
     numberOfSuccessfullyProcessedTransactions: Number;
@@ -177,128 +342,78 @@ export class StatisticsPerCountry {
 		this.numberOfIncorrectlyDetectedFrauds = numberOfIncorrectlyDetectedFrauds;
 		this.country = country;
     }
-} 
+}
+
+export class StatisticsPerClientCountry {
+    numberOfDetectedFraudsPerMonth: Number;
+    numberOfSuccessfullyProcessedTransactions: Number;
+    numberOfIncorrectlyDetectedFrauds: Number;
+    clientCountry: string;
+    constructor(numberOfDetectedFraudsPerMonth: Number,
+        numberOfSuccessfullyProcessedTransactions: Number,
+        numberOfIncorrectlyDetectedFrauds: Number,
+        clientCountry: string) {
+        this.numberOfDetectedFraudsPerMonth = numberOfDetectedFraudsPerMonth;
+        this.numberOfSuccessfullyProcessedTransactions = numberOfSuccessfullyProcessedTransactions;
+        this.numberOfIncorrectlyDetectedFrauds = numberOfIncorrectlyDetectedFrauds;
+        this.clientCountry = clientCountry;
+    }
+}
+
+export class StatisticsPerCardVendor {
+    numberOfDetectedFraudsPerMonth: Number;
+    numberOfSuccessfullyProcessedTransactions: Number;
+    numberOfIncorrectlyDetectedFrauds: Number;
+    cardVendor: string;
+    constructor(numberOfDetectedFraudsPerMonth: Number,
+        numberOfSuccessfullyProcessedTransactions: Number,
+        numberOfIncorrectlyDetectedFrauds: Number,
+        cardVendor: string) {
+        this.numberOfDetectedFraudsPerMonth = numberOfDetectedFraudsPerMonth;
+        this.numberOfSuccessfullyProcessedTransactions = numberOfSuccessfullyProcessedTransactions;
+        this.numberOfIncorrectlyDetectedFrauds = numberOfIncorrectlyDetectedFrauds;
+        this.cardVendor = cardVendor;
+    }
+}
+
+export class StatisticsPerCardType {
+    numberOfDetectedFraudsPerMonth: Number;
+    numberOfSuccessfullyProcessedTransactions: Number;
+    numberOfIncorrectlyDetectedFrauds: Number;
+    cardType: string;
+    constructor(numberOfDetectedFraudsPerMonth: Number,
+        numberOfSuccessfullyProcessedTransactions: Number,
+        numberOfIncorrectlyDetectedFrauds: Number,
+        cardType: string) {
+        this.numberOfDetectedFraudsPerMonth = numberOfDetectedFraudsPerMonth;
+        this.numberOfSuccessfullyProcessedTransactions = numberOfSuccessfullyProcessedTransactions;
+        this.numberOfIncorrectlyDetectedFrauds = numberOfIncorrectlyDetectedFrauds;
+        this.cardType = cardType;
+    }
+}
+
+export class StatisticsPerTransactionType {
+    numberOfDetectedFraudsPerMonth: Number;
+    numberOfSuccessfullyProcessedTransactions: Number;
+    numberOfIncorrectlyDetectedFrauds: Number;
+    transactionType: string;
+    constructor(numberOfDetectedFraudsPerMonth: Number,
+        numberOfSuccessfullyProcessedTransactions: Number,
+        numberOfIncorrectlyDetectedFrauds: Number,
+        transactionType: string) {
+        this.numberOfDetectedFraudsPerMonth = numberOfDetectedFraudsPerMonth;
+        this.numberOfSuccessfullyProcessedTransactions = numberOfSuccessfullyProcessedTransactions;
+        this.numberOfIncorrectlyDetectedFrauds = numberOfIncorrectlyDetectedFrauds;
+        this.transactionType = transactionType;
+    }
+}
 
 export class DashboardStatistics
 {
+    currentMonthStatistics: MonthStatistics;
 	statisticsPerCountry:StatisticsPerCountry[];
-	currentMonthStatistics:MonthStatistics;
+    statisticsPerClientCountry: StatisticsPerClientCountry[];
+    statisticsPerCardVendor: StatisticsPerCardVendor[];
+    statisticsPerCardType: StatisticsPerCardType[];
+    statisticsPerTransactionType: StatisticsPerTransactionType[];
 }
-
-
-//export class FeatureCollection {
-//    type: string;
-//    features: Feature[];
-//}
-
-//export class Feature {
-//    type: string;
-//    properties: FeatureProperty;
-//    geometry: FeatureGeometry;
-//}
-
-//export class FeatureProperty {
-//    values: number[];
-//    tooltip: string;
-//}
-
-//export class FeatureGeometry {
-//    type: string;
-//    coordinates: number[];
-//}
-
-//let names: string[] = ["Christian", "Muslim", "Unaffiliated", "Buddhist", "Jewish"];
-
-//let markers: FeatureCollection = {
-//    type: "FeatureCollection",
-//    features: jquery.map([{
-//        coordinates: [34.6, -5.1],
-//        values: [61.4, 35.2, 1.4, 0, 0],
-//        country: "Tanzania"
-//    }, {
-//        coordinates: [18.8, 15],
-//        values: [40.6, 55.3, 2.5, 0, 0],
-//        country: "Chad"
-//    }, {
-//        coordinates: [7.36, 9.97],
-//        values: [49.3, 48.8, 0.4, 0, 0],
-//        country: "Nigeria"
-//    }, {
-//        coordinates: [135.61, -24.57],
-//        values: [67.3, 2.4, 24.2, 2.7, 0.5],
-//        country: "Australia"
-//    }, {
-//        coordinates: [103.3, 34.85],
-//        values: [5.1, 1.8, 52.2, 18.2, 0],
-//        country: "China"
-//    }, {
-//        coordinates: [139.5, 37],
-//        values: [1.6, 0.2, 57, 36.2, 0],
-//        country: "Japan"
-//    }, {
-//        coordinates: [100.8, 15.9],
-//        values: [0.9, 5.5, 0.3, 93.2, 0],
-//        country: "Thailand"
-//    }, {
-//        coordinates: [10.4, 51.4],
-//        values: [68.7, 5.8, 24.7, 0.3, 0.3],
-//        country: "Germany"
-//    }, {
-//        coordinates: [100.8, 65.3],
-//        values: [73.3, 10, 16.2, 0.1, 0.2],
-//        country: "Russia"
-//    }, {
-//        coordinates: [-3.48, 40.36],
-//        values: [78.6, 2.1, 19, 0, 0.1],
-//        country: "Spain"
-//    }, {
-//        coordinates: [-78.01, 21.72],
-//        values: [59.2, 0, 23, 0, 0],
-//        country: "Cuba"
-//    }, {
-//        coordinates: [-63.7, -31.92],
-//        values: [85.2, 1, 12.2, 0.05, 0.5],
-//        country: "Argentina"
-//    }, {
-//        coordinates: [-110.53, 60.78],
-//        values: [69, 2.1, 23.7, 0.5, 0.3],
-//        country: "Canada"
-//    }, {
-//        coordinates: [-100.1, 40.14],
-//        values: [78.3, 0.9, 16.4, 1.2, 1.8],
-//        country: "United States"
-//    }, {
-//        coordinates: [34.88, 31.16],
-//        values: [2, 18.6, 3.1, 0.3, 75.6],
-//        country: "Israel"
-//    }], function (data) {
-//        let list = ["<b>" + data.country + "</b>"];
-//        $.each(data.values, function (i, value) {
-//            if (value > 0) {
-//                list.push(names[i] + ": " + value + "%");
-//            }
-//        });
-//        return {
-//            type: "Feature",
-//            geometry: {
-//                type: "Point",
-//                coordinates: data.coordinates
-//            },
-//            properties: {
-//                tooltip: list.join("\n"),
-//                values: data.values
-//            }
-//        };
-//    })
-//};
-
-//@Injectable()
-//export class Service {
-//    getMarkers(): FeatureCollection {
-//        return markers;
-//    }
-
-//    getNames(): string[] {
-//        return names;
-//    }
-//}

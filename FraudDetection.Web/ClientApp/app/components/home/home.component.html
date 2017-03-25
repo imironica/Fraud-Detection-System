@@ -13,10 +13,10 @@
         <section class="content">
             <!-- Info boxes -->
             <div class="row">
-                <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="info-box">
                         <span class="info-box-icon bg-red"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
- 
+
                         <div class="info-box-content">
                             <span class="info-box-text">Number of fraud detected last month</span>
                             <span class="info-box-number">{{statisticPerMonth?.numberOfDetectedFraudsPerCurrentMonth}}</span>
@@ -26,7 +26,7 @@
                     <!-- /.info-box -->
                 </div>
                 <!-- /.col -->
-                <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="info-box">
                         <span class="info-box-icon bg-green"><i class="fa fa-check-square" aria-hidden="true"></i></span>
 
@@ -42,20 +42,7 @@
                 <!-- fix for small devices only -->
                 <div class="clearfix visible-sm-block"></div>
 
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="info-box">
-                        <span class="info-box-icon bg-aqua"><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
-
-                        <div class="info-box-content">
-                            <span class="info-box-text">Number of succesfully processed transactions</span>
-                            <span class="info-box-number">{{statisticPerMonth?.numberOfIncorrectlyDetectedFrauds}}</span>
-                        </div>
-                        <!-- /.info-box-content -->
-                    </div>
-                    <!-- /.info-box -->
-                </div>
-
-                <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="col-md-4 col-sm-6 col-xs-12">
                     <div class="info-box">
                         <span class="info-box-icon bg-aqua"><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
 
@@ -99,42 +86,35 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-5 col-md-offset-1">
                                     <p class="text-center">
-                                        <strong>Number of frauds per country</strong>
+                                        <strong>Number of frauds per merchant country</strong>
                                     </p>
-                                    <p-chart type="doughnut" [data]="doughnutdata"></p-chart>
-                                </div>
-                                
-                                <div class="col-md-5">
-                                    <p class="text-center">
-                                        <strong>Goal Completion</strong>
-                                    </p>
-                                    <p-chart type="line" [data]="linedata" (onDataSelect)="selectData($event)"></p-chart>
+                                    <p-chart type="doughnut" [data]="chartDataCountries"></p-chart>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-5 col-md-offset-1">
                                     <p class="text-center">
-                                        <strong>Goal Completion</strong>
+                                        <strong>Number of frauds per month</strong>
                                     </p>
-                                    <p-chart type="polarArea" [data]="polardata"></p-chart>
+                                    <p-chart type="line" [data]="chartDataMonthlyStatistics" (onDataSelect)="selectData($event)"></p-chart>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-5 col-md-offset-1">
+                                    <p class="text-center">
+                                        <strong>Number of frauds per card vendor</strong>
+                                    </p>
+                                    <p-chart type="polarArea" [data]="chartDataCardVendors"></p-chart>
                                 </div>
 
-                                <!--<dx-vector-map id="vector-map"
-                                               [bounds]="[-180, 85, 180, -60]">
-                                    <dxo-tooltip [enabled]="true"
-                                                 [customizeTooltip]="customizeTooltip"></dxo-tooltip>
-                                    <dxi-layer [dataSource]="worldMap"
-                                               [hoverEnabled]="false"></dxi-layer>
-                                    <dxi-layer [dataSource]="markers"
-                                               name="pies"
-                                               elementType="pie"
-                                               dataField="values"></dxi-layer>
-                                    <dxi-legend [customizeText]="customizeText">
-                                        <dxo-source layer="pies" grouping="color"></dxo-source>
-                                    </dxi-legend>
-                                </dx-vector-map>-->
-
+                                <div class="col-md-5 col-md-offset-1">
+                                    <p class="text-center">
+                                        <strong>Number of frauds per client country</strong>
+                                    </p>
+                                    <p-chart type="doughnut" [data]="chartDataClientCountries"></p-chart>
+                                </div>
                             </div>
                             <!-- /.row -->
                         </div>

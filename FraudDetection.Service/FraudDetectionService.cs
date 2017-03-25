@@ -135,6 +135,23 @@ namespace FraudDetection.Service
             return currentMonthStatistics;
         }
 
+        public List<DailyStatisticsPerLastMonthDTO> GetDashboardDailyStatisticsPerLastMonth()
+        {
+            var monthlyStatistics = new List<DailyStatisticsPerLastMonthDTO>();
+            var transactionList = _transactionRepo.GetAllList();
+
+            foreach(var item in transactionList)
+            {
+                var statistic = new DailyStatisticsPerLastMonthDTO();
+                statistic.Day = item.TransactionDate.Substring(0,2);
+                statistic.NumberOfDetectedFrauds = _transactionRepo.Find(t => t.TransactionDate.Substring(3,2).Equals("03")
+                                                                                  && t.Class == 0).Count;
+                monthlyStatistics.Add(statistic);
+            }
+
+            return monthlyStatistics;
+        }
+
         public List<StatisticsPerCountryDTO> GetDashboardStatisticsPerCountryPerCurrentMonth()
         {
             var currentMonthStatisticsPerCountry = new List<StatisticsPerCountryDTO>();
@@ -150,6 +167,7 @@ namespace FraudDetection.Service
 
                 statistic.NumberOfDetectedFraudsPerMonth = detectedFraudsPerMonth;
                 statistic.NumberOfIncorrectlyDetectedFrauds = numberOfIncorrectlyDetectedFrauds;
+                statistic.NumberOfSuccessfullyProcessedTransactions = statistic.NumberOfDetectedFraudsPerMonth + statistic.NumberOfIncorrectlyDetectedFrauds;
 
                 currentMonthStatisticsPerCountry.Add(statistic);
             }
@@ -172,6 +190,7 @@ namespace FraudDetection.Service
 
                 statistic.NumberOfDetectedFraudsPerMonth = detectedFraudsPerMonth;
                 statistic.NumberOfIncorrectlyDetectedFrauds = numberOfIncorrectlyDetectedFrauds;
+                statistic.NumberOfSuccessfullyProcessedTransactions = statistic.NumberOfDetectedFraudsPerMonth + statistic.NumberOfIncorrectlyDetectedFrauds;
 
                 currentMonthStatisticsPerClientCountry.Add(statistic);
             }
@@ -182,18 +201,19 @@ namespace FraudDetection.Service
         public List<StatisticsPerCardVendorDTO> GetDashboardStatisticsPerCardVendorPerCurrentMonth()
         {
             var currentMonthStatisticsPerCardVendor = new List<StatisticsPerCardVendorDTO>();
-            var cardVendors = _cardTypeRepo.GetAllList();
+            var cardVendors = _cardVendorRepo.GetAllList();
 
             foreach (var cardVendor in cardVendors)
             {
                 var statistic = new StatisticsPerCardVendorDTO();
                 statistic.CardVendor = cardVendor.Name;
-                var detectedFraudsPerMonth = _transactionRepo.Find(t => t.CardVendor.Equals(cardVendor.Name)).Count;
+                var detectedFraudsPerMonth = _transactionRepo.Find(t => t.CardVendor.Equals(cardVendor.Name) && t.Class.Equals(0)).Count;
                 var numberOfIncorrectlyDetectedFrauds = _transactionRepo.Find(t => (t.Class.Equals(0) && t.Prediction.Equals(1)) ||
                                                                        (t.Class.Equals(1) && t.Prediction.Equals(0))).Count;
 
                 statistic.NumberOfDetectedFraudsPerMonth = detectedFraudsPerMonth;
                 statistic.NumberOfIncorrectlyDetectedFrauds = numberOfIncorrectlyDetectedFrauds;
+                statistic.NumberOfSuccessfullyProcessedTransactions = statistic.NumberOfDetectedFraudsPerMonth + statistic.NumberOfIncorrectlyDetectedFrauds;
 
                 currentMonthStatisticsPerCardVendor.Add(statistic);
             }
@@ -216,6 +236,7 @@ namespace FraudDetection.Service
 
                 statistic.NumberOfDetectedFraudsPerMonth = detectedFraudsPerMonth;
                 statistic.NumberOfIncorrectlyDetectedFrauds = numberOfIncorrectlyDetectedFrauds;
+                statistic.NumberOfSuccessfullyProcessedTransactions = statistic.NumberOfDetectedFraudsPerMonth + statistic.NumberOfIncorrectlyDetectedFrauds;
 
                 currentMonthStatisticsPerCardType.Add(statistic);
             }
@@ -238,6 +259,7 @@ namespace FraudDetection.Service
 
                 statistic.NumberOfDetectedFraudsPerMonth = detectedFraudsPerMonth;
                 statistic.NumberOfIncorrectlyDetectedFrauds = numberOfIncorrectlyDetectedFrauds;
+                statistic.NumberOfSuccessfullyProcessedTransactions = statistic.NumberOfDetectedFraudsPerMonth + statistic.NumberOfIncorrectlyDetectedFrauds;
 
                 currentMonthStatisticsPerTransactionType.Add(statistic);
             }

@@ -51,9 +51,58 @@ namespace FraudDetection.Web.Controllers
             return response;
         }
         [HttpGet("[action]")]
+        public DashboardStatisticsDTO GetDashboardStatistics()
+        {
+            var response = _fraudService.GetDashboardStatistics();
+            return response;
+        }
+
+        [HttpGet("[action]")]
         public MonthStatisticDTO GetDashboardStatisticsPerCurrentMonth()
         {
             var response = _fraudService.GetDashboardStatisticsPerCurrentMonth();
+            return response;
+        }
+
+        [HttpGet("[action]")]
+        public List<DailyStatisticsPerLastMonthDTO> GetDashboardDailyStatisticsPerLastMonth()
+        {
+            var response = _fraudService.GetDashboardDailyStatisticsPerLastMonth();
+            return response;
+        }
+
+        [HttpGet("[action]")]
+        public List<StatisticsPerCountryDTO> GetDashboardStatisticsPerCountryPerCurrentMonth()
+        {
+            var response = _fraudService.GetDashboardStatisticsPerCountryPerCurrentMonth();
+            return response;
+        }
+
+        [HttpGet("[action]")]
+        public List<StatisticsPerClientCountryDTO> GetDashboardStatisticsPerClientCountryPerCurrentMonth()
+        {
+            var response = _fraudService.GetDashboardStatisticsPerClientCountryPerCurrentMonth();
+            return response;
+        }
+
+        [HttpGet("[action]")]
+        public List<StatisticsPerCardVendorDTO> GetDashboardStatisticsPerCardVendorPerCurrentMonth()
+        {
+            var response = _fraudService.GetDashboardStatisticsPerCardVendorPerCurrentMonth();
+            return response;
+        }
+
+        [HttpGet("[action]")]
+        public List<StatisticsPerCardTypeDTO> GetDashboardStatisticsPerCardTypePerCurrentMonth()
+        {
+            var response = _fraudService.GetDashboardStatisticsPerCardTypePerCurrentMonth();
+            return response;
+        }
+
+        [HttpGet("[action]")]
+        public List<StatisticsPerTransactionTypeDTO> GetDashboardStatisticsPerTransactionTypePerCurrentMonth()
+        {
+            var response = _fraudService.GetDashboardStatisticsPerTransactionTypePerCurrentMonth();
             return response;
         }
     }

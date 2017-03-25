@@ -16,6 +16,7 @@ namespace FraudDetection.Models
             StatisticsPerTransactionType = new List<StatisticsPerTransactionTypeDTO>();
         }
         public MonthStatisticDTO CurrentMonthStatistics { get; set; }
+        public List<DailyStatisticsPerLastMonthDTO> MonthlyStatistics { get; set; }
         public List<StatisticsPerCountryDTO> StatisticsPerCountry { get; set; }
         public List<StatisticsPerClientCountryDTO> StatisticsPerClientCountry { get; set; }
         public List<StatisticsPerCardVendorDTO> StatisticsPerCardVendor { get;set;}
@@ -26,6 +27,14 @@ namespace FraudDetection.Models
     public class MonthStatisticDTO
     {
         public int NumberOfDetectedFraudsPerCurrentMonth { get; set; }
+        public int NumberOfSuccessfullyProcessedTransactions { get; set; }
+        public int NumberOfIncorrectlyDetectedFrauds { get; set; }
+    }
+
+    public class DailyStatisticsPerLastMonthDTO
+    {
+        public string Day { get; set; }
+        public int NumberOfDetectedFrauds { get; set; }
         public int NumberOfSuccessfullyProcessedTransactions { get; set; }
         public int NumberOfIncorrectlyDetectedFrauds { get; set; }
     }
@@ -60,6 +69,7 @@ namespace FraudDetection.Models
         public int NumberOfDetectedFraudsPerMonth { get; set; }
         public int NumberOfSuccessfullyProcessedTransactions { get; set; }
         public int NumberOfIncorrectlyDetectedFrauds { get; set; }
+        public int SavedAmount { get; set; }
     }
 
     public class StatisticsPerTransactionTypeDTO
