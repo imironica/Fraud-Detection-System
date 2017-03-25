@@ -37,7 +37,9 @@ module.exports = {
             'primeng/resources/themes/omega/theme.css',
             'primeng/resources/primeng.min.css',
             'admin-lte/dist/css/AdminLTE.min.css',
-            'admin-lte/dist/css/skins/skin-red-light.min.css'
+            'admin-lte/dist/css/skins/skin-red-light.min.css',
+            'devextreme/dist/css/dx.common.css',
+            'devextreme/dist/css/dx.light.css'
         ]
     },
     output: {
