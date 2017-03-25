@@ -22,5 +22,6 @@ namespace FraudDetection.Service
         List<StatisticsPerCardVendorDTO> GetDashboardStatisticsPerCardVendorPerCurrentMonth();
         List<StatisticsPerCardTypeDTO> GetDashboardStatisticsPerCardTypePerCurrentMonth();
         List<StatisticsPerTransactionTypeDTO> GetDashboardStatisticsPerTransactionTypePerCurrentMonth();
+        TransactionClientResponse GetTransaction(string sms, string smsCode);
     }
 }

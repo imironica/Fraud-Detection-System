@@ -16,18 +16,18 @@ namespace FraudDetection.Web.Controllers
             _fraudService = new FraudDetectionService();
         }
 
-        [HttpGet("[action]")]
-        public IEnumerable<TransactionDTO> GetAlerts()
-        {
-            var lstTransactions = _fraudService.GetAlerts();
-            return lstTransactions;
-        }
 
         [HttpPost("[action]")]
-        public TransactionDTO GetAlert([FromBody] TransactionDTO transactionRequest)
+        public TransactionClientResponse GetTransactionDetails([FromBody] TransactionQuery transactionRequest)
         {
-            var transaction = _fraudService.GetAlert(transactionRequest.TransactionId);
-            return transaction;
+            if (transactionRequest != null && !string.IsNullOrEmpty(transactionRequest.SmsCode)
+                && !string.IsNullOrEmpty(transactionRequest.Code))
+            {
+                var transaction = _fraudService.GetTransaction(transactionRequest.Code, transactionRequest.SmsCode);
+                return transaction;
+            }
+
+            return new TransactionClientResponse() { TransactionStatus = "INVALID", Message="Invalid request credentials!" };
         }
 
         [HttpPost("[action]")]
@@ -36,25 +36,12 @@ namespace FraudDetection.Web.Controllers
             var transactionChange = _fraudService.SaveTransactionStatus(transactionRequest.TransactionId, transactionRequest.Class);
             return transactionChange;
         }
-        
 
-        [HttpPost("[action]")]
-        public TransactionAlertReponse VerifyAlert([FromBody]TransactionDTO transaction)
-        {
-            var response = _fraudService.VerifyAlert(transaction);
-            return response;
-        }
-        [HttpGet("[action]")]
-        public DailyStatisticsDTO GetDailyStatistics()
-        {
-            var response = _fraudService.GetDailyStatistics();
-            return response;
-        }
-        [HttpGet("[action]")]
-        public MonthStatisticDTO GetDashboardStatisticsPerCurrentMonth()
-        {
-            var response = _fraudService.GetDashboardStatisticsPerCurrentMonth();
-            return response;
-        }
+    }
+
+    public class TransactionQuery
+    {
+        public string Code { get; set; }
+        public string SmsCode { get; set; }
     }
 }

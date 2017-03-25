@@ -1,6 +1,4 @@
-﻿import { ClientCountry } from './ClientCountry';
-
-export class Transaction {
+﻿export class Transaction {
 
 		constructor() {
         

@@ -4,39 +4,60 @@ import { FormsModule, FormControl, FormGroup, FormBuilder, Validators } from '@a
 import { UniversalModule } from 'angular2-universal';
 import { Http } from '@angular/http';
 import { Transaction } from './dto/Transaction';
-import { TransactionAlertResponse } from './dto/transactionAlertResponse';
-import { ButtonModule, GrowlModule, Message, CalendarModule, Calendar, SelectItem, Button, Dropdown } from 'primeng/primeng';
+import { TransactionClientResponse } from './dto/transactionClientResponse';
+import { TransactionQuery } from './dto/TransactionQuery';
 
 @Component({
     selector: 'transaction',
-    template: require('./transaction.component.html'),
-    styles: [require('../css/AdminLTE.css'), require('../css/skins/skin-blue.css')]
+    template: require('./transaction.component.html')
 })
 
 export class TransactionComponent {
-    public smsCode: string;
-    public code: string;
-    public transaction: Transaction;
-    public showTransactionDetails: boolean;
-    public alertResponse: TransactionAlertResponse;
-    showCredentialsTab: boolean;
+    smsCode: string;
+    code: string;
+    transaction: Transaction;
+    showTransactionDetailsCode: number;
+
+    showTransactionDetails: boolean;
+    transactionResponse: TransactionClientResponse;
+    alertStatus: string;
+    showCredentialsTab : boolean;
  
     message: string;
     http: Http;
 
     constructor(http: Http) {
-		this.transaction = new Transaction();
-		this.alertResponse = new TransactionAlertResponse();
-		this.alertResponse.status = "";
+ 
+        this.alertStatus = "";
         this.http = http;
-
+        this.showTransactionDetailsCode = 0;
         this.showTransactionDetails = false;
         this.showCredentialsTab = true;
     }
 
-    getTransactionDetails() {
-        var transactionRequest = new Transaction();
-        this.showTransactionDetails = true;
+    public showTransaction(){
+        
+        var transactionQuery = new TransactionQuery();
+        transactionQuery.code = this.code;
+        transactionQuery.smsCode = this.smsCode;
+        this.alertStatus = '';
+        this.http.post('/api/Transactions/GetTransactionDetails',
+            transactionQuery)
+            .subscribe(result => {
+                this.transactionResponse = result.json();
+
+                if (this.transactionResponse.transactionStatus == 'VALID') {
+                    this.showCredentialsTab = false;
+                    this.transaction = this.transactionResponse.transaction;
+                    this.showTransactionDetailsCode = 1;
+                }
+                if (this.transactionResponse.transactionStatus == 'INVALID') {
+                    this.transaction = this.transactionResponse.transaction;
+                    this.message = this.transactionResponse.message;
+                    this.alertStatus = 'INVALID';
+                }
+               
+            });
     }
 
     saveTransactionStatus(id: Number, status: Number) {
@@ -46,7 +67,12 @@ export class TransactionComponent {
         this.http.post('/api/Transactions/saveTransactionStatus',
             transactionRequest)
             .subscribe(result => {
-                this.message = "saved";
+                this.message = "";
             });
+        if (status == 0)
+            this.alertStatus = "ALERT";
+        if (status == 1)
+            this.alertStatus = 'SECURE'
+        this.showTransactionDetailsCode = 0;
     }
 }
