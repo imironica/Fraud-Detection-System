@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import datetime
 import twilio_service
+from pymongo import MongoClient
 app = Flask(__name__)
 
 
@@ -42,6 +43,10 @@ def get_probability():
     df= main.return_prediction(df)
 
     fraudProbability = df['FraudProbability'][0]
+    client = MongoClient()
+    db = client.FraudDetection
+    df['']
+    db.Transactions.insert(df)
     print(fraudProbability)
    # if fraudProbability > 0:
    #     twilio_service.send_alert_message(df['Merchant'][0],df['Amount'][0],3657)

@@ -67,32 +67,7 @@
                         </div>
                     </div>
 
-<<<<<<< HEAD
-=======
-                    <div class="form-group" [class.has-error]="transactionform.controls['transactionTime'].invalid && transactionform.controls['transactionTime'].touched">
-                        <div class="col-md-12">
-                            <div style="clear:both">
-                                <label>Transaction time *</label>
-                            </div>
-                            <p-calendar formControlName="transactionTime" #transactionTime name="transactionTime" id="transactionTime"
-                                        [(ngModel)]="transaction.transactionDateTimeFeature">
-                            </p-calendar>
-                        </div>
-                    </div>
 
-                    <div class="form-group" [class.has-error]="transactionform.controls['transactionDate'].invalid && transactionform.controls['transactionDate'].touched">
-                        <div class="col-md-12">
-                            <div style="clear:both">
-                                <label>Transaction date *</label>
-                            </div>
-                            <p-calendar formControlName="transactionDate" #transactionDate name="transactionDate" id="transactionDate"
-                                        [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
-                                        [(ngModel)]="transaction.transactionDateTimeFeature">
-                            </p-calendar>
-                        </div>
-                    </div>
-
->>>>>>> 452b2a4d5a9ba689a9fc85852535dee41af46ce2
                     <div class="form-group" [class.has-error]="transactionform.controls['loginAtempts'].invalid && transactionform.controls['loginAtempts'].touched">
                         <div class="col-md-12">
                             <div style="clear:both">
@@ -128,21 +103,6 @@
                         </div>
                     </div>
 
-                
-
-                    <div class="form-group" [class.has-error]="transactionform.controls['lastTransactionDate'].invalid && transactionform.controls['lastTransactionDate'].touched">
-                        <div class="col-md-12">
-                            <div style="clear:both">
-                                <label>Last transaction date *</label>
-                            </div>
-                            <p-calendar formControlName="lastTransactionDate" #lastTransactionDateFeature 
-                                        name="lastTransactionDateFeature" id="lastTransactionDateFeature"
-                                        dateFormat="dd.mm.yy"
-                                        [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
-                                        [(ngModel)]="transaction.lastTransactionDateFeature">
-                            </p-calendar>
-                        </div>
-                    </div>
 
                     <div class="form-group" [class.has-error]="transactionform.controls['spentMoneyPerDay'].invalid && transactionform.controls['spentMoneyPerDay'].touched">
                         <div class="col-md-12">
