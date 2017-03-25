@@ -27,9 +27,9 @@ namespace FraudDetection.Service
             _transactionTypeRepo = new MDRepository<TransactionTypeDTO>("TransactionTypes");
         }
 
-        public List<TransactionDTO> GetAlerts()
+        public List<TransactionDTO> GetAlerts(DateTime date)
         {
-            var list = _transactionRepo.Find((x => x.TransactionDate.Equals(DateTime.Today.ToString("dd/MM/yyyy"))))
+            var list = _transactionRepo.Find((x => x.TransactionDate.Equals(date.ToString("dd/MM/yyyy"))))
                                                 .OrderByDescending(y => y.FraudProbability).ToList();
             return list;
         }
