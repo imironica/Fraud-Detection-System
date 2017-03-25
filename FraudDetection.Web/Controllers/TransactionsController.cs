@@ -2,13 +2,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using FraudDetection.Models;
 using FraudDetection.Service;
-using System.Linq;
-using System.Web.Http;
-<<<<<<< HEAD
-using System.Threading.Tasks;
-=======
 using System;
->>>>>>> 452b2a4d5a9ba689a9fc85852535dee41af46ce2
+ 
 
 namespace FraudDetection.Web.Controllers
 {
