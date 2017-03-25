@@ -173,7 +173,7 @@
                         <td>{{ transaction.transactionTime }}</td>
                         <td>{{ transaction.transactionDate }}</td>
                         <td>
-                            <span *ngIf="transaction.prediction==0" class="label label-warning">Alert</span>
+                            <span *ngIf="transaction.prediction==0 && transaction.verified==false" class="label label-warning">Alert</span>
                             <span *ngIf="transaction.class==1" class="label label-success">Classified as NonFraud</span>
                             <span *ngIf="transaction.class==0" class="label label-danger">Classified as Fraud</span>
                         </td>

@@ -17,7 +17,7 @@ namespace FraudDetection.Service
         string _collectionName;
         public MDRepository()
         {
-            _collectionName = "transactions";
+            _collectionName = "Transactions";
             OpenConnection();
         }
         public MDRepository(string collectionName)
@@ -98,7 +98,7 @@ namespace FraudDetection.Service
 
         public void Update(Expression<System.Func<T, bool>> filter, UpdateDefinition<T> updateDefinition)
         {
-            _collection.UpdateOne<T>(filter, updateDefinition);
+            var response = _collection.UpdateOne<T>(filter, updateDefinition);
         }
     }
 }

@@ -111,10 +111,11 @@ namespace FraudDetection.Service
         }
         public DailyStatisticsDTO GetDailyStatistics()
         {
-            var detectedFrauds = _transactionRepo.Find(t => t.Class == 0 && t.TransactionDateTimeFeature == DateTime.Today).Count();
-            var goodTransactions = _transactionRepo.Find(t => t.Class == 1 && t.TransactionDateTimeFeature == DateTime.Today).Count();
-            var unprocessedAlerts = _transactionRepo.Find(t => t.Verified == false && t.TransactionDateTimeFeature == DateTime.Today).Count();
-            var processedAlerts = _transactionRepo.Find(t => t.Verified == true && t.TransactionDateTimeFeature == DateTime.Today).Count();
+            string today = DateTime.Today.ToString("dd/MM/yyyy");
+            var detectedFrauds = _transactionRepo.Find(t => t.Class == 0 && t.TransactionDate == today).Count();
+            var goodTransactions = _transactionRepo.Find(t => t.Class == 1 && t.TransactionDate == today).Count();
+            var unprocessedAlerts = _transactionRepo.Find(t => t.Verified == false && t.TransactionDate == today).Count();
+            var processedAlerts = _transactionRepo.Find(t => t.Verified == true && t.TransactionDate == today).Count();
 
             return new DailyStatisticsDTO()
             {
@@ -157,19 +158,22 @@ namespace FraudDetection.Service
 
         public List<DailyStatisticsPerLastMonthDTO> GetDashboardDailyStatisticsPerLastMonth()
         {
-            var monthlyStatistics = new List<DailyStatisticsPerLastMonthDTO>();
-            var transactionList = _transactionRepo.GetAllList();
-
-            foreach(var item in transactionList)
+            var dailyStatisticsPerLastMonth = new List<DailyStatisticsPerLastMonthDTO>();
+            string currentMonth = DateTime.Today.ToString("dd/MM/yyyy").Substring(3,2);
+            string currentYear = DateTime.Today.ToString("dd/MM/yyyy").Substring(6,4);
+            int daysInMonth = DateTime.DaysInMonth(2017, int.Parse(currentMonth));
+            var transactionListPerLastMonth = _transactionRepo.Find(t => t.TransactionDate.Substring(3,2).Equals(currentMonth));
+            
+            foreach (var item in transactionListPerLastMonth)
             {
                 var statistic = new DailyStatisticsPerLastMonthDTO();
                 statistic.Day = item.TransactionDate.Substring(0,2);
-                statistic.NumberOfDetectedFrauds = _transactionRepo.Find(t => t.TransactionDate.Substring(3,2).Equals("03")
-                                                                                  && t.Class == 0).Count;
-                monthlyStatistics.Add(statistic);
+                statistic.NumberOfDetectedFrauds = _transactionRepo.Find(t => t.TransactionDate.Substring(0, 2).Equals(statistic.Day) 
+                                                                           && t.Class == 0).Count;
+                dailyStatisticsPerLastMonth.Add(statistic);
             }
 
-            return monthlyStatistics;
+            return dailyStatisticsPerLastMonth;
         }
 
         public List<StatisticsPerCountryDTO> GetDashboardStatisticsPerCountryPerCurrentMonth()
@@ -290,7 +294,9 @@ namespace FraudDetection.Service
         public bool SaveTransactionStatus(int transactionId, int statusCode)
         {
             var repo = new MDRepository<TransactionDTO>();
-            var update = Builders<TransactionDTO>.Update.Set("Class", statusCode).Set("Verified", true);
+            var update = Builders<TransactionDTO>.Update.Set("Class", statusCode);
+            repo.Update(x => x.TransactionId == transactionId, update);
+            update = Builders<TransactionDTO>.Update.Set("Verified", true);
             repo.Update(x => x.TransactionId == transactionId, update);
             return true;
         }
