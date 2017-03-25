@@ -24,7 +24,7 @@ namespace FraudDetection.Console
                 if (option == "1")
                     InitialSetup();
                 if (option == "2")
-                    System.Console.WriteLine("Not implemented yet");
+                    RunApi();
 
             }
         }
@@ -35,6 +35,24 @@ namespace FraudDetection.Console
             System.Console.WriteLine("1 - Generate database: ");
             System.Console.WriteLine("2 - Run PythonApi");
             System.Console.WriteLine("0 - Exit: ");
+        }
+        public static void RunApi()
+        {
+
+                ProcessStartInfo start = new ProcessStartInfo();
+                start.FileName = @"..\FraudDetection.ML\Python\python.exe";
+                start.Arguments = string.Format(@"..\FraudDetection.ML\python_api.py");
+                start.UseShellExecute = false;
+                start.RedirectStandardOutput = true;
+                using (Process process = Process.Start(start))
+                {
+                    using (StreamReader reader = process.StandardOutput)
+                    {
+                        string result = reader.ReadToEnd();
+                        System.Console.Write(result);
+                    }
+                }
+            
         }
 
         public static void InitialSetup()

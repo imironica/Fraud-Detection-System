@@ -21,9 +21,9 @@ export class Transaction {
         cardVendorFeature: Number;
         transactionTime: string;
         transactionDate: string;
-        transactionDateTimeFeature: Number;
-        longitude: Number;
-        latitude: Number;
+        transactionDateTimeFeature: Date;
+        longitude: number;
+        latitude: number;
         loginAtempts: Number;
         country: string;
         countryFeature: Number;
@@ -31,7 +31,7 @@ export class Transaction {
         merchantFeature: Number;
 
         clientCountry: string;
-		ClientCountryFeature: Number;
+		ClientCountryFeature: number;
         lastTransactionDate: Date;
         lastTransactionDateFeature: Number;
 		amountOfSpentMoneyPerDay: Number;

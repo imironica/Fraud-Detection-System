@@ -67,29 +67,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group" [class.has-error]="transactionform.controls['transactionTime'].invalid && transactionform.controls['transactionTime'].touched">
-                        <div class="col-md-12">
-                            <div style="clear:both">
-                                <label>Transaction time *</label>
-                            </div>
-                            <p-calendar class="form-control" formControlName="transactionTime" #transactionTime name="transactionTime" id="transactionTime"
-                                        [(ngModel)]="transaction.transactionDateTimeFeature">
-                            </p-calendar>
-                        </div>
-                    </div>
-
-                    <div class="form-group" [class.has-error]="transactionform.controls['transactionDate'].invalid && transactionform.controls['transactionDate'].touched">
-                        <div class="col-md-12">
-                            <div style="clear:both">
-                                <label>Transaction date *</label>
-                            </div>
-                            <p-calendar class="form-control" formControlName="transactionDate" #transactionDate name="transactionDate" id="transactionDate"
-                                        [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
-                                        [(ngModel)]="transaction.transactionDateTimeFeature">
-                            </p-calendar>
-                        </div>
-                    </div>
-
                     <div class="form-group" [class.has-error]="transactionform.controls['loginAtempts'].invalid && transactionform.controls['loginAtempts'].touched">
                         <div class="col-md-12">
                             <div style="clear:both">
@@ -109,6 +86,7 @@
                     <h3 class="box-title">Client details</h3>
                 </div>
 
+
                 <div class="box-body">
                     <div class="form-group" [class.has-error]="hasClientCountryError">
                         <div class="col-md-12">
@@ -116,21 +94,24 @@
                                 <label class="control-label">Client country *</label>
                             </div>
                             <select class="form-control" formControlName="clientCountry" #clientCountryFeature name="clientCountryFeature" id="clientCountryFeature"
-                                    (blur)="validateClientCountry(clientCountryFeature.value)"
-                                    (change)="validateClientCountry(clientCountryFeature.value)"
+                                    (blur)="validateClientCountry(transaction.clientCountryFeature)"
+                                    (change)="validateClientCountry(transaction.clientCountryFeature)"
                                     [(ngModel)]="transaction.clientCountryFeature">
                                 <option *ngFor="let x of clientCountries" [value]="x.clientCountryId">{{x.name}}</option>
                             </select>
                         </div>
                     </div>
 
+                
+
                     <div class="form-group" [class.has-error]="transactionform.controls['lastTransactionDate'].invalid && transactionform.controls['lastTransactionDate'].touched">
                         <div class="col-md-12">
                             <div style="clear:both">
                                 <label>Last transaction date *</label>
                             </div>
-                            <p-calendar class="form-control" formControlName="lastTransactionDate" #lastTransactionDateFeature 
+                            <p-calendar formControlName="lastTransactionDate" #lastTransactionDateFeature 
                                         name="lastTransactionDateFeature" id="lastTransactionDateFeature"
+                                        dateFormat="dd.mm.yy"
                                         [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
                                         [(ngModel)]="transaction.lastTransactionDateFeature">
                             </p-calendar>
@@ -167,42 +148,54 @@
                                 <label class="control-label">Card number *</label>
                             </div>
                             <input type="text" class="form-control" formControlName="cardNumber" #cardNumberFeature name="cardNumberFeature" id="cardNumberFeature"
+                                    (blur)="validateCardNumber(cardNumberFeature.value)"
+                                    (change)="validateCardNumber(cardNumberFeature.value)"
                                     placeholder="Enter card number..."
                                     [(ngModel)]="transaction.cardNumberFeature">
                         </div>
                     </div>
-
                     <div class="form-group" [class.has-error]="transactionform.controls['cardVendor'].invalid && transactionform.controls['cardVendor'].touched">
                         <div class="col-md-12">
                             <div style="clear:both">
                                 <label class="control-label">Card Vendor *</label>
                             </div>
-                            <input type="text" class="form-control" formControlName="cardVendor" #cardVendorFeature name="cardVendorFeature" id="cardVendorFeature"
-                                   placeholder="Enter card vendor..."
-                                   [(ngModel)]="transaction.cardVendorFeature">
+                            <select class="form-control" formControlName="cardVendor" #clientCountryFeature name="cardVendorFeature" id="cardVendorFeature"
+                                    (blur)="validateCardVendor(validateCardVendor.value)"
+                                    (change)="validateCardVendor(validateCardVendor.value)"
+                                    [(ngModel)]="transaction.cardVendorFeature">
+                                <option *ngFor="let x of cardVendors" [value]="x.cardVendorId">{{x.name}}</option>
+                            </select>
                         </div>
                     </div>
 
-                    <!--<div class="form-group" [class.has-error]="transactionform.controls['cardCvv'].invalid && transactionform.controls['cardCvv'].touched">
+                    <div class="form-group">
                         <div class="col-md-12">
                             <div style="clear:both">
-                                <label class="control-label">Card CVV *</label>
+                                <label>Name of cardholder *</label>
+                                <input type="text" class="form-control" placeholder="Enter name on card">
                             </div>
-                            <input type="text" class="form-control" formControlName="cardCvv" #cardCvv name="cardCvv" id="cardCvv"
-                                   placeholder="Enter card CVV..."
-                                   [(ngModel)]="transaction.cardCvv">
                         </div>
-                    </div>-->
+                    </div>
 
                     <div class="form-group" [class.has-error]="transactionform.controls['cardExpiryDate'].invalid && transactionform.controls['cardExpiryDate'].touched">
                         <div class="col-md-12">
                             <div style="clear:both">
                                 <label>Card expiry date *</label>
                             </div>
-                            <p-calendar class="form-control" formControlName="cardExpiryDate" #CardExpiryDateFeature name="CardExpiryDateFeature" id="CardExpiryDateFeature"
+                            <p-calendar  formControlName="cardExpiryDate" #CardExpiryDateFeature name="CardExpiryDateFeature" id="CardExpiryDateFeature"
                                         [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
+                                        dateFormat="dd.mm.yy"
                                         [(ngModel)]="transaction.CardExpiryDateFeature">
+
                             </p-calendar>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div style="clear:both">
+                                <label>CVV *</label>
+                                <input type="text" class="form-control" placeholder="Enter CVV code">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -213,22 +206,22 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Merchant details</h3>
                 </div>
-
+                    
                 <div class="box-body">
-                    <div class="form-group" [class.has-error]="hasMerchantCountryError">
+                    <div class="form-group" [class.has-error]="hasCountryError">
                         <div class="col-md-12">
                             <div style="clear:both">
                                 <label class="control-label">Merchant country *</label>
                             </div>
-                            <select class="form-control" formControlName="merchantCountry" 
-                                    #merchantCountryFeature name="merchantCountryFeature" id="merchantCountryFeature"
-                                    (blur)="validateMerchantCountry(merchantCountryFeature.value)"
-                                    (change)="validateMerchantCountry(merchantCountryFeature.value)"
-                                    [(ngModel)]="transaction.merchantCountryFeature">
+                            <select class="form-control" formControlName="country" #countryFeature name="countryFeature" id="countryFeature"
+                                    (blur)="validateCountry(countryFeature.value)"
+                                    (change)="validateCountry(countryFeature.value)"
+                                    [(ngModel)]="transaction.countryFeature">
                                 <option *ngFor="let x of countries" [value]="x.countryId">{{x.name}}</option>
                             </select>
                         </div>
                     </div>
+
 
                     <div class="form-group" [class.has-error]="hasMerchantError">
                         <div class="col-md-12">
@@ -270,7 +263,8 @@
         </div>
         <div class="box-body">
             <div class="form-group" style="clear:both; padding:10px;">
-                <button type="button" (click)="verify()" class="btn btn-primary" [disabled]="transactionform.invalid">Submit</button>
+                <button type="button" (click)="verify()" class="btn btn-primary" >Submit</button>
+                <!--  [disabled]="transactionform.invalid" -->
             </div>
         </div>
      </form>

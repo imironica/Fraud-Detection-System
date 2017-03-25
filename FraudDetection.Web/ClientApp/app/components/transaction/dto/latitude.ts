@@ -1,4 +1,4 @@
 ﻿export class Latitude {
-    min: Number;
-    max: Number;
+    min: number;
+    max: number;
 }

@@ -46,7 +46,6 @@ def generate_transactions(date, size=10000):
     df['CountryFeature'] = country_list
     df['AmountOfSpentMoneyPerDay'] = amount_per_day
     df['CardTypeFeature'] = card_type_list
-    df['MerchantFeature'] = merchant_code_list
 
     y = []
     for row in df.values:
@@ -63,10 +62,12 @@ def generate_transactions(date, size=10000):
                 break
             classnum = classnum + 1
     y = np.asarray(y)
+
+    df['MerchantFeature'] = merchant_code_list
     df['CardStartFeature'] = card_start
     df['CardEndFeature'] = card_end
-    df['TransactionTimeFeature'] = transaction_time
     df['CardExpiryDateFeature'] = card_expiry_date
+    df['TransactionTimeFeature'] = transaction_time
     df['TransactionDateFeature'] = date
     df['LastTransactionDateFeature'] = last_trans_date
     df['AmountOfSpentMoneyPerMonth'] = df['AmountOfSpentMoneyPerDay'] * 30
