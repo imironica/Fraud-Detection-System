@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box">
-                        <span class="info-box-icon bg-red"><i class="ion ion-ios-gear-outline"></i></span>
+                        <span class="info-box-icon bg-red"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>
  
                         <div class="info-box-content">
                             <span class="info-box-text">Number of fraud detected last month</span>
@@ -28,7 +28,7 @@
                 <!-- /.col -->
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box">
-                        <span class="info-box-icon bg-aqua"><i class="fa fa-google-plus"></i></span>
+                        <span class="info-box-icon bg-green"><i class="fa fa-check-square" aria-hidden="true"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">Number of good transactions</span>
@@ -44,7 +44,20 @@
 
                 <div class="col-md-3 col-sm-6 col-xs-12">
                     <div class="info-box">
-                        <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+                        <span class="info-box-icon bg-aqua"><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Number of succesfully processed transactions</span>
+                            <span class="info-box-number">{{statisticPerMonth?.numberOfIncorrectlyDetectedFrauds}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="info-box">
+                        <span class="info-box-icon bg-aqua"><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
 
                         <div class="info-box-content">
                             <span class="info-box-text">Number of succesfully processed transactions</span>
@@ -86,60 +99,42 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-3">
                                     <p class="text-center">
                                         <strong>Number of frauds per country</strong>
                                     </p>
-
-                                    <p-chart type="doughnut" [data]="data"></p-chart>
-
+                                    <p-chart type="doughnut" [data]="doughnutdata"></p-chart>
                                 </div>
-
-
-                                <!-- /.col -->
-                                <div class="col-md-4">
+                                
+                                <div class="col-md-5">
                                     <p class="text-center">
                                         <strong>Goal Completion</strong>
                                     </p>
-
-                                    <div class="progress-group">
-                                        <span class="progress-text">Add Products to Cart</span>
-                                        <span class="progress-number"><b>160</b>/200</span>
-
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <!-- /.progress-group -->
-                                    <div class="progress-group">
-                                        <span class="progress-text">Complete Purchase</span>
-                                        <span class="progress-number"><b>310</b>/400</span>
-
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-red" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <!-- /.progress-group -->
-                                    <div class="progress-group">
-                                        <span class="progress-text">Visit Premium Page</span>
-                                        <span class="progress-number"><b>480</b>/800</span>
-
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <!-- /.progress-group -->
-                                    <div class="progress-group">
-                                        <span class="progress-text">Send Inquiries</span>
-                                        <span class="progress-number"><b>250</b>/500</span>
-
-                                        <div class="progress sm">
-                                            <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                    <!-- /.progress-group -->
+                                    <p-chart type="line" [data]="linedata" (onDataSelect)="selectData($event)"></p-chart>
                                 </div>
-                                <!-- /.col -->
+
+                                <div class="col-md-3">
+                                    <p class="text-center">
+                                        <strong>Goal Completion</strong>
+                                    </p>
+                                    <p-chart type="polarArea" [data]="polardata"></p-chart>
+                                </div>
+
+                                <!--<dx-vector-map id="vector-map"
+                                               [bounds]="[-180, 85, 180, -60]">
+                                    <dxo-tooltip [enabled]="true"
+                                                 [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                                    <dxi-layer [dataSource]="worldMap"
+                                               [hoverEnabled]="false"></dxi-layer>
+                                    <dxi-layer [dataSource]="markers"
+                                               name="pies"
+                                               elementType="pie"
+                                               dataField="values"></dxi-layer>
+                                    <dxi-legend [customizeText]="customizeText">
+                                        <dxo-source layer="pies" grouping="color"></dxo-source>
+                                    </dxi-legend>
+                                </dx-vector-map>-->
+
                             </div>
                             <!-- /.row -->
                         </div>

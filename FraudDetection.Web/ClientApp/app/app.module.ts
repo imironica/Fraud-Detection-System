@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UniversalModule } from 'angular2-universal';
@@ -11,6 +12,7 @@ import { CounterComponent } from './components/counter/counter.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarMenuComponent } from './components/sidebarmenu/sidebarmenu.component';
 import { AccordionModule, ButtonModule, Message, GrowlModule, CalendarModule, MenuItem, ChartModule, Calendar, SelectItem, Button, Dropdown } from 'primeng/primeng';
+//import { DxButtonModule, DxVectorMapModule } from 'devextreme-angular'; 
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -31,6 +33,8 @@ import { AccordionModule, ButtonModule, Message, GrowlModule, CalendarModule, Me
         CalendarModule,
         ChartModule,
         ReactiveFormsModule,
+        //DxButtonModule,
+        //DxVectorMapModule,
 		RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

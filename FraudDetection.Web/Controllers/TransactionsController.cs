@@ -4,7 +4,11 @@ using FraudDetection.Models;
 using FraudDetection.Service;
 using System.Linq;
 using System.Web.Http;
+<<<<<<< HEAD
 using System.Threading.Tasks;
+=======
+using System;
+>>>>>>> 452b2a4d5a9ba689a9fc85852535dee41af46ce2
 
 namespace FraudDetection.Web.Controllers
 {
@@ -17,10 +21,10 @@ namespace FraudDetection.Web.Controllers
             _fraudService = new FraudDetectionService();
         }
 
-        [HttpGet("[action]")]
-        public IEnumerable<TransactionDTO> GetAlerts()
+        [HttpPost("[action]")]
+        public IEnumerable<TransactionDTO> GetAlerts([FromBody]TransactionListRequest query)
         {
-            var lstTransactions = _fraudService.GetAlerts();
+            var lstTransactions = _fraudService.GetAlerts(query.TransactionDate);
             return lstTransactions;
         }
 
@@ -37,7 +41,7 @@ namespace FraudDetection.Web.Controllers
             var transactionChange = _fraudService.SaveTransactionStatus(transactionRequest.TransactionId, transactionRequest.Class);
             return transactionChange;
         }
-        
+
 
         [HttpPost("[action]")]
         public TransactionAlertReponse VerifyAlert([FromBody]TransactionDTO transaction)
@@ -57,5 +61,10 @@ namespace FraudDetection.Web.Controllers
             var response = _fraudService.GetDashboardStatisticsPerCurrentMonth();
             return response;
         }
+    }
+
+    public class TransactionListRequest
+    {
+        public DateTime TransactionDate { get; set; }
     }
 }

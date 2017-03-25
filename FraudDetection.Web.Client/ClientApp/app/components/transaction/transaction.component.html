@@ -1,0 +1,178 @@
+﻿<div class="box box-warning skin-blue">
+    <div class="box-header with-border">
+        <h1>Transaction details</h1>
+    </div>
+    <div style="padding:10px;">
+        <div class="alert alert-danger alert-dismissible" *ngIf="alertStatus == 'ALERT'">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+            This transaction have been mark as a fraud and blocked. Our operator will call you for more details on your number +40724 *** ***
+        </div>
+
+        <div class="alert alert-success alert-dismissible" *ngIf="alertStatus == 'SECURE'">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i> Message!</h4>
+            Thank you for your feedback and we appologise for any inconvenience. Your transaction will be processed in few minutes. 
+        </div>
+
+        <div class="alert alert-success alert-dismissible" *ngIf="alertStatus == 'INVALID'">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-check"></i> Message!</h4>
+            {{message}}
+        </div>
+    </div>
+    <form id="form">
+        <div *ngIf="showCredentialsTab && showCredentialsTab === true">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Fill de details</h3>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div style="clear:both">
+                            <label class="control-label">SMS code</label>
+                        </div>
+                        <input type="text" class="form-control" name="smsCode" id="smsCode" [(ngModel)]="smsCode"
+                               placeholder="Enter SMS code ..." />
+                    </div>
+                    <div class="col-md-12">
+                        <div style="clear:both">
+                            <label class="control-label">Last 4 digits</label>
+                        </div>
+                        <input type="text" class="form-control" name="code" id="code" [(ngModel)]="code"
+                               placeholder="Enter code ..." />
+                    </div>
+                </div>
+                <div class="box-body" style="clear:both;">
+                    <button type="button" class="btn btn-primary" (click)="showTransaction();">This transaction is performed by me</button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="showTransactionDetailsCode == 1" >
+            <div class="col-md-4">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Transaction details</h3>
+                    </div>
+
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div style="clear:both">
+                                    <label class="control-label">Transaction Type </label>
+                                </div>
+                                {{transaction.transactionType}}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div style="clear:both">
+                                    <label class="control-label">Card Type </label>
+                                </div>
+                                {{transaction.cardType}}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div style="clear:both">
+                                    <label class="control-label">Transaction amount </label>
+                                </div>
+                                {{transaction.amount}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div style="clear:both">
+                                    <label>Transaction time</label>
+                                </div>
+                                {{transaction.transactionDateTime}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div style="clear:both">
+                                    <label>Transaction date</label>
+                                </div>
+                                {{transaction.transactionDateTime}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box box-warning">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Client details</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div style="clear:both">
+                                    <label class="control-label">Client country</label>
+                                </div>
+                                {{transaction.clientCountry}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div style="clear:both">
+                                    <label class="control-label">Card number</label>
+                                </div>
+                                {{transaction.cardNumber}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div style="clear:both">
+                                    <label class="control-label">Card Vendor</label>
+                                </div>
+                                {{transaction.cardVendor}}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div style="clear:both">
+                                    <label>Card expiry date</label>
+                                </div>
+                                {{transaction.CardExpiryDate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Merchant details</h3>
+                    </div>
+
+                    <div class="box-body">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div style="clear:both">
+                                    <label class="control-label">Merchant country</label>
+                                </div>
+                                {{transaction.merchantCountry}}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div style="clear:both">
+                                    <label class="control-label">Merchant</label>
+                                </div>
+                                {{transaction.merchant}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body" style="clear:both;">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveTransactionStatus(transaction.transactionId, 1);">This transaction is performed by me</button>
+                <button type="button" class="btn btn-primary btn-danger" data-dismiss="modal" (click)="saveTransactionStatus(transaction.transactionId, 0);">This transaction is performed by me</button>
+            </div>
+        </div>
+    </form>
+</div>

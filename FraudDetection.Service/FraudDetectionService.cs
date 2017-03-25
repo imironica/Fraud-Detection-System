@@ -31,12 +31,25 @@ namespace FraudDetection.Service
             _transactionTypeRepo = new MDRepository<TransactionTypeDTO>("TransactionTypes");
         }
 
-        public List<TransactionDTO> GetAlerts()
+        public List<TransactionDTO> GetAlerts(DateTime date)
         {
-            var list = _transactionRepo.Find((x => x.TransactionDate.Equals(DateTime.Today.ToString("dd/MM/yyyy"))))
+            var list = _transactionRepo.Find((x => x.TransactionDate.Equals(date.ToString("dd/MM/yyyy"))))
                                                 .OrderByDescending(y => y.FraudProbability).ToList();
-            //var list = repo.Find((x => x.Verified == false)).OrderByDescending(y=> y.FraudProbability).ToList();
             return list;
+        }
+
+        public TransactionClientResponse GetTransaction(string sms, string smsCode)
+        {
+            var response = new TransactionClientResponse();
+            var transaction = _transactionRepo.GetAll().FirstOrDefault();
+            if (transaction == null)
+                response.TransactionStatus = "INVALID";
+            else
+            {
+                response.TransactionStatus = "VALID";
+                response.Transaction = transaction;
+            }
+            return response;
         }
         public TransactionDTO GetAlert(int id)
         {
@@ -114,7 +127,7 @@ namespace FraudDetection.Service
         public DashboardStatisticsDTO GetDashboardStatistics()
         {
             var detectedFraudsPerCurrentMonth = _transactionRepo.Find(t => t.Class.Equals(0)).Count;
-            var numberOfIncorrectlyDetectedFrauds = _transactionRepo.Find(t => (t.Class.Equals(0) && t.Prediction.Equals(1)) || 
+            var numberOfIncorrectlyDetectedFrauds = _transactionRepo.Find(t => (t.Class.Equals(0) && t.Prediction.Equals(1)) ||
                                                                          (t.Class.Equals(1) && t.Prediction.Equals(0))).Count;
             var dashboardStatisticsDTO = new DashboardStatisticsDTO();
             dashboardStatisticsDTO.CurrentMonthStatistics = new MonthStatisticDTO()
@@ -147,7 +160,7 @@ namespace FraudDetection.Service
             var currentMonthStatisticsPerCountry = new List<StatisticsPerCountryDTO>();
             var countries = _countryRepo.GetAllList();
 
-            foreach(var country in countries)
+            foreach (var country in countries)
             {
                 var statistic = new StatisticsPerCountryDTO();
                 statistic.Country = country.Name;
@@ -191,7 +204,7 @@ namespace FraudDetection.Service
             var currentMonthStatisticsPerCardVendor = new List<StatisticsPerCardVendorDTO>();
             var cardVendors = _cardTypeRepo.GetAllList();
 
-            foreach(var cardVendor in cardVendors)
+            foreach (var cardVendor in cardVendors)
             {
                 var statistic = new StatisticsPerCardVendorDTO();
                 statistic.CardVendor = cardVendor.Name;
