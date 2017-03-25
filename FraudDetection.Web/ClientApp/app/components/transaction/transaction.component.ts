@@ -27,7 +27,9 @@ export class TransactionComponent implements OnInit {
     public cardVendors: CardVendor[];
 	public transaction: Transaction;
     public countries: Country[];
-    public merchants: Merchant[] = [];
+ 
+    public merchants: Merchant[]
+ 
     public clientCountries: ClientCountry[];
 	public alertResponse: TransactionAlertResponse;
     public msgs: Message[] = [];
@@ -37,9 +39,10 @@ export class TransactionComponent implements OnInit {
     public hasCardTypeError = false;
     public hasTransactionCurrencyError = false;
     public hasClientCountryError = false;
-    public hasMerchantCountryError = false;
+    public hasCountryError = false;
     public hasMerchantError = false;
-    public selectedMerchantCountry: Country;
+    public hasCardNumberError = false;
+    public hasCardVendorError = false;
     http: Http;
 
     constructor(http: Http, private fb: FormBuilder) {
@@ -70,7 +73,7 @@ export class TransactionComponent implements OnInit {
         http.get('/api/MasterData/GetClientCountries').subscribe(result => {
             this.clientCountries = result.json();
         });
-        this.selectedMerchantCountry = new Country();
+        
     }
 
     ngOnInit() {
@@ -78,25 +81,23 @@ export class TransactionComponent implements OnInit {
             'transactionType': new FormControl('', Validators.required),
             'cardType': new FormControl('', Validators.required),
             'amount': new FormControl('', Validators.required),
-            'transactionTime': new FormControl('', Validators.required),
-            'transactionDate': new FormControl('', Validators.required),
             'loginAtempts': new FormControl('', Validators.required),
             'clientCountry': new FormControl('', Validators.required),
             'lastTransactionDate': new FormControl('', Validators.required),
             'spentMoneyPerDay': new FormControl('', Validators.required),
             'spentMoneyPerMonth': new FormControl('', Validators.required),
             'cardNumber': new FormControl('', Validators.required),
-            //'cardCvv': new FormControl('', Validators.required),
             'cardVendor': new FormControl('', Validators.required),
             'cardExpiryDate': new FormControl('', Validators.required),
-            'merchantCountry': new FormControl('', Validators.required),
+            'country': new FormControl('', Validators.required),
             'merchant': new FormControl('', Validators.required),
             'longitude': new FormControl('', Validators.required),
             'latitude': new FormControl('', Validators.required)
         });
     }
-
-	verify() {
+ 
+    verify() {
+         this.transaction.transactionDateTimeFeature = new Date();
          this.http.post('/api/Transactions/VerifyAlert', this.transaction)
 			.subscribe(result => {
               this.alertResponse = result.json();
@@ -116,6 +117,22 @@ export class TransactionComponent implements OnInit {
         else
             this.hasCardTypeError = false;
     }
+    validateCardVendor(value) {
+        if (value === '')
+            this.hasCardVendorError = true;
+        else
+            this.hasCardVendorError = false;
+    }
+    validateCardNumber(value) {
+        if (value === '' || value.length !=16)
+            this.hasCardNumberError = true;
+        else {
+            this.hasCardTypeError = false;
+            this.transaction.cardStartFeature = value.substring(0, 4);
+            this.transaction.cardEndFeature = value.substring(12, 16);
+        }
+            
+    }
 
     validateTransactionCurrencyError(value) {
         if (value === '')
@@ -131,26 +148,29 @@ export class TransactionComponent implements OnInit {
             this.hasClientCountryError = false;
     }
 
-    validateMerchantCountry(value) {
+    validateCountry(value) {
         if (value === '')
-            this.hasMerchantCountryError = true;
-        else
-            this.hasMerchantCountryError = false;
-
-        this.selectedMerchantCountry.countryId = value;
-        this.onSelect();
+            this.hasCountryError = true;
+        else {
+            this.hasCountryError = false;
+            this.merchants = this.countries.find(x => x.countryId === parseInt(value)).merchants;
+        }
+            
     }
 
-    onSelect() {
-        this.http.get('/api/MasterData/GetMerchants?id=' + this.selectedMerchantCountry.countryId).subscribe(result => {
-            this.merchants = result.json();
-        });
-    }
+ 
 
     validateMerchant(value) {
         if (value === '')
             this.hasMerchantError = true;
         else
+        {
             this.hasMerchantError = false;
+           // let longitude = this.countries.find(x => x.countryId === this.transaction.countryFeature).longitude;
+          //  let latitude = this.countries.find(x => x.countryId === this.transaction.countryFeature).latitude;
+           // this.transaction.latitude = Math.random() + latitude.min;
+          //  this.transaction.longitude = Math.random() + longitude.min;
+        }
+            
     }
 }

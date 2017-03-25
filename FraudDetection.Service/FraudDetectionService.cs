@@ -2,9 +2,13 @@
 using FraudDetection.Models.Transactions;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FraudDetection.Service
 {
@@ -27,9 +31,9 @@ namespace FraudDetection.Service
             _transactionTypeRepo = new MDRepository<TransactionTypeDTO>("TransactionTypes");
         }
 
-        public List<TransactionDTO> GetAlerts()
+        public List<TransactionDTO> GetAlerts(DateTime date)
         {
-            var list = _transactionRepo.Find((x => x.TransactionDate.Equals(DateTime.Today.ToString("dd/MM/yyyy"))))
+            var list = _transactionRepo.Find((x => x.TransactionDate.Equals(date.ToString("dd/MM/yyyy"))))
                                                 .OrderByDescending(y => y.FraudProbability).ToList();
             return list;
         }
@@ -69,9 +73,25 @@ namespace FraudDetection.Service
 
         public TransactionAlertReponse VerifyAlert(TransactionDTO transaction)
         {
-            var response = new TransactionAlertReponse()
+            var jsonString = JsonConvert.SerializeObject(transaction);
+            var fraudProbability = 0;
+            using (var client = new HttpClient())
             {
-                Probability = transaction.FraudProbability
+           
+
+                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                var result =  client.PostAsync("http://127.0.0.1:5000/verify", content).Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    
+                }
+                
+            }
+
+                var response = new TransactionAlertReponse()
+            {
+                Probability = 0
             };
 
             if (response.Probability == 1)
@@ -79,7 +99,7 @@ namespace FraudDetection.Service
                 response.Status = "ALERT";
                 return response;
             }
-            if (response.Probability > 0.5)
+            if (response.Probability > 0.3)
             {
                 response.Status = "WARNING";
                 return response;

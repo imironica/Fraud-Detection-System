@@ -1,6 +1,10 @@
 import { Component, OnInit }  from '@angular/core';
 import { Http } from '@angular/http';
 import { Transaction } from './dto/Transaction';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, FormControl } from '@angular/forms';
+import { UniversalModule } from 'angular2-universal';
+import { CalendarModule, Calendar } from 'primeng/primeng';
 
 @Component({
     selector: 'transaction-list',
@@ -11,16 +15,20 @@ export class TransactionListComponent {
     public transactions: Transaction[];
 	public transaction: Transaction;
 	http: Http;
-    message:string;
+    message: string;
+    transactionDate: Date;
 
     constructor(http: Http) {
 	    this.http = http;
         this.transaction = new Transaction();
+        this.transactionDate = new Date();
         this.reloadData();
     }
 
     reloadData() {
-        this.http.get('/api/Transactions/GetAlerts').subscribe(result => {
+        var request = new TransactionListRequest();
+        request.transactionDate = this.transactionDate;
+        this.http.post('/api/Transactions/GetAlerts', request).subscribe(result => {
             this.transactions = result.json();
         });
     }
@@ -45,7 +53,12 @@ export class TransactionListComponent {
 			 .subscribe(result => {
               this.message = "saved";
             });
+        this.reloadData();
         //this.transaction.verified = true;
-        window.location.reload();
+        //window.location.reload();
 	}
+}
+
+export class TransactionListRequest {
+    transactionDate: Date;
 }

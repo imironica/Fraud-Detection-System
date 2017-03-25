@@ -1,4 +1,4 @@
 ﻿export class Longitude {
-    min: Number;
-    max: Number;
+    min: number;
+    max: number;
 }

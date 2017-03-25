@@ -8,7 +8,7 @@ namespace FraudDetection.Service
 {
     public interface IFraudDetectionService
     {
-        List<TransactionDTO> GetAlerts();
+        List<TransactionDTO> GetAlerts(DateTime date);
         TransactionDTO GetAlert(int id);
         bool SaveTransactionStatus(int transactionId, int statusCode);
         TransactionAlertReponse VerifyAlert(TransactionDTO transaction);
