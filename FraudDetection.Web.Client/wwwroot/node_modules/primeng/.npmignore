@@ -1,0 +1,35 @@
+# dependencies
+node_modules
+
+# demo
+showcase
+index.html
+upload.php
+
+# typescript
+*.ts
+!*.d.ts
+
+# git
+.git
+.gitignore
+
+# config
+tsconfig.json
+tsconfig-aot.json
+webpack.config.js
+config
+gulpfile.js
+
+# aot
+aot
+
+# misc
+.github
+.vscode
+*.log
+prod
+.editorconfig
+
+
+
