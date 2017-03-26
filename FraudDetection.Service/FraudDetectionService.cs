@@ -161,15 +161,20 @@ namespace FraudDetection.Service
             var dailyStatisticsPerLastMonth = new List<DailyStatisticsPerLastMonthDTO>();
             string currentMonth = DateTime.Today.ToString("dd/MM/yyyy").Substring(3,2);
             string currentYear = DateTime.Today.ToString("dd/MM/yyyy").Substring(6,4);
-            int daysInMonth = DateTime.DaysInMonth(2017, int.Parse(currentMonth));
-            var transactionListPerLastMonth = _transactionRepo.Find(t => t.TransactionDate.Substring(3,2).Equals(currentMonth));
-            
-            foreach (var item in transactionListPerLastMonth)
+            //int daysInMonth = DateTime.DaysInMonth(2017, int.Parse(currentMonth));
+            int daysInMonth = DateTime.Today.Day; // days 'till now.
+
+            for (int day = 1; day <= daysInMonth; day++)
             {
                 var statistic = new DailyStatisticsPerLastMonthDTO();
-                statistic.Day = item.TransactionDate.Substring(0,2);
-                statistic.NumberOfDetectedFrauds = _transactionRepo.Find(t => t.TransactionDate.Substring(0, 2).Equals(statistic.Day) 
-                                                                           && t.Class == 0).Count;
+                statistic.Day = day <= 9 ? "0" + day.ToString() : day.ToString();
+                string date = statistic.Day + "/" + currentMonth + "/" + currentYear;
+                statistic.NumberOfDetectedFraudsDailyPerLastMonth = _transactionRepo.Find(t => t.TransactionDate.Equals(date) && t.Class == 0).Count;
+                statistic.NumberOfIncorrectlyDetectedFrauds = _transactionRepo.Find(t => ((t.Class.Equals(0) && t.Prediction.Equals(1)) ||
+                                                                   (t.Class.Equals(1) && t.Prediction.Equals(0)))
+                                                                   && t.TransactionDate.Equals(date)).Count;
+                statistic.NumberOfSuccessfullyProcessedTransactions = statistic.NumberOfDetectedFraudsDailyPerLastMonth + statistic.NumberOfIncorrectlyDetectedFrauds;
+
                 dailyStatisticsPerLastMonth.Add(statistic);
             }
 
