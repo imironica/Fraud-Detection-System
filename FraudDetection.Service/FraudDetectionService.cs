@@ -12,6 +12,11 @@ using System.Threading.Tasks;
 
 namespace FraudDetection.Service
 {
+    class Data 
+    {
+        [JsonProperty("fraudProbability")]
+        public float fraudProbabilty { get; set; }
+    }
     public class FraudDetectionService : IFraudDetectionService
     {
         private MDRepository<TransactionDTO> _transactionRepo;
@@ -71,19 +76,23 @@ namespace FraudDetection.Service
             return true;
         }
 
-        public TransactionAlertReponse VerifyAlert(TransactionDTO transaction)
+        public async Task<TransactionAlertReponse> VerifyAlert(TransactionDTO transaction)
         {
             var jsonString = JsonConvert.SerializeObject(transaction);
-            var fraudProbability = 0;
+            var fraudProbability = 0.0;
             using (var client = new HttpClient())
             {
-           
+
 
                 var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-                var result =  client.PostAsync("http://127.0.0.1:5000/verify", content).Result;
+                var result = await client.PostAsync("http://127.0.0.1:5000/verify", content);
                 if (result.IsSuccessStatusCode)
                 {
+                    var responseBody = await result.Content.ReadAsStringAsync();
+      
+                    Data data = JsonConvert.DeserializeObject<Data>(responseBody);
+                    fraudProbability = data.fraudProbabilty;
                     
                 }
                 
@@ -91,7 +100,7 @@ namespace FraudDetection.Service
 
                 var response = new TransactionAlertReponse()
             {
-                Probability = 0
+                Probability = fraudProbability
             };
 
             if (response.Probability == 1)

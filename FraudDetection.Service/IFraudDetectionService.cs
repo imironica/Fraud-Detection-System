@@ -11,7 +11,7 @@ namespace FraudDetection.Service
         List<TransactionDTO> GetAlerts(DateTime date);
         TransactionDTO GetAlert(int id);
         bool SaveTransactionStatus(int transactionId, int statusCode);
-        TransactionAlertReponse VerifyAlert(TransactionDTO transaction);
+        Task<TransactionAlertReponse> VerifyAlert(TransactionDTO transaction);
         bool InsertTransactionList(List<TransactionDTO> lstTransactions);
         bool InsertTransation(TransactionDTO transaction);
         DailyStatisticsDTO GetDailyStatistics();

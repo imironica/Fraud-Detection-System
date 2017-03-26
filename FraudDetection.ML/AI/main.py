@@ -33,10 +33,4 @@ def return_prediction(df):
     df = helper_methods.format_df_for_db(df)
     return df
 
-def return_test_prediction(df):
-    model = load_model_from_disk()
-    prediction = model.predict(df)
-    prediction_proba = model.predict_proba(df)
-    df['Prediction'] = prediction
-    df['FraudProbability'] = prediction_proba[:, 0]
-    return df
+

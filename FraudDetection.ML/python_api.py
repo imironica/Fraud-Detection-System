@@ -27,7 +27,8 @@ def get_probability():
                             request.json['CardExpiryDateFeature'],request.json['LastTransactionDateFeature'],
                             request.json['AmountOfSpentMoneyPerMonth'],request.json['Class']]])
 
-    df['LastTransactionDateFeature'] = df['LastTransactionDateFeature'].map(np.datetime64)
+
+    df['LastTransactionDateFeature'] = datetime.date.today() - datetime.timedelta(days=4)
     df['CardExpiryDateFeature'] = df['CardExpiryDateFeature'].map(np.datetime64)
     df['TransactionTimeFeature'] = datetime.time()
     df['TransactionDateFeature'] = datetime.date.today()
@@ -41,16 +42,19 @@ def get_probability():
 
 
     df= main.return_prediction(df)
-
+    df['LastTransactionDateFeature'] = df['LastTransactionDateFeature'].astype('datetime64')
     fraudProbability = df['FraudProbability'][0]
     client = MongoClient()
     db = client.FraudDetection
-    df['']
-    db.Transactions.insert(df)
+    df['TransactionId'] = db.Transactions.find_one(sort=[("TransactionId", -1)])["TransactionId"] +1
+    df['SmsCode'] = np.random.randint(100001,999999)
+    trans = df.to_dict('records')
+    db.Transactions.insert(trans)
     print(fraudProbability)
-   # if fraudProbability > 0:
-   #     twilio_service.send_alert_message(df['Merchant'][0],df['Amount'][0],3657)
-    return jsonify(fraudProbability),200
+
+    if fraudProbability > 0.4:
+        twilio_service.send_alert_message(df['Merchant'][0],df['Amount'][0],df['SmsCode'][0])
+    return jsonify({'fraudProbability': fraudProbability})
 
 
 
