@@ -9,9 +9,9 @@ def send_alert_message(merchant,amount,otp):
 
 
     message = client.messages.create(
-    to="+40773967515",
+    to="+40724391554",
     from_="+12056832624",
-    body="Transaction at {} with amount of {}$ needs your approval, in order to be processed. Please visit url http://verify.com/ and confirm with the code {}"
+    body="Transaction at {} with amount of {}$ needs your approval, in order to be processed. Please visit url http://verify.com/ and confirm with the code {}. For more info call on +40773967515"
         .format(merchant,amount,otp),
     )
 

@@ -24,6 +24,8 @@ namespace FraudDetection.Web.Controllers
                 && !string.IsNullOrEmpty(transactionRequest.Code))
             {
                 var transaction = _fraudService.GetTransaction(transactionRequest.Code, transactionRequest.SmsCode);
+                if(transaction == null)
+                    return new TransactionClientResponse() { TransactionStatus = "INVALID", Message = "Invalid request credentials!" };
                 return transaction;
             }
 

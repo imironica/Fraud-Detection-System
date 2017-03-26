@@ -35,6 +35,7 @@ namespace FraudDetection.Models
         public double CountryFeature { get; set; }
         public string Merchant { get; set; }
         public double MerchantFeature { get; set; }
+        public int SmsCode { get; set; }
 
         #region ClientRelated
         public string ClientCountry { get; set; }

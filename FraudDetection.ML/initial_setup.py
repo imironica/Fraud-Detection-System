@@ -31,6 +31,7 @@ def generate_initial_transactions():
     prediction = main.return_prediction(test_df)
     prediction = prediction.reset_index().rename(columns={'index':'TransactionId'})
     prediction['Verified'] = True
+    prediction['SmsCode'] = 123456
     trans_list = prediction.to_dict('records')
     db.Transactions.insert_many(trans_list)
 
@@ -46,6 +47,7 @@ def generate_transaction_for_today():
     prediction = main.return_prediction(test_df)
     prediction = prediction.reset_index().rename(columns={'index':'TransactionId'})
     prediction['Verified'] = False
+    prediction['SmsCode'] = 123456
     prediction['TransactionId'] = prediction['TransactionId'] + last_id
     print(prediction.tail())
     trans_list = prediction.to_dict('records')

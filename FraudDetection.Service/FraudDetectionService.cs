@@ -43,12 +43,17 @@ namespace FraudDetection.Service
             return list;
         }
 
-        public TransactionClientResponse GetTransaction(string sms, string smsCode)
+        public TransactionClientResponse GetTransaction(string cardEnd, string smsCode)
         {
+            var cend = Convert.ToInt32(cardEnd);
+            var csms = Convert.ToInt32(smsCode);
             var response = new TransactionClientResponse();
-            var transaction = _transactionRepo.GetAll().FirstOrDefault();
+            var transaction = _transactionRepo.Find(x=> x.SmsCode == csms).FirstOrDefault();
             if (transaction == null)
+            {
                 response.TransactionStatus = "INVALID";
+                response.Message = "Invalid request credentials!";
+        }
             else
             {
                 response.TransactionStatus = "VALID";
