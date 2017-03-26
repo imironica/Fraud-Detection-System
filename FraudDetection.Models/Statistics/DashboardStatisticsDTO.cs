@@ -34,7 +34,7 @@ namespace FraudDetection.Models
     public class DailyStatisticsPerLastMonthDTO
     {
         public string Day { get; set; }
-        public int NumberOfDetectedFrauds { get; set; }
+        public int NumberOfDetectedFraudsDailyPerLastMonth { get; set; }
         public int NumberOfSuccessfullyProcessedTransactions { get; set; }
         public int NumberOfIncorrectlyDetectedFrauds { get; set; }
     }

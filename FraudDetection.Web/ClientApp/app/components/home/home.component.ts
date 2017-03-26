@@ -78,6 +78,8 @@ export class HomeComponent implements OnInit {
 
     public labelsDailyStatisticsPerLastMonth: Array<string> = [];
     public numberOfDetectedFraudsDailyPerLastMonth: Array<Number> = [];
+    public numberOfIncorrectlyDetectedFraudsDaily: Array<Number> = [];
+    public numberOfSuccessfullyProcessedTransactionsDaily: Array<Number> = [];
 
     chartDataCountries: any;
     chartDataClientCountries: any;
@@ -89,9 +91,9 @@ export class HomeComponent implements OnInit {
     names: string[];
 
     constructor(http: Http) {
-        this.statisticPerMonth = new MonthStatistics(300, 50, 100);
-		this.dashboardStatistics = new DashboardStatistics();
-        this.dashboardStatistics.currentMonthStatistics = this.statisticPerMonth;
+        //this.statisticPerMonth = new MonthStatistics(300, 50, 100);
+		//this.dashboardStatistics = new DashboardStatistics();
+        //this.dashboardStatistics.currentMonthStatistics = this.statisticPerMonth;
 
         http.get('/api/MasterData/GetTransactionTypes').subscribe(result => {
             this.transactionTypes = result.json();
@@ -113,13 +115,15 @@ export class HomeComponent implements OnInit {
             this.statisticPerMonth = result.json();
         });
 
-        //http.get('/api/Transactions/GetDashboardDailyStatisticsPerLastMonth').subscribe(result => {
-        //    this.dailyStatisticsPerLastMonth = result.json();
-        //    for (var item of this.dailyStatisticsPerLastMonth) {
-        //        this.labelsDailyStatisticsPerLastMonth.push(item.day);
-        //        this.numberOfDetectedFraudsDailyPerLastMonth.push(item.numberOfDetectedFraudsMonthly);
-        //    }
-        //});
+        http.get('/api/Transactions/GetDashboardDailyStatisticsPerLastMonth').subscribe(result => {
+            this.dailyStatisticsPerLastMonth = result.json();
+            for (var item of this.dailyStatisticsPerLastMonth) {
+                this.labelsDailyStatisticsPerLastMonth.push(item.day);
+                this.numberOfDetectedFraudsDailyPerLastMonth.push(item.numberOfDetectedFraudsDailyPerLastMonth);
+                this.numberOfIncorrectlyDetectedFraudsDaily.push(item.numberOfIncorrectlyDetectedFrauds);
+                this.numberOfSuccessfullyProcessedTransactionsDaily.push(item.numberOfSuccessfullyProcessedTransactions);
+            }
+        });
 
         http.get('/api/Transactions/GetDashboardStatisticsPerCountryPerCurrentMonth').subscribe(result => {
             this.statisticsPerCountry = result.json();
@@ -265,18 +269,43 @@ export class HomeComponent implements OnInit {
             ]
         };
 
-        //====line chart=====
+        //====line chart====
         this.chartDataMonthlyStatistics = {
-            labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26],
+            labels: this.labelsDailyStatisticsPerLastMonth,
             datasets: [
                 {
                     label: 'Fraud Detections',
-                    data: [5, 10, 8, 3, 15, 6, 11, 18, 7, 10, 3, 15, 6, 11, 5, 10, 8, 7, 10, 3, 13, 8, 6, 19 ],
+                    data: this.numberOfDetectedFraudsDailyPerLastMonth,
                     fill: false,
                     borderColor: '#cd0000'
                 }
             ]
         }
+
+        //====bar chart======
+        this.chartDataTransactionTypes = {
+            labels: this.labelsTransactionTypes,
+            datasets: [
+                {
+                    label: 'Fraud Detections',
+                    backgroundColor: '#cd0000',
+                    borderColor: '#cd0000',
+                    data: this.numberOfDetectedFraudsPerTransactionTypes
+                }
+            ]
+        }
+
+        //this.chartDataMonthlyStatistics = {
+        //    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26],
+        //    datasets: [
+        //        {
+        //            label: 'Fraud Detections',
+        //            data: [5, 10, 8, 3, 15, 6, 11, 18, 7, 10, 3, 15, 6, 11, 5, 10, 8, 7, 10, 3, 13, 8, 6, 19 ],
+        //            fill: false,
+        //            borderColor: '#cd0000'
+        //        }
+        //    ]
+        //}
 
         //====== polar chart =======
         this.chartDataCardVendors = {
@@ -325,7 +354,9 @@ export class MonthStatistics {
 
 export class DailyStatisticsPerLastMonth {
     day: string;
-    numberOfDetectedFraudsMonthly: Number;
+    numberOfDetectedFraudsDailyPerLastMonth: Number;
+    numberOfIncorrectlyDetectedFrauds: Number;
+    numberOfSuccessfullyProcessedTransactions: Number;
 }
 
 export class StatisticsPerCountry {
