@@ -52,8 +52,9 @@ def get_probability():
     db.Transactions.insert(trans)
     print(fraudProbability)
 
-    if fraudProbability > 0.4:
-        twilio_service.send_alert_message(df['Merchant'][0],df['Amount'][0],df['SmsCode'][0])
+    if fraudProbability > 0.3:
+        #twilio_service.send_alert_message(df['Merchant'][0],df['Amount'][0],df['SmsCode'][0])
+        print(df['SmsCode'][0])
     return jsonify({'fraudProbability': fraudProbability})
 
 

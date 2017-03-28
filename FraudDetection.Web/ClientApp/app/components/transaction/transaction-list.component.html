@@ -157,7 +157,7 @@
                         <th>Card Type</th>
                         <th>Card Number</th>
                         <th>Country</th>
-                        <th>Transaction Time</th>
+                        <th>Expiration Date</th>
                         <th>Transaction Date</th>
                         <th>Status</th>
                         <th>Fraud Probability</th>
@@ -170,7 +170,7 @@
                         <td>{{ transaction.cardType }}</td>
                         <td>{{ transaction.cardNumber }}</td>
                         <td>{{ transaction.country }}</td>
-                        <td>{{ transaction.transactionTime }}</td>
+                        <td>{{ transaction.cardExpiryDate }}</td>
                         <td>{{ transaction.transactionDate }}</td>
                         <td>
                             <span *ngIf="transaction.prediction==0 && transaction.verified==false" class="label label-warning">Alert</span>
