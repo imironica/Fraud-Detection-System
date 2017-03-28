@@ -105,6 +105,13 @@ namespace FraudDetection.Web.Controllers
             var response = _fraudService.GetDashboardStatisticsPerTransactionTypePerCurrentMonth();
             return response;
         }
+
+        [HttpGet("[action]")]
+        public List<CountriesWithFraudDetectionsOnMapDTO> GetCountriesWithFraudDetections()
+        {
+            var response = _fraudService.GetCountriesWithFraudDetections();
+            return response;
+        }
     }
 
     public class TransactionListRequest

@@ -32,7 +32,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">Number of good transactions</span>
-                            <span class="info-box-number">{{statisticPerMonth?.numberOfSuccessfullyProcessedTransactions}}</span>
+                            <span class="info-box-number">{{statisticPerMonth?.numberOfGoodTransactions}}</span>
                         </div>
                         <!-- /.info-box-content -->
                     </div>
@@ -124,6 +124,19 @@
                                     <p-chart type="bar" [data]="chartDataTransactionTypes"></p-chart>
                                 </div>
                                 
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-11 col-md-offset-1">
+                                    <p class="text-center">
+                                        <strong>Map</strong>
+                                    </p>
+
+                                    <p-gmap #gmap [options]="options" [overlays]="overlays" [style]="{'width':'100%','height':'320px'}"></p-gmap>
+
+                                </div>
+
                             </div>
                             <!-- /.row -->
                         </div>

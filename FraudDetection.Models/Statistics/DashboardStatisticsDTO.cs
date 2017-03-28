@@ -14,6 +14,7 @@ namespace FraudDetection.Models
             StatisticsPerCardVendor = new List<StatisticsPerCardVendorDTO>();
             StatisticsPerCardType = new List<StatisticsPerCardTypeDTO>();
             StatisticsPerTransactionType = new List<StatisticsPerTransactionTypeDTO>();
+            CountriesWithFraudDetections = new List<CountriesWithFraudDetectionsOnMapDTO>();
         }
         public MonthStatisticDTO CurrentMonthStatistics { get; set; }
         public List<DailyStatisticsPerLastMonthDTO> MonthlyStatistics { get; set; }
@@ -22,11 +23,20 @@ namespace FraudDetection.Models
         public List<StatisticsPerCardVendorDTO> StatisticsPerCardVendor { get;set;}
         public List<StatisticsPerCardTypeDTO> StatisticsPerCardType { get; set; }
         public List<StatisticsPerTransactionTypeDTO> StatisticsPerTransactionType { get; set; }
+        public List<CountriesWithFraudDetectionsOnMapDTO> CountriesWithFraudDetections { get; set; }
+    }
+
+    public class CountriesWithFraudDetectionsOnMapDTO
+    {
+        public string Country { get; set; }
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
     }
 
     public class MonthStatisticDTO
     {
         public int NumberOfDetectedFraudsPerCurrentMonth { get; set; }
+        public int NumberOfGoodTransactions { get; set; }
         public int NumberOfSuccessfullyProcessedTransactions { get; set; }
         public int NumberOfIncorrectlyDetectedFrauds { get; set; }
     }

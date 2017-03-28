@@ -68,12 +68,12 @@ Countries = [
         "Name":"USA",
         "Probability":0.28,
         "Longitude": {
-            "Min": 33,
-            "Max": 45
-        },
-        "Latitude": {
             "Min": -121,
             "Max": -77
+        },
+        "Latitude": {
+            "Min": 33,
+            "Max": 45
         },
         "Merchants":[
             {
@@ -393,7 +393,7 @@ Countries = [
         "Name": "Brazil",
         "Probability": 0.15,
         "Longitude": {
-            "Min": -59,
+            "Min": -58,
             "Max": -37
         },
         "Latitude": {
@@ -459,12 +459,12 @@ Countries = [
         "Name": "Romania",
         "Probability": 0.05,
         "Longitude": {
-            "Min": 44,
-            "Max": 47
-        },
-        "Latitude": {
             "Min": 23,
             "Max": 27
+        },
+        "Latitude": {
+            "Min": 44,
+            "Max": 47
         },
         "Merchants":[
             {

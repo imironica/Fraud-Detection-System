@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, Injectable } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { Http } from '@angular/http';
-import { ChartModule, Message } from 'primeng/primeng';
+import { ChartModule, Message, GMapModule } from 'primeng/primeng';
 import { DxVectorMapModule } from 'devextreme-angular';
 import $ = require("jquery");
 import * as jquery from 'jquery';
@@ -15,6 +15,8 @@ import { Merchant } from '../transaction/dto/Merchant';
 import { Transaction } from '../transaction/dto/Transaction';
 //import { FeatureCollection, Service } from './home.service';
 //import * as mapsData from 'devextreme/dist/js/vectormap-data/world.js';
+declare var google: any;
+declare var OpenLayers: any;
 
 @Component({
     selector: 'home',
@@ -37,8 +39,8 @@ export class HomeComponent implements OnInit {
     public statisticsPerCardVendor: Array<StatisticsPerCardVendor>;
     public statisticsPerCardType: Array<StatisticsPerCardType>;
     public statisticsPerTransactionType: Array<StatisticsPerTransactionType>;
-
-    options: any;
+    public countriesWithFraudDetections: Array<CountriesWithFraudDetectionsOnMap>;
+       
     msgs: Message[] = [];
     transactionstatistics: any;
     isDataAvailable: boolean = false;
@@ -88,12 +90,15 @@ export class HomeComponent implements OnInit {
     chartDataCardTypes: any;
     chartDataTransactionTypes: any;
 
-    names: string[];
+    countriesOnMap: Array<{ position: { lat: Number, lng: Number }, title: string }> = [];
+    countryOnMap: { position: { lat: Number, lng: Number }, title: string };
 
-    constructor(http: Http) {
-        //this.statisticPerMonth = new MonthStatistics(300, 50, 100);
-		//this.dashboardStatistics = new DashboardStatistics();
-        //this.dashboardStatistics.currentMonthStatistics = this.statisticPerMonth;
+    names: string[];
+    public options: any;
+    public overlays: any[];
+    public markers: any[] = [];
+
+    constructor(http: Http) {        
 
         http.get('/api/MasterData/GetTransactionTypes').subscribe(result => {
             this.transactionTypes = result.json();
@@ -174,6 +179,47 @@ export class HomeComponent implements OnInit {
                 this.numberOfSuccessfullyProcessedTransactionsPerTransactionTypes.push(item.numberOfSuccessfullyProcessedTransactions);
             }
         });
+
+        http.get('/api/Transactions/GetCountriesWithFraudDetections').subscribe(result => {
+            this.countriesWithFraudDetections = result.json();
+            for (let item of this.countriesWithFraudDetections) {
+                this.markers.push(new google.maps.Marker({ position: { lat: item.latitude, lng: item.longitude }, title: item.country }));
+                console.log("lat: " + item.latitude + ", lng: " + item.longitude + ", country: " + item.country);
+            }
+        });
+
+        //========= map =========
+        //function initMap() {
+        //    var map = new google.maps.Map(document.getElementById('map'), {
+        //        center: { lat: 45.943161, lng: 24.96676 },
+        //        //scrollwheel: false,
+        //        zoom: 2
+        //    });
+        //}
+
+        this.options = {
+            center: { lat: 45.943161, lng: 24.96676 },
+            //scrollwheel: true,
+            zoom: 3
+        };
+
+        this.overlays = this.markers;
+
+        //this.overlays = [
+        //    new google.maps.Marker({ position: { lat: 36.879466, lng: 30.667648 }, title: "Konyaalti" }),
+        //    new google.maps.Marker({ position: { lat: 36.883707, lng: 30.689216 }, title: "Ataturk Park" }),
+        //    new google.maps.Marker({ position: { lat: 36.885233, lng: 30.702323 }, title: "Oldtown" })
+
+        //     Polygons, Polyline, Circle -> TBD how to use
+
+        //    new google.maps.Polygon({
+        //        paths: [
+        //            { lat: 36.9177, lng: 30.7854 }, { lat: 36.8851, lng: 30.7802 }, { lat: 36.8829, lng: 30.8111 }, { lat: 36.9177, lng: 30.8159 }
+        //        ], strokeOpacity: 0.5, strokeWeight: 1, fillColor: '#1976D2', fillOpacity: 0.35
+        //    }),
+        //    new google.maps.Circle({ center: { lat: 36.90707, lng: 30.56533 }, fillColor: '#1976D2', fillOpacity: 0.35, strokeWeight: 1, radius: 1500 }),
+        //    new google.maps.Polyline({ path: [{ lat: 36.86149, lng: 30.63743 }, { lat: 36.86341, lng: 30.72463 }], geodesic: true, strokeColor: '#FF0000', strokeOpacity: 0.5, strokeWeight: 2 })
+        //];
 
         // =====doughnut per countries ====
 
@@ -295,18 +341,6 @@ export class HomeComponent implements OnInit {
             ]
         }
 
-        //this.chartDataMonthlyStatistics = {
-        //    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26],
-        //    datasets: [
-        //        {
-        //            label: 'Fraud Detections',
-        //            data: [5, 10, 8, 3, 15, 6, 11, 18, 7, 10, 3, 15, 6, 11, 5, 10, 8, 7, 10, 3, 13, 8, 6, 19 ],
-        //            fill: false,
-        //            borderColor: '#cd0000'
-        //        }
-        //    ]
-        //}
-
         //====== polar chart =======
         this.chartDataCardVendors = {
             datasets: [{
@@ -322,7 +356,6 @@ export class HomeComponent implements OnInit {
             }],
             labels: this.labelsCardVendors
         }
-
     }
 
     selectData(event) {
@@ -339,8 +372,15 @@ export class HomeComponent implements OnInit {
     } 
 }
 
+export class CountriesWithFraudDetectionsOnMap {
+    country: string;
+    longitude: Number;
+    latitude: Number;
+}
+
 export class MonthStatistics {
     numberOfDetectedFraudsPerCurrentMonth: Number;
+    numberOfGoodTransactions: Number;
     numberOfSuccessfullyProcessedTransactions: Number;
     numberOfIncorrectlyDetectedFrauds: Number;
 	constructor(numberOfDetectedFraudsPerCurrentMonth: Number, 

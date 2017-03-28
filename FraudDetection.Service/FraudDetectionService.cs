@@ -134,6 +134,7 @@ namespace FraudDetection.Service
                 NumberGoodTransactions = goodTransactions
             };
         }
+
         public DashboardStatisticsDTO GetDashboardStatistics()
         {
             var detectedFraudsPerCurrentMonth = _transactionRepo.Find(t => t.Class.Equals(0)).Count;
@@ -153,12 +154,14 @@ namespace FraudDetection.Service
         public MonthStatisticDTO GetDashboardStatisticsPerCurrentMonth()
         {
             var detectedFraudsPerCurrentMonth = _transactionRepo.Find(t => t.Class.Equals(0)).Count;
+            var goodTransactions = _transactionRepo.Find(t => t.Class.Equals(1)).Count;
             var numberOfIncorrectlyDetectedFrauds = _transactionRepo.Find(t => (t.Class.Equals(0) && t.Prediction.Equals(1)) ||
                                                                    (t.Class.Equals(1) && t.Prediction.Equals(0))).Count;
             var currentMonthStatistics = new MonthStatisticDTO()
             {
                 NumberOfDetectedFraudsPerCurrentMonth = detectedFraudsPerCurrentMonth,
                 NumberOfIncorrectlyDetectedFrauds = numberOfIncorrectlyDetectedFrauds,
+                NumberOfGoodTransactions = goodTransactions
             };
             currentMonthStatistics.NumberOfSuccessfullyProcessedTransactions = currentMonthStatistics.NumberOfDetectedFraudsPerCurrentMonth
                                                                              + currentMonthStatistics.NumberOfIncorrectlyDetectedFrauds;
@@ -188,6 +191,25 @@ namespace FraudDetection.Service
             }
 
             return dailyStatisticsPerLastMonth;
+        }
+
+        public List<CountriesWithFraudDetectionsOnMapDTO> GetCountriesWithFraudDetections()
+        {
+            var countriesWithFraudDetections = new List<CountriesWithFraudDetectionsOnMapDTO>();
+            var numberOfFraudedDetections = _transactionRepo.Find(t => t.Class.Equals(0)).Count;
+            var fraudedTransactions = _transactionRepo.Find(t => t.Class.Equals(0)).ToList();
+
+            foreach (var transaction in fraudedTransactions)
+            {
+                var country = new CountriesWithFraudDetectionsOnMapDTO();
+                country.Country = transaction.Country;
+                country.Longitude = transaction.Longitude;
+                country.Latitude = transaction.Latitude;
+
+                countriesWithFraudDetections.Add(country);
+            }
+
+            return countriesWithFraudDetections;
         }
 
         public List<StatisticsPerCountryDTO> GetDashboardStatisticsPerCountryPerCurrentMonth()

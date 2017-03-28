@@ -11,8 +11,9 @@ import { TransactionComponent } from './components/transaction/transaction.compo
 import { CounterComponent } from './components/counter/counter.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarMenuComponent } from './components/sidebarmenu/sidebarmenu.component';
-import { AccordionModule, ButtonModule, Message, GrowlModule, CalendarModule, MenuItem, ChartModule, Calendar, SelectItem, Button, Dropdown } from 'primeng/primeng';
+import { AccordionModule, ButtonModule, Message, GrowlModule, CalendarModule, MenuItem, ChartModule, Calendar, SelectItem, Button, Dropdown, GMapModule } from 'primeng/primeng';
 //import { DxButtonModule, DxVectorMapModule } from 'devextreme-angular'; 
+declare var google: any;
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -33,6 +34,7 @@ import { AccordionModule, ButtonModule, Message, GrowlModule, CalendarModule, Me
         CalendarModule,
         ChartModule,
         ReactiveFormsModule,
+        GMapModule, 
         //DxButtonModule,
         //DxVectorMapModule,
 		RouterModule.forRoot([
